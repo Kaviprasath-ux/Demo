@@ -1,9 +1,19 @@
 "use client";
 
-import { useTrainingStore, type TrainingMode, type ViewMode } from "@/lib/training-store";
+import {
+  useTrainingStore,
+  type TrainingMode,
+  type ViewMode,
+  type TerrainType,
+  type WeatherType,
+  terrainConfigs,
+  weatherConfigs,
+} from "@/lib/training-store";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { GunSystemSelectorCompact } from "./gun-system-selector";
+import { CrewStationSelectorCompact } from "./crew-station-selector";
 import {
   GraduationCap,
   UserCog,
@@ -20,6 +30,15 @@ import {
   ZoomIn,
   Volume2,
   VolumeX,
+  Mountain,
+  TreePine,
+  Sun,
+  Snowflake,
+  Cloud,
+  CloudRain,
+  CloudFog,
+  Moon,
+  Target,
 } from "lucide-react";
 
 export function ControlsPanel() {
@@ -35,6 +54,12 @@ export function ControlsPanel() {
     cameraPreset,
     setCameraPreset,
     setSelectedComponent,
+    terrain,
+    setTerrain,
+    weather,
+    setWeather,
+    aimingMode,
+    setAimingMode,
   } = useTrainingStore();
 
   const modeDescriptions: Record<TrainingMode, string> = {
@@ -57,12 +82,34 @@ export function ControlsPanel() {
     { value: "detail" as const, label: "Detail", icon: ZoomIn },
   ];
 
+  // Terrain options - SOW Section 8.4
+  const terrainOptions: { value: TerrainType; label: string; icon: typeof Mountain }[] = [
+    { value: "plains", label: "Plains", icon: TreePine },
+    { value: "desert", label: "Desert", icon: Sun },
+    { value: "mountain", label: "Mountain", icon: Mountain },
+    { value: "high-altitude", label: "High Alt", icon: Snowflake },
+  ];
+
+  // Weather options - SOW Section 8.4
+  const weatherOptions: { value: WeatherType; label: string; icon: typeof Cloud }[] = [
+    { value: "clear", label: "Clear", icon: Sun },
+    { value: "rain", label: "Rain", icon: CloudRain },
+    { value: "fog", label: "Fog", icon: CloudFog },
+    { value: "night", label: "Night", icon: Moon },
+  ];
+
   return (
     <Card>
       <CardHeader className="pb-3">
         <CardTitle className="text-sm font-medium">Training Controls</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
+        {/* Gun System Selection - SOW Section 8.4 */}
+        <GunSystemSelectorCompact />
+
+        {/* Crew Station Selection - SOW Section 8.4 */}
+        <CrewStationSelectorCompact />
+
         {/* Training Mode Selection */}
         <div className="space-y-2">
           <label className="text-xs font-medium text-muted-foreground">
@@ -129,12 +176,62 @@ export function ControlsPanel() {
           </div>
         </div>
 
+        {/* Terrain Selection - SOW Section 8.4 */}
+        <div className="space-y-2">
+          <label className="text-xs font-medium text-muted-foreground">
+            Terrain Environment
+          </label>
+          <div className="grid grid-cols-4 gap-1">
+            {terrainOptions.map((option) => (
+              <Button
+                key={option.value}
+                variant={terrain === option.value ? "default" : "outline"}
+                size="sm"
+                className="text-xs px-2"
+                onClick={() => setTerrain(option.value)}
+                title={terrainConfigs[option.value].description}
+              >
+                <option.icon className="h-3 w-3 mr-1" />
+                <span className="hidden sm:inline">{option.label}</span>
+              </Button>
+            ))}
+          </div>
+          <p className="text-[10px] text-muted-foreground">
+            {terrainConfigs[terrain].description}
+          </p>
+        </div>
+
+        {/* Weather Selection - SOW Section 8.4 */}
+        <div className="space-y-2">
+          <label className="text-xs font-medium text-muted-foreground">
+            Weather Conditions
+          </label>
+          <div className="grid grid-cols-4 gap-1">
+            {weatherOptions.map((option) => (
+              <Button
+                key={option.value}
+                variant={weather === option.value ? "default" : "outline"}
+                size="sm"
+                className="text-xs px-2"
+                onClick={() => setWeather(option.value)}
+                title={weatherConfigs[option.value].description}
+              >
+                <option.icon className="h-3 w-3 mr-1" />
+                <span className="hidden sm:inline">{option.label}</span>
+              </Button>
+            ))}
+          </div>
+          <p className="text-[10px] text-muted-foreground">
+            {weatherConfigs[weather].description}
+          </p>
+        </div>
+
         {/* Toggle Options */}
         <div className="space-y-2">
           <label className="text-xs font-medium text-muted-foreground">
             Display Options
           </label>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 gap-2">
             <Button
               variant={showLabels ? "default" : "outline"}
               size="sm"
@@ -156,6 +253,15 @@ export function ControlsPanel() {
                 <VolumeX className="h-3 w-3 mr-1" />
               )}
               Sound
+            </Button>
+            <Button
+              variant={aimingMode ? "default" : "outline"}
+              size="sm"
+              onClick={() => setAimingMode(!aimingMode)}
+              title="Toggle Aiming Mode"
+            >
+              <Target className="h-3 w-3 mr-1" />
+              Aiming
             </Button>
             <Button
               variant="outline"

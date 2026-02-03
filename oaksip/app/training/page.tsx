@@ -12,6 +12,9 @@ import { AssemblyGuide } from "@/components/training/assembly-guide";
 import { DrillPlayer } from "@/components/training/drill-player";
 import { SafetyAlerts, SafetyAlertDemo } from "@/components/training/safety-alerts";
 import { AssessmentPanel } from "@/components/training/assessment-panel";
+import { AARPanel } from "@/components/training/aar-panel";
+import { ScenarioSelector } from "@/components/training/scenario-selector";
+import { CrewTrainingPanel } from "@/components/training/crew-training-panel";
 import { useTrainingStore } from "@/lib/training-store";
 import { gunComponents } from "@/lib/gun-data";
 import {
@@ -25,7 +28,12 @@ import {
   Minimize,
   Flame,
   Volume2,
+  FileText,
+  Target,
+  Users,
+  Trophy,
 } from "lucide-react";
+import { ScoringPanel } from "@/components/training/scoring-panel";
 
 // Dynamically import 3D viewer to avoid SSR issues
 const GunViewer = dynamic(
@@ -226,18 +234,30 @@ export default function TrainingPage() {
         {/* Right sidebar - controls and info */}
         <div className="space-y-4">
           <Tabs defaultValue="controls" className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="controls" className="text-xs">
+            <TabsList className="grid w-full grid-cols-8">
+              <TabsTrigger value="controls" className="text-xs" title="Controls">
                 <Settings className="h-3 w-3" />
               </TabsTrigger>
-              <TabsTrigger value="drills" className="text-xs">
+              <TabsTrigger value="score" className="text-xs" title="Score">
+                <Trophy className="h-3 w-3" />
+              </TabsTrigger>
+              <TabsTrigger value="crew" className="text-xs" title="Crew">
+                <Users className="h-3 w-3" />
+              </TabsTrigger>
+              <TabsTrigger value="drills" className="text-xs" title="Drills">
                 <BookOpen className="h-3 w-3" />
               </TabsTrigger>
-              <TabsTrigger value="info" className="text-xs">
+              <TabsTrigger value="missions" className="text-xs" title="Missions">
+                <Target className="h-3 w-3" />
+              </TabsTrigger>
+              <TabsTrigger value="info" className="text-xs" title="Info">
                 <Info className="h-3 w-3" />
               </TabsTrigger>
-              <TabsTrigger value="safety" className="text-xs">
+              <TabsTrigger value="safety" className="text-xs" title="Safety">
                 <AlertTriangle className="h-3 w-3" />
+              </TabsTrigger>
+              <TabsTrigger value="aar" className="text-xs" title="AAR">
+                <FileText className="h-3 w-3" />
               </TabsTrigger>
             </TabsList>
 
@@ -245,8 +265,20 @@ export default function TrainingPage() {
               <ControlsPanel />
             </TabsContent>
 
+            <TabsContent value="score" className="mt-4">
+              <ScoringPanel />
+            </TabsContent>
+
+            <TabsContent value="crew" className="mt-4">
+              <CrewTrainingPanel />
+            </TabsContent>
+
             <TabsContent value="drills" className="mt-4">
               <AssemblyGuide />
+            </TabsContent>
+
+            <TabsContent value="missions" className="mt-4">
+              <ScenarioSelector />
             </TabsContent>
 
             <TabsContent value="info" className="mt-4">
@@ -267,6 +299,10 @@ export default function TrainingPage() {
                   <SafetyAlertDemo />
                 </CardContent>
               </Card>
+            </TabsContent>
+
+            <TabsContent value="aar" className="mt-4">
+              <AARPanel />
             </TabsContent>
           </Tabs>
 
