@@ -14,7 +14,8 @@ import { CrewPositionOverlay } from "./crew-position-overlay";
 import { TargetRange } from "./target-range";
 import { AimingOverlay, SimpleCrosshair } from "./aiming-overlay";
 import { ScoreDisplay } from "./scoring-panel";
-import { SmallArmsShooter, ArtilleryCrew } from "./soldier-model";
+import { ArtilleryCrew } from "./soldier-model";
+import { FPPHands } from "./fpp-hands";
 import { useTrainingStore, cameraPresetPositions } from "@/lib/training-store";
 import { getGunSystemById } from "@/lib/gun-systems";
 
@@ -117,8 +118,10 @@ export function GunViewer({ className }: GunViewerProps) {
           <GunModel />
         </Suspense>
 
-        {/* Soldier/Crew Models - Digital Twin */}
-        <SmallArmsShooter />
+        {/* FPP Hands for small arms (First Person Perspective) */}
+        <FPPHands />
+
+        {/* Artillery Crew - Full soldiers for towed guns */}
         <ArtilleryCrew />
 
         {/* Crew Position Overlay - SOW Section 8.4 */}
