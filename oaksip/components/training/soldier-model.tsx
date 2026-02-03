@@ -1,259 +1,351 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 import * as THREE from "three";
 import { useTrainingStore } from "@/lib/training-store";
 
-interface SoldierProps {
-  position?: [number, number, number];
-  rotation?: [number, number, number];
-  stance?: "standing" | "kneeling" | "prone" | "crew";
-  role?: string;
-  animateRecoil?: boolean;
-  uniformColor?: string;
+// Create a smooth soldier silhouette shape
+function createSoldierShape(): THREE.Shape {
+  const shape = new THREE.Shape();
+
+  // Start at bottom center
+  shape.moveTo(0, 0);
+
+  // Right leg
+  shape.lineTo(0.15, 0);
+  shape.lineTo(0.18, 0.35);
+
+  // Hip to torso right
+  shape.lineTo(0.22, 0.45);
+  shape.lineTo(0.25, 0.55);
+
+  // Right arm (down)
+  shape.lineTo(0.35, 0.52);
+  shape.lineTo(0.38, 0.38);
+  shape.lineTo(0.32, 0.35);
+  shape.lineTo(0.28, 0.48);
+
+  // Shoulder to neck right
+  shape.lineTo(0.25, 0.7);
+  shape.lineTo(0.18, 0.75);
+
+  // Head right side
+  shape.quadraticCurveTo(0.2, 0.85, 0.15, 0.92);
+
+  // Head top (helmet)
+  shape.quadraticCurveTo(0.1, 1.0, 0, 1.02);
+  shape.quadraticCurveTo(-0.1, 1.0, -0.15, 0.92);
+
+  // Head left side
+  shape.quadraticCurveTo(-0.2, 0.85, -0.18, 0.75);
+
+  // Neck to shoulder left
+  shape.lineTo(-0.25, 0.7);
+
+  // Left arm
+  shape.lineTo(-0.28, 0.48);
+  shape.lineTo(-0.32, 0.35);
+  shape.lineTo(-0.38, 0.38);
+  shape.lineTo(-0.35, 0.52);
+
+  // Torso left
+  shape.lineTo(-0.25, 0.55);
+  shape.lineTo(-0.22, 0.45);
+
+  // Left leg
+  shape.lineTo(-0.18, 0.35);
+  shape.lineTo(-0.15, 0);
+
+  shape.lineTo(0, 0);
+
+  return shape;
 }
 
-// Individual soldier figure using primitives
-export function Soldier({
+// Create shooting stance silhouette
+function createShootingShape(): THREE.Shape {
+  const shape = new THREE.Shape();
+
+  // Feet spread stance
+  shape.moveTo(-0.2, 0);
+  shape.lineTo(-0.12, 0);
+  shape.lineTo(-0.08, 0.32);
+
+  // Body leaning forward slightly
+  shape.lineTo(-0.05, 0.42);
+  shape.lineTo(0.05, 0.45);
+  shape.lineTo(0.12, 0.55);
+
+  // Arms extended forward (holding weapon)
+  shape.lineTo(0.45, 0.62);
+  shape.lineTo(0.48, 0.58);
+  shape.lineTo(0.15, 0.5);
+
+  // Shoulder
+  shape.lineTo(0.18, 0.68);
+
+  // Neck and head
+  shape.lineTo(0.12, 0.72);
+  shape.quadraticCurveTo(0.15, 0.82, 0.1, 0.9);
+  shape.quadraticCurveTo(0.05, 0.95, -0.02, 0.95);
+  shape.quadraticCurveTo(-0.1, 0.93, -0.12, 0.85);
+  shape.quadraticCurveTo(-0.14, 0.78, -0.1, 0.72);
+
+  // Back
+  shape.lineTo(-0.15, 0.65);
+  shape.lineTo(-0.18, 0.5);
+  shape.lineTo(-0.15, 0.4);
+  shape.lineTo(-0.12, 0.32);
+
+  // Back leg
+  shape.lineTo(-0.25, 0.25);
+  shape.lineTo(-0.28, 0);
+  shape.lineTo(-0.2, 0);
+
+  return shape;
+}
+
+interface SoldierSilhouetteProps {
+  position?: [number, number, number];
+  rotation?: [number, number, number];
+  scale?: number;
+  color?: string;
+  isShootingStance?: boolean;
+  showRecoil?: boolean;
+  label?: string;
+}
+
+// Clean silhouette soldier
+export function SoldierSilhouette({
   position = [0, 0, 0],
   rotation = [0, 0, 0],
-  stance = "standing",
-  animateRecoil = false,
-  uniformColor = "#4a5243", // OD Green
-}: SoldierProps) {
+  scale = 1,
+  color = "#1a2e1a",
+  isShootingStance = false,
+  showRecoil = false,
+  label,
+}: SoldierSilhouetteProps) {
   const groupRef = useRef<THREE.Group>(null);
   const { currentAnimation } = useTrainingStore();
-  const recoilRef = useRef(0);
+  const recoilOffset = useRef(0);
 
-  // Animate recoil when firing
+  // Create extruded geometry from shape
+  const geometry = useMemo(() => {
+    const shape = isShootingStance ? createShootingShape() : createSoldierShape();
+    const extrudeSettings = {
+      depth: 0.08,
+      bevelEnabled: true,
+      bevelThickness: 0.02,
+      bevelSize: 0.02,
+      bevelSegments: 3,
+    };
+    return new THREE.ExtrudeGeometry(shape, extrudeSettings);
+  }, [isShootingStance]);
+
+  // Recoil animation
   useFrame((_, delta) => {
-    if (!groupRef.current || !animateRecoil) return;
+    if (!groupRef.current || !showRecoil) return;
 
     if (currentAnimation === "firing") {
-      recoilRef.current = Math.min(recoilRef.current + delta * 15, 0.15);
+      recoilOffset.current = Math.min(recoilOffset.current + delta * 8, 0.1);
     } else {
-      recoilRef.current = Math.max(recoilRef.current - delta * 5, 0);
+      recoilOffset.current = Math.max(recoilOffset.current - delta * 4, 0);
     }
 
-    // Apply subtle body recoil
-    groupRef.current.position.z = position[2] - recoilRef.current * 0.3;
+    groupRef.current.position.z = position[2] - recoilOffset.current;
   });
 
-  const skinColor = "#d4a574";
-  const bootColor = "#2a2a2a";
-  const helmetColor = "#3d4a3a";
-
-  // Adjust heights based on stance
-  const stanceOffsets = {
-    standing: { bodyY: 0.65, headY: 1.35, legY: 0.2 },
-    kneeling: { bodyY: 0.4, headY: 1.0, legY: 0.1 },
-    prone: { bodyY: 0.15, headY: 0.25, legY: 0.1 },
-    crew: { bodyY: 0.65, headY: 1.35, legY: 0.2 },
-  };
-
-  const offsets = stanceOffsets[stance];
-
   return (
-    <group ref={groupRef} position={position} rotation={rotation}>
-      {/* Helmet */}
-      <mesh position={[0, offsets.headY + 0.15, 0]}>
-        <sphereGeometry args={[0.14, 16, 16]} />
-        <meshStandardMaterial color={helmetColor} />
+    <group ref={groupRef} position={position} rotation={rotation} scale={scale}>
+      {/* Main silhouette body */}
+      <mesh geometry={geometry} castShadow receiveShadow>
+        <meshStandardMaterial
+          color={color}
+          roughness={0.8}
+          metalness={0.1}
+        />
       </mesh>
 
-      {/* Head */}
-      <mesh position={[0, offsets.headY, 0]}>
-        <sphereGeometry args={[0.1, 16, 16]} />
-        <meshStandardMaterial color={skinColor} />
+      {/* Subtle edge glow for visibility */}
+      <mesh geometry={geometry} scale={1.02}>
+        <meshBasicMaterial
+          color="#2d4a2d"
+          transparent
+          opacity={0.3}
+        />
       </mesh>
 
-      {/* Body/Torso */}
-      <mesh position={[0, offsets.bodyY, 0]}>
-        <boxGeometry args={[0.35, 0.5, 0.2]} />
-        <meshStandardMaterial color={uniformColor} />
-      </mesh>
-
-      {/* Tactical vest */}
-      <mesh position={[0, offsets.bodyY + 0.05, 0.05]}>
-        <boxGeometry args={[0.38, 0.4, 0.15]} />
-        <meshStandardMaterial color="#3a3a3a" />
-      </mesh>
-
-      {stance === "standing" || stance === "crew" ? (
-        <>
-          {/* Standing legs */}
-          <mesh position={[-0.08, offsets.legY, 0]}>
-            <boxGeometry args={[0.12, 0.4, 0.12]} />
-            <meshStandardMaterial color={uniformColor} />
-          </mesh>
-          <mesh position={[0.08, offsets.legY, 0]}>
-            <boxGeometry args={[0.12, 0.4, 0.12]} />
-            <meshStandardMaterial color={uniformColor} />
-          </mesh>
-          {/* Boots */}
-          <mesh position={[-0.08, 0.02, 0.02]}>
-            <boxGeometry args={[0.1, 0.08, 0.18]} />
-            <meshStandardMaterial color={bootColor} />
-          </mesh>
-          <mesh position={[0.08, 0.02, 0.02]}>
-            <boxGeometry args={[0.1, 0.08, 0.18]} />
-            <meshStandardMaterial color={bootColor} />
-          </mesh>
-        </>
-      ) : stance === "kneeling" ? (
-        <>
-          {/* Kneeling - one leg forward, one back */}
-          <mesh position={[-0.1, 0.15, 0.1]} rotation={[0.3, 0, 0]}>
-            <boxGeometry args={[0.12, 0.35, 0.12]} />
-            <meshStandardMaterial color={uniformColor} />
-          </mesh>
-          <mesh position={[0.1, 0.08, -0.1]} rotation={[-1.2, 0, 0]}>
-            <boxGeometry args={[0.12, 0.35, 0.12]} />
-            <meshStandardMaterial color={uniformColor} />
-          </mesh>
-        </>
-      ) : (
-        <>
-          {/* Prone - legs stretched back */}
-          <mesh position={[0, 0.08, -0.4]} rotation={[-1.5, 0, 0]}>
-            <boxGeometry args={[0.25, 0.5, 0.12]} />
-            <meshStandardMaterial color={uniformColor} />
-          </mesh>
-        </>
+      {/* Role label */}
+      {label && (
+        <Html position={[0, 1.15 * scale, 0]} center>
+          <div className="px-2 py-1 bg-slate-900/95 rounded-md text-white text-[10px] font-semibold whitespace-nowrap border border-slate-600/50 shadow-lg">
+            {label}
+          </div>
+        </Html>
       )}
-
-      {/* Arms - positioned for holding weapon */}
-      {stance !== "prone" ? (
-        <>
-          {/* Left arm (forward, supporting weapon) */}
-          <mesh position={[-0.22, offsets.bodyY + 0.1, 0.15]} rotation={[0.8, 0, 0.3]}>
-            <boxGeometry args={[0.08, 0.3, 0.08]} />
-            <meshStandardMaterial color={uniformColor} />
-          </mesh>
-          {/* Left hand */}
-          <mesh position={[-0.2, offsets.bodyY - 0.05, 0.3]}>
-            <sphereGeometry args={[0.045, 8, 8]} />
-            <meshStandardMaterial color={skinColor} />
-          </mesh>
-
-          {/* Right arm (back, on trigger) */}
-          <mesh position={[0.22, offsets.bodyY + 0.05, 0.1]} rotation={[0.5, 0, -0.3]}>
-            <boxGeometry args={[0.08, 0.3, 0.08]} />
-            <meshStandardMaterial color={uniformColor} />
-          </mesh>
-          {/* Right hand */}
-          <mesh position={[0.18, offsets.bodyY - 0.1, 0.2]}>
-            <sphereGeometry args={[0.045, 8, 8]} />
-            <meshStandardMaterial color={skinColor} />
-          </mesh>
-        </>
-      ) : (
-        <>
-          {/* Prone arms - extended forward */}
-          <mesh position={[-0.12, 0.12, 0.2]} rotation={[0.2, 0, 0]}>
-            <boxGeometry args={[0.08, 0.25, 0.08]} />
-            <meshStandardMaterial color={uniformColor} />
-          </mesh>
-          <mesh position={[0.12, 0.12, 0.2]} rotation={[0.2, 0, 0]}>
-            <boxGeometry args={[0.08, 0.25, 0.08]} />
-            <meshStandardMaterial color={uniformColor} />
-          </mesh>
-        </>
-      )}
-
     </group>
   );
 }
 
-// Small arms shooter - soldier holding rifle/pistol
+// Prone soldier for machine guns
+function ProneSoldier({
+  position = [0, 0, 0] as [number, number, number],
+  rotation = [0, 0, 0] as [number, number, number],
+  scale = 1,
+  showRecoil = false,
+}: {
+  position?: [number, number, number];
+  rotation?: [number, number, number];
+  scale?: number;
+  showRecoil?: boolean;
+}) {
+  const groupRef = useRef<THREE.Group>(null);
+  const { currentAnimation } = useTrainingStore();
+  const recoilOffset = useRef(0);
+
+  useFrame((_, delta) => {
+    if (!groupRef.current || !showRecoil) return;
+
+    if (currentAnimation === "firing") {
+      recoilOffset.current = Math.min(recoilOffset.current + delta * 8, 0.05);
+    } else {
+      recoilOffset.current = Math.max(recoilOffset.current - delta * 4, 0);
+    }
+
+    groupRef.current.position.z = position[2] - recoilOffset.current;
+  });
+
+  return (
+    <group ref={groupRef} position={position} rotation={rotation} scale={scale}>
+      {/* Prone body - lying flat */}
+      <mesh position={[0, 0.08, -0.3]} rotation={[-Math.PI / 2 + 0.1, 0, 0]} castShadow>
+        <capsuleGeometry args={[0.12, 0.6, 8, 16]} />
+        <meshStandardMaterial color="#1a2e1a" roughness={0.8} />
+      </mesh>
+
+      {/* Head */}
+      <mesh position={[0, 0.15, 0.05]} castShadow>
+        <sphereGeometry args={[0.1, 16, 16]} />
+        <meshStandardMaterial color="#1a2e1a" roughness={0.8} />
+      </mesh>
+
+      {/* Helmet */}
+      <mesh position={[0, 0.18, 0.03]} castShadow>
+        <sphereGeometry args={[0.12, 16, 12, 0, Math.PI * 2, 0, Math.PI / 2]} />
+        <meshStandardMaterial color="#1f3a1f" roughness={0.7} />
+      </mesh>
+
+      {/* Arms extended forward */}
+      <mesh position={[-0.12, 0.1, 0.2]} rotation={[0.2, 0, 0.3]} castShadow>
+        <capsuleGeometry args={[0.04, 0.25, 4, 8]} />
+        <meshStandardMaterial color="#1a2e1a" roughness={0.8} />
+      </mesh>
+      <mesh position={[0.12, 0.1, 0.2]} rotation={[0.2, 0, -0.3]} castShadow>
+        <capsuleGeometry args={[0.04, 0.25, 4, 8]} />
+        <meshStandardMaterial color="#1a2e1a" roughness={0.8} />
+      </mesh>
+
+      {/* Legs */}
+      <mesh position={[-0.1, 0.06, -0.6]} rotation={[-Math.PI / 2, 0, 0.1]} castShadow>
+        <capsuleGeometry args={[0.05, 0.35, 4, 8]} />
+        <meshStandardMaterial color="#1a2e1a" roughness={0.8} />
+      </mesh>
+      <mesh position={[0.1, 0.06, -0.6]} rotation={[-Math.PI / 2, 0, -0.1]} castShadow>
+        <capsuleGeometry args={[0.05, 0.35, 4, 8]} />
+        <meshStandardMaterial color="#1a2e1a" roughness={0.8} />
+      </mesh>
+    </group>
+  );
+}
+
+// Small arms shooter - soldier with weapon
 export function SmallArmsShooter() {
   const { getGunSystemInfo } = useTrainingStore();
   const gunSystem = getGunSystemInfo();
 
-  // Only show for small arms
   const category = gunSystem?.category;
   if (category === "towed") return null;
 
-  // Determine stance based on weapon
-  let stance: "standing" | "kneeling" | "prone" = "standing";
-  let position: [number, number, number] = [0, 0, -0.3];
-
   if (category === "machine-gun") {
-    stance = "prone";
-    position = [0, 0, -0.5];
-  } else if (category === "assault-rifle") {
-    stance = "standing";
-    position = [0, 0, -0.35];
-  } else if (category === "pistol") {
-    stance = "standing";
-    position = [0, 0, -0.25];
+    return (
+      <ProneSoldier
+        position={[0, 0, -0.6]}
+        scale={1.2}
+        showRecoil={true}
+      />
+    );
   }
 
+  // Standing shooting stance for rifles and pistols
+  const scale = category === "pistol" ? 0.9 : 1.0;
+  const zOffset = category === "pistol" ? -0.25 : -0.4;
+
   return (
-    <group>
-      <Soldier
-        position={position}
-        stance={stance}
-        animateRecoil={true}
-      />
-    </group>
+    <SoldierSilhouette
+      position={[0, 0, zOffset]}
+      rotation={[0, 0, 0]}
+      scale={scale}
+      isShootingStance={true}
+      showRecoil={true}
+      color="#1a2e1a"
+    />
   );
 }
 
-// Artillery crew - multiple soldiers at their stations
+// Artillery crew positions
+const CREW_POSITIONS: Array<{
+  position: [number, number, number];
+  rotation: [number, number, number];
+  role: string;
+  scale: number;
+}> = [
+  // Gunner - operating the sight
+  { position: [1.0, 0, 1.8], rotation: [0, -Math.PI / 2, 0], role: "Gunner", scale: 0.9 },
+  // Assistant Gunner - at breech
+  { position: [-1.0, 0, 2.0], rotation: [0, Math.PI / 2, 0], role: "Asst Gunner", scale: 0.9 },
+  // Loader - loading shells
+  { position: [0, 0, 0], rotation: [0, Math.PI, 0], role: "Loader", scale: 0.95 },
+  // Ammo bearer 1
+  { position: [-2.0, 0, 0.5], rotation: [0, Math.PI / 4, 0], role: "Ammo #1", scale: 0.85 },
+  // Ammo bearer 2
+  { position: [-2.2, 0, -0.8], rotation: [0, Math.PI / 3, 0], role: "Ammo #2", scale: 0.85 },
+  // Section Chief - commanding
+  { position: [2.2, 0, 0], rotation: [0, -Math.PI / 3, 0], role: "Section Chief", scale: 0.95 },
+];
+
+// Artillery crew - multiple soldiers at stations
 export function ArtilleryCrew() {
   const { getGunSystemInfo } = useTrainingStore();
   const gunSystem = getGunSystemInfo();
 
-  // Only show for artillery (towed)
   if (gunSystem?.category !== "towed") return null;
-
-  // Crew positions around the artillery piece
-  const crewPositions: Array<{
-    position: [number, number, number];
-    rotation: [number, number, number];
-    role: string;
-  }> = [
-    // Gunner - at the sight/controls (right side)
-    { position: [1.2, 0, 1.5], rotation: [0, -Math.PI / 2, 0], role: "Gunner" },
-    // Assistant Gunner - left side of breech
-    { position: [-1.2, 0, 1.8], rotation: [0, Math.PI / 2, 0], role: "Asst Gunner" },
-    // Loader - behind the breech
-    { position: [0, 0, -0.5], rotation: [0, 0, 0], role: "Loader" },
-    // Ammo Handler 1 - bringing shells
-    { position: [-2, 0, 0], rotation: [0, Math.PI / 4, 0], role: "Ammo #1" },
-    // Ammo Handler 2
-    { position: [-2.5, 0, -1], rotation: [0, Math.PI / 3, 0], role: "Ammo #2" },
-    // Section Chief - overseeing operation (stands back)
-    { position: [2.5, 0, -0.5], rotation: [0, -Math.PI / 4, 0], role: "Chief" },
-  ];
 
   return (
     <group>
-      {crewPositions.map((crew, index) => (
-        <group key={index} position={crew.position} rotation={crew.rotation}>
-          <Soldier
-            stance="crew"
-            role={crew.role}
-            animateRecoil={index < 3} // Only front crew react to recoil
-          />
-          {/* Role label */}
-          <RoleLabel role={crew.role} />
-        </group>
+      {CREW_POSITIONS.map((crew, index) => (
+        <SoldierSilhouette
+          key={crew.role}
+          position={crew.position}
+          rotation={crew.rotation}
+          scale={crew.scale}
+          label={crew.role}
+          showRecoil={index < 3}
+          color="#1a2e1a"
+        />
+      ))}
+
+      {/* Ground markers for crew positions */}
+      {CREW_POSITIONS.map((crew) => (
+        <mesh
+          key={`marker-${crew.role}`}
+          position={[crew.position[0], 0.01, crew.position[2]]}
+          rotation={[-Math.PI / 2, 0, 0]}
+        >
+          <ringGeometry args={[0.25, 0.3, 32]} />
+          <meshBasicMaterial color="#3b5a3b" transparent opacity={0.4} side={THREE.DoubleSide} />
+        </mesh>
       ))}
     </group>
-  );
-}
-
-// Role label component with Html text
-function RoleLabel({ role }: { role: string }) {
-  return (
-    <Html position={[0, 1.8, 0]} center>
-      <div className="px-2 py-1 bg-blue-900/90 rounded text-white text-[10px] font-bold whitespace-nowrap border border-blue-500/50">
-        {role}
-      </div>
-    </Html>
   );
 }
