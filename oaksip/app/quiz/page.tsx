@@ -5,8 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { useQuizStore } from "@/lib/quiz-store";
+import { Switch } from "@/components/ui/switch";
+import { useQuizStore, QuizConfig, TopicScore } from "@/lib/quiz-store";
 import { soundEffects } from "@/lib/sound-effects";
+import { CourseType, AssessmentType } from "@/types";
 import {
   Brain,
   Clock,
@@ -20,6 +22,13 @@ import {
   BookOpen,
   AlertCircle,
   Award,
+  GraduationCap,
+  FileText,
+  Minus,
+  Download,
+  BarChart3,
+  TrendingUp,
+  TrendingDown,
 } from "lucide-react";
 
 function formatTime(seconds: number): string {
@@ -28,16 +37,39 @@ function formatTime(seconds: number): string {
   return `${mins}:${secs.toString().padStart(2, "0")}`;
 }
 
+// Course labels for display
+const courseLabels: Record<CourseType, string> = {
+  YO: "Young Officers (YO)",
+  LGSC: "Long Gunnery Staff Course",
+  JCO: "JCO Course",
+  OR_CADRE: "OR Cadre",
+  STA: "STA Course",
+  ALL: "All Courses",
+};
+
+// Assessment type labels
+const assessmentLabels: Record<AssessmentType, { label: string; description: string; color: string }> = {
+  diagnostic: { label: "Diagnostic", description: "Pre-course assessment", color: "bg-blue-500" },
+  practice: { label: "Practice", description: "Formative, no records", color: "bg-green-500" },
+  summative: { label: "Summative", description: "Graded examination", color: "bg-orange-500" },
+  requalification: { label: "Requalification", description: "Re-certification test", color: "bg-purple-500" },
+};
+
 // Quiz Setup Screen
-function QuizSetup({ onStart }: { onStart: (cat: string, diff: string, count: number) => void }) {
+function QuizSetup({ onStart }: { onStart: (config: QuizConfig) => void }) {
   const [category, setCategory] = useState("all");
   const [difficulty, setDifficulty] = useState("all");
   const [questionCount, setQuestionCount] = useState(10);
+  const [course, setCourse] = useState<CourseType>("ALL");
+  const [assessmentType, setAssessmentType] = useState<AssessmentType>("practice");
+  const [negativeMarking, setNegativeMarking] = useState(false);
   const { attempts } = useQuizStore();
 
-  const categories = ["all", "General", "Components", "Safety", "Technical", "Procedures"];
+  const categories = ["all", "General", "Components", "Safety", "Technical", "Procedures", "Tactics", "Maintenance"];
   const difficulties = ["all", "easy", "medium", "hard"];
   const counts = [5, 10, 15, 20];
+  const courses: CourseType[] = ["ALL", "YO", "LGSC", "JCO", "OR_CADRE", "STA"];
+  const assessmentTypes: AssessmentType[] = ["practice", "diagnostic", "summative", "requalification"];
 
   // Calculate stats from attempts
   const totalAttempts = attempts.length;
@@ -47,6 +79,17 @@ function QuizSetup({ onStart }: { onStart: (cat: string, diff: string, count: nu
   const bestScore = totalAttempts > 0
     ? Math.max(...attempts.map(a => Math.round((a.score / a.totalQuestions) * 100)))
     : 0;
+
+  const handleStart = () => {
+    onStart({
+      category,
+      difficulty,
+      count: questionCount,
+      course,
+      assessmentType,
+      negativeMarking,
+    });
+  };
 
   return (
     <div className="space-y-6">
@@ -77,13 +120,61 @@ function QuizSetup({ onStart }: { onStart: (cat: string, diff: string, count: nu
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Brain className="h-5 w-5" />
-            Start New Quiz
+            Start New Assessment
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-5">
+          {/* Course Selection - SOW Requirement */}
+          <div>
+            <label className="text-sm font-medium mb-2 block flex items-center gap-2">
+              <GraduationCap className="h-4 w-4" />
+              Course
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {courses.map((c) => (
+                <Button
+                  key={c}
+                  variant={course === c ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCourse(c)}
+                  className="text-xs"
+                >
+                  {courseLabels[c]}
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          {/* Assessment Type - SOW Section 8.2 */}
+          <div>
+            <label className="text-sm font-medium mb-2 block flex items-center gap-2">
+              <FileText className="h-4 w-4" />
+              Assessment Type
+            </label>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {assessmentTypes.map((type) => (
+                <button
+                  key={type}
+                  onClick={() => setAssessmentType(type)}
+                  className={`p-3 rounded-lg border-2 text-left transition-all ${
+                    assessmentType === type
+                      ? "border-primary bg-primary/10"
+                      : "border-border hover:border-muted-foreground"
+                  }`}
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <div className={`w-2 h-2 rounded-full ${assessmentLabels[type].color}`} />
+                    <span className="text-sm font-medium">{assessmentLabels[type].label}</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground">{assessmentLabels[type].description}</p>
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Category */}
           <div>
-            <label className="text-sm font-medium mb-2 block">Category</label>
+            <label className="text-sm font-medium mb-2 block">Topic Category</label>
             <div className="flex flex-wrap gap-2">
               {categories.map((cat) => (
                 <Button
@@ -137,14 +228,33 @@ function QuizSetup({ onStart }: { onStart: (cat: string, diff: string, count: nu
             </div>
           </div>
 
+          {/* Negative Marking Toggle - SOW Requirement */}
+          <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-500/10">
+                <Minus className="h-5 w-5 text-red-500" />
+              </div>
+              <div>
+                <p className="text-sm font-medium">Negative Marking</p>
+                <p className="text-xs text-muted-foreground">
+                  -0.25 marks for each wrong answer (Standard -1/4 rule)
+                </p>
+              </div>
+            </div>
+            <Switch
+              checked={negativeMarking}
+              onCheckedChange={setNegativeMarking}
+            />
+          </div>
+
           {/* Start Button */}
           <Button
             className="w-full mt-4"
             size="lg"
-            onClick={() => onStart(category, difficulty, questionCount)}
+            onClick={handleStart}
           >
             <Zap className="h-4 w-4 mr-2" />
-            Start Quiz
+            Start {assessmentLabels[assessmentType].label} Assessment
           </Button>
         </CardContent>
       </Card>
@@ -165,17 +275,27 @@ function QuizSetup({ onStart }: { onStart: (cat: string, diff: string, count: nu
                   key={attempt.id}
                   className="flex items-center justify-between p-2 bg-muted/50 rounded-lg"
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <Badge variant="outline" className="text-xs">
                       {attempt.category}
                     </Badge>
+                    {attempt.course && attempt.course !== "ALL" && (
+                      <Badge variant="secondary" className="text-xs">
+                        {attempt.course}
+                      </Badge>
+                    )}
+                    {attempt.negativeMarking && (
+                      <Badge variant="destructive" className="text-xs">
+                        -ve
+                      </Badge>
+                    )}
                     <span className="text-xs text-muted-foreground">
                       {new Date(attempt.date).toLocaleDateString()}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-medium">
-                      {attempt.score}/{attempt.totalQuestions}
+                      {attempt.negativeMarking ? attempt.netScore?.toFixed(1) : attempt.score}/{attempt.totalQuestions}
                     </span>
                     <span className={`text-sm font-bold ${
                       (attempt.score / attempt.totalQuestions) >= 0.8 ? "text-green-500" :
@@ -350,12 +470,150 @@ function QuizQuestion() {
   );
 }
 
+// Topic Breakdown Component - SOW Section 8.3 requirement
+function TopicBreakdown({ breakdown }: { breakdown: TopicScore[] }) {
+  if (breakdown.length === 0) return null;
+
+  // Sort by percentage (lowest first to highlight weak areas)
+  const sortedBreakdown = [...breakdown].sort((a, b) => a.percentage - b.percentage);
+
+  return (
+    <Card className="border-primary/20">
+      <CardHeader className="pb-2">
+        <CardTitle className="text-sm flex items-center gap-2">
+          <BarChart3 className="h-4 w-4" />
+          Topic-wise Performance Analysis
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-3">
+          {sortedBreakdown.map((topic) => {
+            const isWeak = topic.percentage < 60;
+            const isStrong = topic.percentage >= 80;
+
+            return (
+              <div key={topic.topic} className="space-y-1">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium">{topic.topic}</span>
+                    {isWeak && (
+                      <Badge variant="destructive" className="text-xs flex items-center gap-1">
+                        <TrendingDown className="h-3 w-3" />
+                        Needs Focus
+                      </Badge>
+                    )}
+                    {isStrong && (
+                      <Badge variant="default" className="text-xs flex items-center gap-1 bg-green-500">
+                        <TrendingUp className="h-3 w-3" />
+                        Strong
+                      </Badge>
+                    )}
+                  </div>
+                  <span className={`text-sm font-medium ${
+                    isStrong ? "text-green-500" : isWeak ? "text-red-500" : "text-yellow-500"
+                  }`}>
+                    {topic.correct}/{topic.total} ({topic.percentage}%)
+                  </span>
+                </div>
+                <Progress
+                  value={topic.percentage}
+                  className={`h-2 ${isWeak ? "[&>div]:bg-red-500" : isStrong ? "[&>div]:bg-green-500" : ""}`}
+                />
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Weak Areas Summary */}
+        {sortedBreakdown.filter(t => t.percentage < 60).length > 0 && (
+          <div className="mt-4 p-3 bg-red-500/10 rounded-lg border border-red-500/20">
+            <p className="text-sm font-medium text-red-500 mb-1">Areas Requiring Improvement</p>
+            <p className="text-xs text-muted-foreground">
+              Focus on: {sortedBreakdown.filter(t => t.percentage < 60).map(t => t.topic).join(", ")}
+            </p>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+// Export Report Function
+function exportQuizReport(
+  score: { correct: number; total: number; percentage: number; netScore: number; wrongAnswers: number },
+  breakdown: TopicScore[],
+  config: QuizConfig | null
+) {
+  // Generate report content
+  const reportDate = new Date().toLocaleString();
+  const reportContent = `
+OAKSIP ARTILLERY TRAINING PLATFORM
+ASSESSMENT REPORT
+================================
+
+Report Generated: ${reportDate}
+
+ASSESSMENT CONFIGURATION
+------------------------
+Course: ${config ? courseLabels[config.course] : "All Courses"}
+Assessment Type: ${config ? assessmentLabels[config.assessmentType].label : "Practice"}
+Category: ${config?.category === "all" ? "All Topics" : config?.category || "All Topics"}
+Difficulty: ${config?.difficulty === "all" ? "Mixed" : config?.difficulty || "Mixed"}
+Negative Marking: ${config?.negativeMarking ? "Enabled (-0.25 per wrong answer)" : "Disabled"}
+
+RESULTS SUMMARY
+---------------
+Total Questions: ${score.total}
+Correct Answers: ${score.correct}
+Wrong Answers: ${score.wrongAnswers}
+Unanswered: ${score.total - score.correct - score.wrongAnswers}
+Raw Score: ${score.correct}/${score.total}
+${config?.negativeMarking ? `Net Score (after deductions): ${score.netScore.toFixed(2)}/${score.total}` : ""}
+Percentage: ${score.percentage}%
+Grade: ${score.percentage >= 90 ? "A+" : score.percentage >= 80 ? "A" : score.percentage >= 70 ? "B" : score.percentage >= 60 ? "C" : score.percentage >= 50 ? "D" : "F"}
+
+TOPIC-WISE ANALYSIS
+-------------------
+${breakdown.map(t => `${t.topic}: ${t.correct}/${t.total} (${t.percentage}%) ${t.percentage < 60 ? "- NEEDS IMPROVEMENT" : t.percentage >= 80 ? "- STRONG" : ""}`).join("\n")}
+
+AREAS REQUIRING FOCUS
+---------------------
+${breakdown.filter(t => t.percentage < 60).length > 0
+  ? breakdown.filter(t => t.percentage < 60).map(t => `- ${t.topic}`).join("\n")
+  : "No significant weak areas identified."}
+
+RECOMMENDATIONS
+---------------
+${score.percentage >= 80
+  ? "Excellent performance. Continue with advanced topics and practical exercises."
+  : score.percentage >= 60
+  ? "Good progress. Focus on weak areas identified above for improvement."
+  : "Additional study recommended. Review fundamental concepts and retake assessment."}
+
+================================
+School of Artillery, Deolali
+AI-Based Offline Artillery Intelligence Platform
+  `.trim();
+
+  // Create and download file
+  const blob = new Blob([reportContent], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `OAKSIP_Assessment_Report_${new Date().toISOString().split("T")[0]}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
 // Quiz Results Screen
 function QuizResults({ onRetry, onExit }: { onRetry: () => void; onExit: () => void }) {
-  const { currentQuiz, selectedAnswers, getScore } = useQuizStore();
+  const { currentQuiz, selectedAnswers, getScore, getTopicBreakdown, currentConfig } = useQuizStore();
   const [showReview, setShowReview] = useState(false);
 
   const score = getScore();
+  const topicBreakdown = getTopicBreakdown();
 
   useEffect(() => {
     // Play sound on completion
@@ -395,25 +653,58 @@ function QuizResults({ onRetry, onExit }: { onRetry: () => void; onExit: () => v
             {score.correct} of {score.total} questions correct
           </p>
 
-          <div className="grid grid-cols-3 gap-4 mt-6">
+          {/* Assessment Info */}
+          {currentConfig && (
+            <div className="flex items-center justify-center gap-2 mt-3 flex-wrap">
+              <Badge variant="outline">{courseLabels[currentConfig.course]}</Badge>
+              <Badge className={assessmentLabels[currentConfig.assessmentType].color}>
+                {assessmentLabels[currentConfig.assessmentType].label}
+              </Badge>
+              {currentConfig.negativeMarking && (
+                <Badge variant="destructive">-ve Marking</Badge>
+              )}
+            </div>
+          )}
+
+          <div className="grid grid-cols-4 gap-3 mt-6">
             <div className="p-3 bg-muted rounded-lg">
               <div className="text-2xl font-bold text-green-500">{score.correct}</div>
               <p className="text-xs text-muted-foreground">Correct</p>
             </div>
             <div className="p-3 bg-muted rounded-lg">
-              <div className="text-2xl font-bold text-red-500">{score.total - score.correct}</div>
+              <div className="text-2xl font-bold text-red-500">{score.wrongAnswers}</div>
               <p className="text-xs text-muted-foreground">Wrong</p>
             </div>
             <div className="p-3 bg-muted rounded-lg">
-              <div className="text-2xl font-bold text-primary">+{Math.round(score.percentage * 0.5)}</div>
-              <p className="text-xs text-muted-foreground">Points</p>
+              <div className="text-2xl font-bold text-gray-500">{score.total - score.correct - score.wrongAnswers}</div>
+              <p className="text-xs text-muted-foreground">Skipped</p>
+            </div>
+            <div className="p-3 bg-muted rounded-lg">
+              <div className={`text-2xl font-bold ${currentConfig?.negativeMarking ? "text-orange-500" : "text-primary"}`}>
+                {currentConfig?.negativeMarking ? score.netScore.toFixed(1) : score.correct}
+              </div>
+              <p className="text-xs text-muted-foreground">
+                {currentConfig?.negativeMarking ? "Net Score" : "Points"}
+              </p>
             </div>
           </div>
+
+          {/* Negative Marking Breakdown */}
+          {currentConfig?.negativeMarking && score.wrongAnswers > 0 && (
+            <div className="mt-4 p-3 bg-orange-500/10 rounded-lg text-sm">
+              <p className="text-orange-500">
+                Deduction: -{(score.wrongAnswers * 0.25).toFixed(2)} ({score.wrongAnswers} wrong × 0.25)
+              </p>
+            </div>
+          )}
         </CardContent>
       </Card>
 
+      {/* Topic Breakdown - SOW requirement */}
+      <TopicBreakdown breakdown={topicBreakdown} />
+
       {/* Action Buttons */}
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-wrap">
         <Button variant="outline" className="flex-1" onClick={onExit}>
           <ArrowLeft className="h-4 w-4 mr-1" />
           Back
@@ -421,6 +712,14 @@ function QuizResults({ onRetry, onExit }: { onRetry: () => void; onExit: () => v
         <Button variant="outline" className="flex-1" onClick={() => setShowReview(!showReview)}>
           <BookOpen className="h-4 w-4 mr-1" />
           {showReview ? "Hide Review" : "Review Answers"}
+        </Button>
+        <Button
+          variant="outline"
+          className="flex-1"
+          onClick={() => exportQuizReport(score, topicBreakdown, currentConfig)}
+        >
+          <Download className="h-4 w-4 mr-1" />
+          Export Report
         </Button>
         <Button className="flex-1" onClick={onRetry}>
           <RotateCcw className="h-4 w-4 mr-1" />
@@ -446,9 +745,19 @@ function QuizResults({ onRetry, onExit }: { onRetry: () => void; onExit: () => v
                     )}
                     <div>
                       <p className="font-medium text-sm">{question.question}</p>
-                      <Badge variant="outline" className="mt-1 text-xs">
-                        {question.category} - {question.difficulty}
-                      </Badge>
+                      <div className="flex gap-1 mt-1 flex-wrap">
+                        <Badge variant="outline" className="text-xs">
+                          {question.category}
+                        </Badge>
+                        <Badge variant="outline" className="text-xs">
+                          {question.difficulty}
+                        </Badge>
+                        {question.course && question.course !== "ALL" && (
+                          <Badge variant="secondary" className="text-xs">
+                            {question.course}
+                          </Badge>
+                        )}
+                      </div>
                     </div>
                   </div>
 
@@ -495,8 +804,8 @@ function QuizResults({ onRetry, onExit }: { onRetry: () => void; onExit: () => v
 export default function QuizPage() {
   const { currentQuiz, isCompleted, startQuiz, resetQuiz } = useQuizStore();
 
-  const handleStart = (category: string, difficulty: string, count: number) => {
-    startQuiz(category, difficulty, count);
+  const handleStart = (config: QuizConfig) => {
+    startQuiz(config);
   };
 
   const handleRetry = () => {
@@ -513,10 +822,10 @@ export default function QuizPage() {
       <div>
         <h1 className="text-2xl font-bold tracking-tight flex items-center gap-2">
           <Brain className="h-6 w-6 text-primary" />
-          Knowledge Quiz
+          Artillery Knowledge Assessment
         </h1>
         <p className="text-muted-foreground">
-          Test your artillery knowledge with timed assessments
+          SoA course-aligned assessments with multi-dimensional analytics
         </p>
       </div>
 

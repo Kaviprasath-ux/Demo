@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { User, Query, QueryResult } from "@/types";
-import { mockUsers, mockRecentQueries, searchKnowledge, getQueriesByUserId } from "./mock-data";
+import { mockUsers, mockRecentQueries, getQueriesByUserId } from "./mock-data";
 
 // =============================================================================
 // AUTH STORE
@@ -53,6 +53,8 @@ export const useAuthStore = create<AuthState>()(
             user = mockUsers.find(u => u.role === "admin");
           } else if (username.toLowerCase() === "instructor") {
             user = mockUsers.find(u => u.role === "instructor");
+          } else if (username.toLowerCase() === "leadership") {
+            user = mockUsers.find(u => u.role === "leadership");
           } else if (username.toLowerCase() === "trainee") {
             user = mockUsers.find(u => u.role === "trainee");
           } else {
@@ -127,27 +129,58 @@ export const useQueryStore = create<QueryState>((set, get) => ({
   search: async (query: string) => {
     set({ isLoading: true, currentResult: null });
 
-    // Simulate API call delay
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      // Use AI API for knowledge search
+      const response = await fetch("/api/ai/search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query }),
+      });
 
-    const result = searchKnowledge(query);
-    const user = useAuthStore.getState().user;
+      const data = await response.json();
 
-    const newQuery: Query = {
-      id: `Q${Date.now()}`,
-      query,
-      result,
-      timestamp: new Date(),
-      userId: user?.id || "UNKNOWN",
-    };
+      // Map AI response sources to QueryResult source format
+      const sources = (data.sources || []).map((s: { title?: string; relevance?: number }) => ({
+        document: s.title || "Unknown Source",
+        page: Math.floor((s.relevance || 0.5) * 100), // Use relevance as pseudo-page for display
+      }));
 
-    set((state) => ({
-      queries: [newQuery, ...state.queries],
-      isLoading: false,
-      currentResult: result,
-    }));
+      const result: QueryResult = {
+        answer: data.answer || "No answer found for your query.",
+        confidence: data.confidence || 0.5,
+        sources,
+      };
 
-    return result;
+      const user = useAuthStore.getState().user;
+
+      const newQuery: Query = {
+        id: `Q${Date.now()}`,
+        query,
+        result,
+        timestamp: new Date(),
+        userId: user?.id || "UNKNOWN",
+      };
+
+      set((state) => ({
+        queries: [newQuery, ...state.queries],
+        isLoading: false,
+        currentResult: result,
+      }));
+
+      return result;
+    } catch (error) {
+      console.error("Search failed:", error);
+
+      // Fallback result on error
+      const fallbackResult: QueryResult = {
+        answer: "Unable to process your query at this time. Please try again.",
+        confidence: 0,
+        sources: [],
+      };
+
+      set({ isLoading: false, currentResult: fallbackResult });
+      return fallbackResult;
+    }
   },
 
   clearCurrentResult: () => set({ currentResult: null }),
@@ -173,13 +206,13 @@ export const useUIStore = create<UIState>((set) => ({
 // ROLE-BASED ACCESS HELPERS
 // =============================================================================
 
-export type UserRole = 'admin' | 'instructor' | 'trainee';
+export type UserRole = 'admin' | 'instructor' | 'leadership' | 'trainee';
 
 // Check if current user has required role
 export function hasRole(requiredRoles: UserRole[]): boolean {
   const user = useAuthStore.getState().user;
   if (!user) return false;
-  return requiredRoles.includes(user.role);
+  return requiredRoles.includes(user.role as UserRole);
 }
 
 // Check if current user can access a feature
@@ -187,21 +220,57 @@ export function canAccess(feature: string): boolean {
   const user = useAuthStore.getState().user;
   if (!user) return false;
 
+  // Role-based permissions per SOW document (Section 7.1 - Key Actors)
+  // Admin = System Administrator (technical management only)
+  // Instructor = DS/Gunnery Instructors (course delivery & evaluation)
+  // Leadership = Course Officers/Commandant (oversight & analytics)
+  // Trainee = Officers/JCOs undergoing training (learning & practice)
+
   const permissions: Record<string, UserRole[]> = {
-    dashboard: ['admin', 'instructor', 'trainee'],
-    search: ['admin', 'instructor', 'trainee'],
-    quiz: ['admin', 'instructor', 'trainee'],
-    training: ['admin', 'instructor', 'trainee'],
-    simulator: ['admin', 'instructor', 'trainee'],
-    documents: ['admin', 'instructor'],
-    audit: ['admin'],
-    // Training modes
-    'training-cadet': ['admin', 'instructor', 'trainee'],
-    'training-instructor': ['admin', 'instructor'],
-    'training-assessment': ['admin', 'instructor', 'trainee'],
+    // Dashboard - All roles (each gets different view)
+    dashboard: ['admin', 'instructor', 'leadership', 'trainee'],
+
+    // System Administrator features (Admin only)
+    'user-management': ['admin'],
+    'system-health': ['admin'],
+
+    // Documents - Admin (manage), Instructor & Leadership (view)
+    documents: ['admin', 'instructor', 'leadership'],
+    'documents-manage': ['admin'],
+
+    // Audit Logs - Admin (full system), Leadership (oversight view)
+    audit: ['admin', 'leadership'],
+
+    // Instructor-only features (Course delivery & evaluation)
+    'question-bank': ['instructor'],
+    'trainee-list': ['instructor'],
+
+    // Leadership features (Oversight & analytics)
+    reports: ['leadership'],
+
+    // Knowledge Search - Instructor (for content) and Trainee (for study)
+    search: ['instructor', 'trainee'],
+
+    // Quiz/Assessment - Instructor (configure/demo) and Trainee (take)
+    quiz: ['instructor', 'trainee'],
+
+    // 3D Training - Instructor (supervise/demo) and Trainee (practice drills)
+    training: ['instructor', 'trainee'],
+
+    // Simulator Intel - All roles (different views per role)
+    simulator: ['admin', 'instructor', 'leadership', 'trainee'],
+    'simulator-system': ['admin'],
+    'simulator-unit': ['leadership'],
+    'simulator-trainee': ['instructor'],
+    'simulator-personal': ['trainee'],
+
+    // Training modes (per SOW - crew drills, scenarios)
+    'training-cadet': ['instructor', 'trainee'],
+    'training-instructor': ['instructor'],
+    'training-assessment': ['instructor', 'trainee'],
   };
 
   const allowedRoles = permissions[feature];
   if (!allowedRoles) return false;
-  return allowedRoles.includes(user.role);
+  return allowedRoles.includes(user.role as UserRole);
 }

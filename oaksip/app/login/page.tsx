@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Target, Loader2, Lock, User, Shield, GraduationCap, Users } from "lucide-react";
+import { Target, Loader2, Lock, User, Shield, GraduationCap, Users, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -69,6 +69,8 @@ export default function LoginPage() {
         return Shield;
       case "instructor":
         return GraduationCap;
+      case "leadership":
+        return Award;
       case "trainee":
         return Users;
       default:
@@ -82,8 +84,10 @@ export default function LoginPage() {
         return "destructive" as const;
       case "instructor":
         return "default" as const;
-      case "trainee":
+      case "leadership":
         return "secondary" as const;
+      case "trainee":
+        return "outline" as const;
       default:
         return "outline" as const;
     }

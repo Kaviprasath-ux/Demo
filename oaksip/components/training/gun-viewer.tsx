@@ -15,7 +15,6 @@ import { TargetRange } from "./target-range";
 import { AimingOverlay, SimpleCrosshair } from "./aiming-overlay";
 import { ScoreDisplay } from "./scoring-panel";
 import { ArtilleryCrew } from "./soldier-model";
-import { FPPHands } from "./fpp-hands";
 import { useTrainingStore, cameraPresetPositions } from "@/lib/training-store";
 import { getGunSystemById } from "@/lib/gun-systems";
 
@@ -37,9 +36,11 @@ function CameraController() {
   // Trigger animation only when preset or weapon changes
   useEffect(() => {
     if (isSmallArm) {
-      targetPosition.current.set(2.5, 1.5, 2.5);
-      targetLookAt.current.set(0, 0.5, 0);
+      // Shooting range view: behind gun, looking at targets
+      targetPosition.current.set(0, 2, -3);  // Behind and above gun
+      targetLookAt.current.set(0, 1, 5);     // Looking at target area
     } else {
+      // Artillery - use preset positions for overview
       const preset = cameraPresetPositions[cameraPreset];
       targetPosition.current.set(...preset.position);
       targetLookAt.current.set(...preset.target);
@@ -68,16 +69,16 @@ function CameraController() {
   return (
     <OrbitControls
       ref={controlsRef as React.Ref<never>}
-      enablePan={true}
+      enablePan={!isSmallArm}
       enableZoom={true}
       enableRotate={true}
       enableDamping={true}
       dampingFactor={0.05}
-      minDistance={isSmallArm ? 1 : 2}
-      maxDistance={isSmallArm ? 8 : 15}
+      minDistance={isSmallArm ? 2 : 2}
+      maxDistance={isSmallArm ? 10 : 15}
       minPolarAngle={0.1}
       maxPolarAngle={Math.PI / 2 - 0.1}
-      target={isSmallArm ? [0, 0.5, 0] : [0, 0.3, 0]}
+      target={isSmallArm ? [0, 1, 5] : [0, 0.3, 0]}
     />
   );
 }
@@ -118,10 +119,7 @@ export function GunViewer({ className }: GunViewerProps) {
           <GunModel />
         </Suspense>
 
-        {/* FPP Hands for small arms (First Person Perspective) */}
-        <FPPHands />
-
-        {/* Artillery Crew - Full soldiers for towed guns */}
+        {/* Artillery Crew - Only for towed artillery */}
         <ArtilleryCrew />
 
         {/* Crew Position Overlay - SOW Section 8.4 */}

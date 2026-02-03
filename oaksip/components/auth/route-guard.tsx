@@ -18,22 +18,61 @@ interface RouteConfig {
   redirectTo?: string;
 }
 
+// Route configuration per SOW document (Section 7.1 - Key Actors)
+// Admin = System Administrator (technical management only, NO training features)
+// Instructor = DS/Gunnery Instructors (full training access)
+// Leadership = Course Officers/Commandant (oversight only, NO training features)
+// Trainee = Officers/JCOs undergoing training (learning features)
+
 const routeConfigs: RouteConfig[] = [
   // Public routes (no auth required)
   { path: "/login", allowedRoles: [] },
 
-  // All authenticated users
-  { path: "/dashboard", allowedRoles: ["admin", "instructor", "trainee"] },
-  { path: "/search", allowedRoles: ["admin", "instructor", "trainee"] },
-  { path: "/quiz", allowedRoles: ["admin", "instructor", "trainee"] },
-  { path: "/training", allowedRoles: ["admin", "instructor", "trainee"] },
-  { path: "/simulator", allowedRoles: ["admin", "instructor", "trainee"] },
+  // All authenticated users - Dashboard (role-specific views)
+  { path: "/dashboard", allowedRoles: ["admin", "instructor", "leadership", "trainee"] },
 
-  // Admin and Instructor only
-  { path: "/documents", allowedRoles: ["admin", "instructor"], redirectTo: "/dashboard" },
+  // Simulator Intel - All roles (different views per role)
+  { path: "/simulator", allowedRoles: ["admin", "instructor", "leadership", "trainee"] },
 
-  // Admin only
-  { path: "/audit", allowedRoles: ["admin"], redirectTo: "/dashboard" },
+  // Knowledge Search - Instructor (content) and Trainee (study) ONLY
+  // Admin and Leadership do NOT need knowledge search
+  { path: "/search", allowedRoles: ["instructor", "trainee"], redirectTo: "/dashboard" },
+
+  // Quiz/Assessment - Instructor (configure/supervise) and Trainee (take) ONLY
+  // Admin and Leadership do NOT take quizzes
+  { path: "/quiz", allowedRoles: ["instructor", "trainee"], redirectTo: "/dashboard" },
+
+  // 3D Training - Instructor (supervise drills) and Trainee (practice) ONLY
+  // Admin and Leadership do NOT do training
+  { path: "/training", allowedRoles: ["instructor", "trainee"], redirectTo: "/dashboard" },
+
+  // Documents - Admin (manage), Instructor & Leadership (view)
+  { path: "/documents", allowedRoles: ["admin", "instructor", "leadership"], redirectTo: "/dashboard" },
+
+  // Audit Logs - Admin (system management) and Leadership (oversight)
+  { path: "/audit", allowedRoles: ["admin", "leadership"], redirectTo: "/dashboard" },
+
+  // Admin-only routes (System Administration)
+  { path: "/admin/users", allowedRoles: ["admin"], redirectTo: "/dashboard" },
+  { path: "/admin/content-versioning", allowedRoles: ["admin"], redirectTo: "/dashboard" },
+  { path: "/admin/document-ingestion", allowedRoles: ["admin"], redirectTo: "/dashboard" },
+  { path: "/admin/paper-generation", allowedRoles: ["admin", "instructor"], redirectTo: "/dashboard" },
+  { path: "/admin/courses", allowedRoles: ["admin"], redirectTo: "/dashboard" },
+  { path: "/admin/fdc", allowedRoles: ["admin"], redirectTo: "/dashboard" },
+  { path: "/admin/gun-systems", allowedRoles: ["admin"], redirectTo: "/dashboard" },
+  { path: "/admin/scenarios", allowedRoles: ["admin"], redirectTo: "/dashboard" },
+  { path: "/admin/taxonomy", allowedRoles: ["admin"], redirectTo: "/dashboard" },
+
+  // Instructor-only routes (Course Delivery & Evaluation)
+  { path: "/instructor/sta-simulation", allowedRoles: ["instructor", "admin"], redirectTo: "/dashboard" },
+  { path: "/instructor/questions", allowedRoles: ["instructor"], redirectTo: "/dashboard" },
+  { path: "/instructor/rubrics", allowedRoles: ["instructor"], redirectTo: "/dashboard" },
+  { path: "/instructor/scheduling", allowedRoles: ["instructor"], redirectTo: "/dashboard" },
+  { path: "/instructor/scripts", allowedRoles: ["instructor"], redirectTo: "/dashboard" },
+  { path: "/instructor/trainees", allowedRoles: ["instructor"], redirectTo: "/dashboard" },
+
+  // Leadership-only routes (Oversight & Analytics)
+  { path: "/leadership/reports", allowedRoles: ["leadership"], redirectTo: "/dashboard" },
 ];
 
 function getRouteConfig(pathname: string): RouteConfig | undefined {

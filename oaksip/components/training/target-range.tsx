@@ -5,19 +5,20 @@ import { Html, Billboard } from "@react-three/drei";
 import * as THREE from "three";
 import { useTrainingStore } from "@/lib/training-store";
 
-// Target distances based on weapon type
+// Target distances based on weapon type (in meters)
 const targetDistances = {
-  pistol: [10, 15, 25], // meters
-  "assault-rifle": [50, 100, 200], // meters
-  "machine-gun": [100, 200, 400], // meters
+  pistol: [7, 15, 25], // meters
+  "assault-rifle": [25, 50, 100], // meters
+  "machine-gun": [50, 100, 200], // meters
   towed: [5000, 10000, 20000], // meters (artillery)
 };
 
 // Scale factors for 3D scene (real meters to scene units)
+// Adjusted for proper visual spacing
 const scaleFactors = {
-  pistol: 0.15,
-  "assault-rifle": 0.08,
-  "machine-gun": 0.05,
+  pistol: 0.4,        // 7m=2.8, 15m=6, 25m=10 units
+  "assault-rifle": 0.15,  // 25m=3.75, 50m=7.5, 100m=15 units
+  "machine-gun": 0.1,     // 50m=5, 100m=10, 200m=20 units
   towed: 0.0005,
 };
 
@@ -324,13 +325,19 @@ export function TargetRange() {
     <group>
       {distances.map((distance, index) => {
         const zPos = distance * scale;
-        const xOffset = (index - 1) * (isArtillery ? 3 : targetSize * 3);
+
+        // For small arms: targets in a row (left, center, right) at SAME distance
+        // Each distance level has ONE target in CENTER
+        // This creates 3 targets at 3 different distances, all centered
+        const xOffset = 0; // All targets centered
 
         if (isArtillery) {
+          // Artillery: spread targets horizontally
+          const artilleryXOffset = (index - 1) * 3;
           return (
             <ArtilleryTarget
               key={distance}
-              position={[xOffset, 0, zPos]}
+              position={[artilleryXOffset, 0, zPos]}
               distance={distance}
               size={targetSize}
               isArtillery={true}
@@ -344,7 +351,7 @@ export function TargetRange() {
         return (
           <Target
             key={distance}
-            position={[xOffset, 1, zPos]}
+            position={[xOffset, 1.2, zPos]}
             distance={distance}
             size={targetSize}
             isArtillery={false}
@@ -355,18 +362,42 @@ export function TargetRange() {
         );
       })}
 
-      {/* Range floor markings */}
-      {!isArtillery && distances.map((distance) => {
-        const zPos = distance * scale;
-        return (
-          <group key={`marker-${distance}`} position={[0, 0.01, zPos]}>
-            <mesh rotation={[-Math.PI / 2, 0, 0]}>
-              <planeGeometry args={[4, 0.1]} />
-              <meshBasicMaterial color="#ffffff" transparent opacity={0.3} />
-            </mesh>
-          </group>
-        );
-      })}
+      {/* Range floor with lane markings */}
+      {!isArtillery && (
+        <group>
+          {/* Main range floor */}
+          <mesh position={[0, 0, 8]} rotation={[-Math.PI / 2, 0, 0]}>
+            <planeGeometry args={[6, 20]} />
+            <meshStandardMaterial color="#3a3a2a" />
+          </mesh>
+
+          {/* Distance markers - lines across the range */}
+          {distances.map((distance) => {
+            const zPos = distance * scale;
+            return (
+              <group key={`marker-${distance}`} position={[0, 0.02, zPos]}>
+                {/* White line marker */}
+                <mesh rotation={[-Math.PI / 2, 0, 0]}>
+                  <planeGeometry args={[5, 0.08]} />
+                  <meshBasicMaterial color="#ffffff" transparent opacity={0.6} />
+                </mesh>
+                {/* Distance label on ground */}
+                <Html position={[2.2, 0, 0]} center>
+                  <div className="px-2 py-0.5 bg-black/70 rounded text-white text-xs font-bold">
+                    {distance}m
+                  </div>
+                </Html>
+              </group>
+            );
+          })}
+
+          {/* Center lane line */}
+          <mesh position={[0, 0.01, 8]} rotation={[-Math.PI / 2, 0, 0]}>
+            <planeGeometry args={[0.05, 18]} />
+            <meshBasicMaterial color="#ffff00" transparent opacity={0.4} />
+          </mesh>
+        </group>
+      )}
     </group>
   );
 }

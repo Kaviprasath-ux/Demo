@@ -12,31 +12,104 @@ import {
   ChevronRight,
   Crosshair,
   Brain,
+  Users,
+  ClipboardList,
+  GraduationCap,
+  BarChart3,
+  Calendar,
+  BookOpen,
+  ScrollText,
+  Sparkles,
+  Tags,
+  GitBranch,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { useUIStore, useAuthStore } from "@/lib/store";
+import { useUIStore, useAuthStore, type UserRole } from "@/lib/store";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-const navigation = [
-  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { name: "Knowledge Search", href: "/search", icon: Search },
-  { name: "Quiz", href: "/quiz", icon: Brain },
-  { name: "3D Training", href: "/training", icon: Crosshair },
-  { name: "Simulator Intel", href: "/simulator", icon: Target },
-  { name: "Documents", href: "/documents", icon: FileText, roles: ["admin", "instructor"] },
-  { name: "Audit Logs", href: "/audit", icon: Shield, roles: ["admin"] },
-];
+interface NavItem {
+  name: string;
+  href: string;
+  icon: React.ComponentType<{ className?: string }>;
+  roles?: UserRole[];
+}
+
+// Role-specific navigation configurations per SOW document (Section 7.1)
+// Admin = System Administrator (technical management only)
+// Instructor = DS/Gunnery Instructors (course delivery & evaluation)
+// Leadership = Course Officers/Commandant (oversight & analytics)
+// Trainee = Officers/JCOs undergoing training (learning & practice)
+
+const getNavigationForRole = (role: UserRole | undefined): NavItem[] => {
+  switch (role) {
+    case "admin":
+      // System Administrator: Technical platform management
+      // NO training features - only system management
+      return [
+        { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+        { name: "User Management", href: "/admin/users", icon: Users },
+        { name: "Documents", href: "/documents", icon: FileText },
+        { name: "Audit Logs", href: "/audit", icon: Shield },
+        { name: "Simulator Intel", href: "/simulator", icon: Target },
+      ];
+
+    case "instructor":
+      // DS/Gunnery Instructor: Course delivery & evaluation
+      // Full access to training tools + course management
+      return [
+        { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+        { name: "AI Generator", href: "/instructor/ai-generator", icon: Sparkles },
+        { name: "Content Tagging", href: "/instructor/content-tagging", icon: Tags },
+        { name: "Knowledge Graph", href: "/instructor/knowledge-graph", icon: GitBranch },
+        { name: "Question Bank", href: "/instructor/questions", icon: ClipboardList },
+        { name: "Rubrics", href: "/instructor/rubrics", icon: ScrollText },
+        { name: "Scheduling", href: "/instructor/scheduling", icon: Calendar },
+        { name: "Answer Scripts", href: "/instructor/scripts", icon: BookOpen },
+        { name: "Trainee List", href: "/instructor/trainees", icon: GraduationCap },
+        { name: "Knowledge Search", href: "/search", icon: Search },
+        { name: "Quiz", href: "/quiz", icon: Brain },
+        { name: "3D Training", href: "/training", icon: Crosshair },
+        { name: "Simulator Intel", href: "/simulator", icon: Target },
+        { name: "Documents", href: "/documents", icon: FileText },
+      ];
+
+    case "leadership":
+      // Course Officers/Commandant: Oversight & analytics
+      // NO direct training access - only dashboards and reports
+      return [
+        { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+        { name: "Reports", href: "/leadership/reports", icon: BarChart3 },
+        { name: "Simulator Intel", href: "/simulator", icon: Target },
+        { name: "Documents", href: "/documents", icon: FileText },
+        { name: "Audit Logs", href: "/audit", icon: Shield },
+      ];
+
+    case "trainee":
+      // Officers/JCOs undergoing training: Learning & practice
+      // Access to learning tools and personal progress
+      return [
+        { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+        { name: "Knowledge Search", href: "/search", icon: Search },
+        { name: "Quiz", href: "/quiz", icon: Brain },
+        { name: "3D Training", href: "/training", icon: Crosshair },
+        { name: "Simulator Intel", href: "/simulator", icon: Target },
+      ];
+
+    default:
+      return [
+        { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+      ];
+  }
+};
 
 export function Sidebar() {
   const pathname = usePathname();
   const { sidebarOpen, toggleSidebar } = useUIStore();
   const { user } = useAuthStore();
 
-  const filteredNav = navigation.filter((item) => {
-    if (!item.roles) return true;
-    return user && item.roles.includes(user.role);
-  });
+  // Get role-specific navigation
+  const filteredNav = getNavigationForRole(user?.role as UserRole | undefined);
 
   return (
     <aside
