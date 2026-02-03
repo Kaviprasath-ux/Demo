@@ -1,9 +1,10 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Shield, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { StatsCards } from "@/components/dashboard/stats-cards";
 import { RecentQueries } from "@/components/dashboard/recent-queries";
 import { QueryInput } from "@/components/search/query-input";
@@ -19,15 +20,84 @@ export default function DashboardPage() {
     router.push("/search");
   };
 
+  // Role-specific quick links
+  const getQuickLinks = () => {
+    const baseLinks = [
+      {
+        title: "Knowledge Search",
+        description: "Search technical manuals and SOPs",
+        href: "/search",
+      },
+      {
+        title: "Quiz Mode",
+        description: "Test your artillery knowledge",
+        href: "/quiz",
+      },
+      {
+        title: "3D Training",
+        description: "Interactive gun training model",
+        href: "/training",
+      },
+      {
+        title: "Simulator Intelligence",
+        description: "View training analytics and performance",
+        href: "/simulator",
+      },
+    ];
+
+    // Add role-specific links
+    if (user?.role === "admin" || user?.role === "instructor") {
+      baseLinks.push({
+        title: "Document Library",
+        description: "Browse and manage indexed documents",
+        href: "/documents",
+      });
+    }
+
+    if (user?.role === "admin") {
+      baseLinks.push({
+        title: "Audit Logs",
+        description: "View system activity logs",
+        href: "/audit",
+      });
+    }
+
+    return baseLinks;
+  };
+
+  const quickLinks = getQuickLinks();
+
+  // Role-specific welcome message
+  const getWelcomeMessage = () => {
+    switch (user?.role) {
+      case "admin":
+        return "System administration dashboard - full access to all features.";
+      case "instructor":
+        return "Instructor dashboard - train cadets and manage content.";
+      case "trainee":
+        return "Access artillery knowledge, training modules, and quizzes.";
+      default:
+        return "Access artillery knowledge, simulator intelligence, and training resources.";
+    }
+  };
+
   return (
     <div className="space-y-8">
       {/* Welcome Header */}
       <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
-          Welcome back, {user?.name.split(" ").slice(-1)[0]}
-        </h1>
+        <div className="flex items-center gap-3">
+          <h1 className="text-3xl font-bold tracking-tight text-foreground">
+            Welcome back, {user?.name.split(" ").slice(-1)[0]}
+          </h1>
+          {user?.role === "admin" && (
+            <Badge variant="destructive" className="gap-1">
+              <Shield className="h-3 w-3" />
+              Admin
+            </Badge>
+          )}
+        </div>
         <p className="text-muted-foreground">
-          Access artillery knowledge, simulator intelligence, and training resources.
+          {getWelcomeMessage()}
         </p>
       </div>
 
@@ -82,23 +152,7 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="grid gap-3">
-              {[
-                {
-                  title: "Knowledge Search",
-                  description: "Search technical manuals and SOPs",
-                  href: "/search",
-                },
-                {
-                  title: "Simulator Intelligence",
-                  description: "View training analytics and performance",
-                  href: "/simulator",
-                },
-                {
-                  title: "Document Library",
-                  description: "Browse indexed documents",
-                  href: "/documents",
-                },
-              ].map((link) => (
+              {quickLinks.slice(0, 4).map((link) => (
                 <button
                   key={link.href}
                   onClick={() => router.push(link.href)}
@@ -117,6 +171,46 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Admin-only Section */}
+      {user?.role === "admin" && (
+        <Card className="border-destructive/30 bg-destructive/5">
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2 text-lg">
+              <Shield className="h-5 w-5 text-destructive" />
+              Admin Tools
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <button
+                onClick={() => router.push("/documents")}
+                className="flex items-center justify-between rounded-lg border border-border/50 p-4 text-left transition-colors hover:bg-muted/50"
+              >
+                <div>
+                  <p className="font-medium text-foreground">Document Library</p>
+                  <p className="text-sm text-muted-foreground">
+                    Manage indexed documents
+                  </p>
+                </div>
+                <FileText className="h-5 w-5 text-muted-foreground" />
+              </button>
+              <button
+                onClick={() => router.push("/audit")}
+                className="flex items-center justify-between rounded-lg border border-border/50 p-4 text-left transition-colors hover:bg-muted/50"
+              >
+                <div>
+                  <p className="font-medium text-foreground">Audit Logs</p>
+                  <p className="text-sm text-muted-foreground">
+                    View all system activity
+                  </p>
+                </div>
+                <Shield className="h-5 w-5 text-muted-foreground" />
+              </button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }

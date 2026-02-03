@@ -2,19 +2,23 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Target, Loader2, Lock, User } from "lucide-react";
+import { Target, Loader2, Lock, User, Shield, GraduationCap, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { useAuthStore } from "@/lib/store";
+import { mockUsers } from "@/lib/mock-data";
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login, isAuthenticated } = useAuthStore();
+  const { login, loginAsUser, isAuthenticated } = useAuthStore();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [loadingUserId, setLoadingUserId] = useState<string | null>(null);
   const [error, setError] = useState("");
+  const [showTestUsers, setShowTestUsers] = useState(true);
 
   // Redirect if already authenticated
   if (isAuthenticated) {
@@ -38,6 +42,50 @@ export default function LoginPage() {
       setError("An error occurred. Please try again.");
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleTestUserLogin = async (userId: string) => {
+    setLoadingUserId(userId);
+    setError("");
+
+    try {
+      const success = await loginAsUser(userId);
+      if (success) {
+        router.push("/dashboard");
+      } else {
+        setError("Failed to login as test user.");
+      }
+    } catch {
+      setError("An error occurred. Please try again.");
+    } finally {
+      setLoadingUserId(null);
+    }
+  };
+
+  const getRoleIcon = (role: string) => {
+    switch (role) {
+      case "admin":
+        return Shield;
+      case "instructor":
+        return GraduationCap;
+      case "trainee":
+        return Users;
+      default:
+        return User;
+    }
+  };
+
+  const getRoleBadgeVariant = (role: string) => {
+    switch (role) {
+      case "admin":
+        return "destructive" as const;
+      case "instructor":
+        return "default" as const;
+      case "trainee":
+        return "secondary" as const;
+      default:
+        return "outline" as const;
     }
   };
 
@@ -70,74 +118,140 @@ export default function LoginPage() {
           </CardHeader>
 
           <CardContent className="space-y-6">
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Username */}
-              <div className="space-y-2">
-                <label
-                  htmlFor="username"
-                  className="text-sm font-medium text-foreground"
-                >
-                  Service Number / Username
-                </label>
-                <div className="relative">
-                  <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                  <Input
-                    id="username"
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    placeholder="Enter your service number"
-                    className="pl-10"
-                    required
-                    disabled={isLoading}
-                  />
+            {/* Test Users Section - For Demo */}
+            {showTestUsers && (
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Quick Login (Demo)
+                  </p>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowTestUsers(false)}
+                    className="h-6 text-xs"
+                  >
+                    Use credentials
+                  </Button>
+                </div>
+                <div className="grid gap-2">
+                  {mockUsers.map((testUser) => {
+                    const RoleIcon = getRoleIcon(testUser.role);
+                    return (
+                      <Button
+                        key={testUser.id}
+                        variant="outline"
+                        className="h-auto justify-start py-3"
+                        onClick={() => handleTestUserLogin(testUser.id)}
+                        disabled={loadingUserId !== null}
+                      >
+                        {loadingUserId === testUser.id ? (
+                          <Loader2 className="mr-3 h-5 w-5 animate-spin" />
+                        ) : (
+                          <RoleIcon className="mr-3 h-5 w-5 text-muted-foreground" />
+                        )}
+                        <div className="flex-1 text-left">
+                          <p className="font-medium">{testUser.name}</p>
+                          <p className="text-xs text-muted-foreground">
+                            {testUser.id}
+                          </p>
+                        </div>
+                        <Badge variant={getRoleBadgeVariant(testUser.role)}>
+                          {testUser.role}
+                        </Badge>
+                      </Button>
+                    );
+                  })}
                 </div>
               </div>
+            )}
 
-              {/* Password */}
-              <div className="space-y-2">
-                <label
-                  htmlFor="password"
-                  className="text-sm font-medium text-foreground"
-                >
-                  Password
-                </label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                  <Input
-                    id="password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter your password"
-                    className="pl-10"
-                    required
-                    disabled={isLoading}
-                  />
+            {/* Credential Login Form - For Production */}
+            {!showTestUsers && (
+              <>
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Login with credentials
+                  </p>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowTestUsers(true)}
+                    className="h-6 text-xs"
+                  >
+                    Use test users
+                  </Button>
                 </div>
-              </div>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Username */}
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="username"
+                      className="text-sm font-medium text-foreground"
+                    >
+                      Service Number / Username
+                    </label>
+                    <div className="relative">
+                      <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                      <Input
+                        id="username"
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder="Enter your service number"
+                        className="pl-10"
+                        required
+                        disabled={isLoading}
+                      />
+                    </div>
+                  </div>
 
-              {/* Error Message */}
-              {error && (
-                <p className="text-sm text-destructive">{error}</p>
-              )}
+                  {/* Password */}
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="password"
+                      className="text-sm font-medium text-foreground"
+                    >
+                      Password
+                    </label>
+                    <div className="relative">
+                      <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                      <Input
+                        id="password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter your password"
+                        className="pl-10"
+                        required
+                        disabled={isLoading}
+                      />
+                    </div>
+                  </div>
 
-              {/* Submit Button */}
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={isLoading}
-              >
-                {isLoading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Authenticating...
-                  </>
-                ) : (
-                  "Sign In"
-                )}
-              </Button>
-            </form>
+                  {/* Submit Button */}
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Authenticating...
+                      </>
+                    ) : (
+                      "Sign In"
+                    )}
+                  </Button>
+                </form>
+              </>
+            )}
+
+            {/* Error Message */}
+            {error && (
+              <p className="text-sm text-destructive text-center">{error}</p>
+            )}
 
             {/* Divider */}
             <div className="relative">

@@ -5,17 +5,24 @@ import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useQueryStore } from "@/lib/store";
+import { useQueryStore, useAuthStore } from "@/lib/store";
 import { formatDate } from "@/lib/utils";
 
 export function RecentQueries() {
   const { queries } = useQueryStore();
-  const recentQueries = queries.slice(0, 5);
+  const { user } = useAuthStore();
+
+  // Filter queries for current user only
+  const userQueries = user
+    ? queries.filter((q) => q.userId === user.id)
+    : [];
+
+  const recentQueries = userQueries.slice(0, 5);
 
   return (
     <Card className="border-border/50">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-lg font-semibold">Recent Queries</CardTitle>
+        <CardTitle className="text-lg font-semibold">My Recent Queries</CardTitle>
         <Link href="/search">
           <Button variant="ghost" size="sm" className="gap-1">
             View all

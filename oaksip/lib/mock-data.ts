@@ -1,11 +1,52 @@
 import { Query, Document, SimulatorStats, SimulatorExercise, AuditLog, QueryResult, User } from "@/types";
 
-export const mockUser: User = {
-  id: "USR001",
-  name: "Col. Rajesh Kumar",
-  role: "instructor",
-  unit: "School of Artillery, Deolali",
-};
+// =============================================================================
+// MOCK USERS - For testing different roles
+// Backend developer: Replace with API call to /api/auth/me
+// =============================================================================
+
+export const mockUsers: User[] = [
+  {
+    id: "USR001",
+    name: "Col. Rajesh Kumar",
+    role: "admin",
+    unit: "School of Artillery, Deolali",
+  },
+  {
+    id: "USR002",
+    name: "Maj. Priya Singh",
+    role: "instructor",
+    unit: "School of Artillery, Deolali",
+  },
+  {
+    id: "USR003",
+    name: "Capt. Vikram Reddy",
+    role: "instructor",
+    unit: "School of Artillery, Deolali",
+  },
+  {
+    id: "USR004",
+    name: "Lt. Arjun Patel",
+    role: "trainee",
+    unit: "School of Artillery, Deolali",
+  },
+  {
+    id: "USR005",
+    name: "2Lt. Sneha Rao",
+    role: "trainee",
+    unit: "School of Artillery, Deolali",
+  },
+];
+
+// Helper to get user by ID
+export function getUserById(userId: string): User | undefined {
+  return mockUsers.find(u => u.id === userId);
+}
+
+// =============================================================================
+// KNOWLEDGE SEARCH RESPONSES
+// Backend developer: Replace with API call to /api/search
+// =============================================================================
 
 export const mockResponses: Record<string, QueryResult> = {
   "range of 155mm": {
@@ -44,7 +85,13 @@ export const mockResponses: Record<string, QueryResult> = {
   },
 };
 
+// =============================================================================
+// RECENT QUERIES - User-specific data
+// Backend developer: Replace with API call to /api/queries?userId=<userId>
+// =============================================================================
+
 export const mockRecentQueries: Query[] = [
+  // Admin queries (USR001)
   {
     id: "Q001",
     query: "What is the range of 155mm gun?",
@@ -59,6 +106,7 @@ export const mockRecentQueries: Query[] = [
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2),
     userId: "USR001",
   },
+  // Instructor queries (USR002)
   {
     id: "Q003",
     query: "Standard battery deployment patterns",
@@ -70,10 +118,51 @@ export const mockRecentQueries: Query[] = [
     id: "Q004",
     query: "Types of ammunition for 155mm",
     result: mockResponses["ammunition types"],
-    timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24),
+    timestamp: new Date(Date.now() - 1000 * 60 * 60 * 8),
+    userId: "USR002",
+  },
+  // Instructor queries (USR003)
+  {
+    id: "Q005",
+    query: "Fire control procedures for indirect fire",
+    result: mockResponses["fire control procedures"],
+    timestamp: new Date(Date.now() - 1000 * 60 * 60 * 12),
     userId: "USR003",
   },
+  // Trainee queries (USR004)
+  {
+    id: "Q006",
+    query: "What is the range of 155mm gun?",
+    result: mockResponses["range of 155mm"],
+    timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24),
+    userId: "USR004",
+  },
+  {
+    id: "Q007",
+    query: "Types of ammunition for 155mm",
+    result: mockResponses["ammunition types"],
+    timestamp: new Date(Date.now() - 1000 * 60 * 60 * 36),
+    userId: "USR004",
+  },
+  // Trainee queries (USR005)
+  {
+    id: "Q008",
+    query: "Standard battery deployment patterns",
+    result: mockResponses["battery deployment"],
+    timestamp: new Date(Date.now() - 1000 * 60 * 60 * 48),
+    userId: "USR005",
+  },
 ];
+
+// Helper to get queries for a specific user
+export function getQueriesByUserId(userId: string): Query[] {
+  return mockRecentQueries.filter(q => q.userId === userId);
+}
+
+// =============================================================================
+// DOCUMENTS - Accessible to admin & instructors
+// Backend developer: Replace with API call to /api/documents
+// =============================================================================
 
 export const mockDocuments: Document[] = [
   {
@@ -150,6 +239,11 @@ export const mockDocuments: Document[] = [
   },
 ];
 
+// =============================================================================
+// SIMULATOR STATS - System-wide (admin/instructor view)
+// Backend developer: Replace with API call to /api/simulator/stats
+// =============================================================================
+
 export const mockSimulatorStats: SimulatorStats = {
   totalExercises: 1247,
   avgAccuracy: 78.5,
@@ -179,6 +273,66 @@ export const mockSimulatorStats: SimulatorStats = {
   ],
 };
 
+// =============================================================================
+// USER-SPECIFIC STATS
+// Backend developer: Replace with API call to /api/users/<userId>/stats
+// =============================================================================
+
+export interface UserStats {
+  queriesThisMonth: number;
+  quizzesTaken: number;
+  avgQuizScore: number;
+  trainingSessionsCompleted: number;
+  lastActiveDate: Date;
+}
+
+export const mockUserStats: Record<string, UserStats> = {
+  USR001: {
+    queriesThisMonth: 45,
+    quizzesTaken: 12,
+    avgQuizScore: 92,
+    trainingSessionsCompleted: 8,
+    lastActiveDate: new Date(),
+  },
+  USR002: {
+    queriesThisMonth: 78,
+    quizzesTaken: 25,
+    avgQuizScore: 88,
+    trainingSessionsCompleted: 15,
+    lastActiveDate: new Date(Date.now() - 1000 * 60 * 60 * 2),
+  },
+  USR003: {
+    queriesThisMonth: 34,
+    quizzesTaken: 18,
+    avgQuizScore: 85,
+    trainingSessionsCompleted: 12,
+    lastActiveDate: new Date(Date.now() - 1000 * 60 * 60 * 5),
+  },
+  USR004: {
+    queriesThisMonth: 56,
+    quizzesTaken: 32,
+    avgQuizScore: 76,
+    trainingSessionsCompleted: 22,
+    lastActiveDate: new Date(Date.now() - 1000 * 60 * 60 * 1),
+  },
+  USR005: {
+    queriesThisMonth: 42,
+    quizzesTaken: 28,
+    avgQuizScore: 71,
+    trainingSessionsCompleted: 18,
+    lastActiveDate: new Date(Date.now() - 1000 * 60 * 60 * 8),
+  },
+};
+
+export function getUserStats(userId: string): UserStats | undefined {
+  return mockUserStats[userId];
+}
+
+// =============================================================================
+// SIMULATOR EXERCISES
+// Backend developer: Replace with API call to /api/simulator/exercises
+// =============================================================================
+
 export const mockSimulatorExercises: SimulatorExercise[] = [
   { id: 1, name: "Battery Fire Mission - Urban", date: new Date("2024-01-15"), participants: 24, avgAccuracy: 82.3, duration: 45 },
   { id: 2, name: "Counter-Battery Drill", date: new Date("2024-01-14"), participants: 18, avgAccuracy: 76.8, duration: 60 },
@@ -186,6 +340,11 @@ export const mockSimulatorExercises: SimulatorExercise[] = [
   { id: 4, name: "Night Fire Exercise", date: new Date("2024-01-12"), participants: 20, avgAccuracy: 71.2, duration: 75 },
   { id: 5, name: "Rapid Deployment Drill", date: new Date("2024-01-11"), participants: 28, avgAccuracy: 84.1, duration: 55 },
 ];
+
+// =============================================================================
+// AUDIT LOGS - Admin only
+// Backend developer: Replace with API call to /api/audit
+// =============================================================================
 
 export const mockAuditLogs: AuditLog[] = [
   { id: "AUD001", userId: "USR001", userName: "Col. Rajesh Kumar", action: "QUERY", query: "Range of 155mm gun", timestamp: new Date(Date.now() - 1000 * 60 * 30), ip: "10.0.1.45" },
@@ -195,8 +354,38 @@ export const mockAuditLogs: AuditLog[] = [
   { id: "AUD005", userId: "USR002", userName: "Maj. Priya Singh", action: "SIMULATOR_ACCESS", timestamp: new Date(Date.now() - 1000 * 60 * 120), ip: "10.0.1.67" },
   { id: "AUD006", userId: "USR004", userName: "Lt. Arjun Patel", action: "QUERY", query: "Fire control procedures", timestamp: new Date(Date.now() - 1000 * 60 * 150), ip: "10.0.1.102" },
   { id: "AUD007", userId: "USR001", userName: "Col. Rajesh Kumar", action: "LOGOUT", timestamp: new Date(Date.now() - 1000 * 60 * 180), ip: "10.0.1.45" },
-  { id: "AUD008", userId: "USR005", userName: "Brig. Suresh Nair", action: "AUDIT_VIEW", timestamp: new Date(Date.now() - 1000 * 60 * 200), ip: "10.0.1.15" },
+  { id: "AUD008", userId: "USR005", userName: "2Lt. Sneha Rao", action: "QUIZ_COMPLETE", query: "Score: 85%", timestamp: new Date(Date.now() - 1000 * 60 * 200), ip: "10.0.1.115" },
+  { id: "AUD009", userId: "USR004", userName: "Lt. Arjun Patel", action: "TRAINING_START", query: "3D Training - Loading Drill", timestamp: new Date(Date.now() - 1000 * 60 * 220), ip: "10.0.1.102" },
+  { id: "AUD010", userId: "USR003", userName: "Capt. Vikram Reddy", action: "DOCUMENT_UPLOAD", query: "New_SOP_v2.pdf", timestamp: new Date(Date.now() - 1000 * 60 * 250), ip: "10.0.1.89" },
 ];
+
+// =============================================================================
+// SYSTEM-WIDE STATS - Admin only
+// Backend developer: Replace with API call to /api/admin/stats
+// =============================================================================
+
+export interface SystemStats {
+  totalQueries: number;
+  documentsIndexed: number;
+  simulatorSessions: number;
+  activeUsers: number;
+  queryTrend: number; // percentage
+  sessionTrend: number; // percentage
+}
+
+export const mockSystemStats: SystemStats = {
+  totalQueries: 1247,
+  documentsIndexed: 156,
+  simulatorSessions: 89,
+  activeUsers: 34,
+  queryTrend: 12,
+  sessionTrend: 8,
+};
+
+// =============================================================================
+// SEARCH FUNCTION
+// Backend developer: Replace with API call to /api/search
+// =============================================================================
 
 export function searchKnowledge(query: string): QueryResult {
   const lowerQuery = query.toLowerCase();

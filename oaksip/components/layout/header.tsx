@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { LogOut, User, Bell } from "lucide-react";
+import { LogOut, User, Bell, Shield, GraduationCap, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -27,11 +27,14 @@ export function Header() {
     router.push("/login");
   };
 
-  const roleLabels: Record<string, string> = {
-    admin: "Administrator",
-    instructor: "Instructor",
-    trainee: "Trainee",
+  const roleConfig: Record<string, { label: string; variant: "default" | "secondary" | "destructive"; icon: typeof Shield }> = {
+    admin: { label: "Admin", variant: "destructive", icon: Shield },
+    instructor: { label: "Instructor", variant: "default", icon: GraduationCap },
+    trainee: { label: "Trainee", variant: "secondary", icon: Users },
   };
+
+  const currentRole = user ? roleConfig[user.role] : null;
+  const RoleIcon = currentRole?.icon || User;
 
   return (
     <header
@@ -51,6 +54,14 @@ export function Header() {
       </div>
 
       <div className="flex items-center gap-4">
+        {/* Role Badge - More prominent */}
+        {user && currentRole && (
+          <Badge variant={currentRole.variant} className="hidden md:inline-flex gap-1.5">
+            <RoleIcon className="h-3 w-3" />
+            {currentRole.label}
+          </Badge>
+        )}
+
         {/* Notifications */}
         <Button variant="ghost" size="icon" className="relative">
           <Bell className="h-5 w-5" />
@@ -70,13 +81,21 @@ export function Header() {
                 <div className="hidden text-left sm:block">
                   <p className="text-sm font-medium">{user.name}</p>
                   <p className="text-xs text-muted-foreground">
-                    {roleLabels[user.role]}
+                    {user.unit}
                   </p>
                 </div>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel className="font-normal">
+                <div className="flex flex-col space-y-1">
+                  <p className="text-sm font-medium">{user.name}</p>
+                  <p className="text-xs text-muted-foreground">{user.id}</p>
+                  <Badge variant={currentRole?.variant} className="w-fit mt-1">
+                    {currentRole?.label}
+                  </Badge>
+                </div>
+              </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <User className="mr-2 h-4 w-4" />

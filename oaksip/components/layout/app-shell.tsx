@@ -5,6 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { Sidebar } from "./sidebar";
 import { Header } from "./header";
 import { useAuthStore, useUIStore } from "@/lib/store";
+import { RouteGuard } from "@/components/auth/route-guard";
 import { cn } from "@/lib/utils";
 
 interface AppShellProps {
@@ -43,7 +44,9 @@ export function AppShell({ children }: AppShellProps) {
           sidebarOpen ? "pl-64" : "pl-16"
         )}
       >
-        <div className="p-6">{children}</div>
+        <div className="p-6">
+          <RouteGuard>{children}</RouteGuard>
+        </div>
       </main>
     </div>
   );

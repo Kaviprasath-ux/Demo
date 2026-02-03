@@ -6,9 +6,13 @@ import {
   Target,
   Users,
   TrendingUp,
+  Brain,
+  Crosshair,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { useAuthStore } from "@/lib/store";
+import { mockSystemStats, getUserStats } from "@/lib/mock-data";
 
 interface StatCardProps {
   title: string;
@@ -59,38 +63,119 @@ function StatCard({ title, value, description, icon: Icon, trend }: StatCardProp
 }
 
 export function StatsCards() {
-  const stats: StatCardProps[] = [
+  const { user } = useAuthStore();
+  const userStats = user ? getUserStats(user.id) : null;
+
+  // Admin sees system-wide stats
+  if (user?.role === "admin") {
+    const adminStats: StatCardProps[] = [
+      {
+        title: "Total Queries",
+        value: mockSystemStats.totalQueries.toLocaleString(),
+        description: "This month (system-wide)",
+        icon: Search,
+        trend: { value: mockSystemStats.queryTrend, positive: true },
+      },
+      {
+        title: "Documents Indexed",
+        value: mockSystemStats.documentsIndexed.toString(),
+        description: "Technical manuals & SOPs",
+        icon: FileText,
+      },
+      {
+        title: "Simulator Sessions",
+        value: mockSystemStats.simulatorSessions.toString(),
+        description: "This month (system-wide)",
+        icon: Target,
+        trend: { value: mockSystemStats.sessionTrend, positive: true },
+      },
+      {
+        title: "Active Users",
+        value: mockSystemStats.activeUsers.toString(),
+        description: "Instructors & Trainees",
+        icon: Users,
+      },
+    ];
+
+    return (
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {adminStats.map((stat) => (
+          <StatCard key={stat.title} {...stat} />
+        ))}
+      </div>
+    );
+  }
+
+  // Instructor sees system + personal stats
+  if (user?.role === "instructor") {
+    const instructorStats: StatCardProps[] = [
+      {
+        title: "My Queries",
+        value: userStats?.queriesThisMonth.toString() || "0",
+        description: "This month",
+        icon: Search,
+      },
+      {
+        title: "Total Sessions",
+        value: mockSystemStats.simulatorSessions.toString(),
+        description: "This month (all trainees)",
+        icon: Target,
+        trend: { value: mockSystemStats.sessionTrend, positive: true },
+      },
+      {
+        title: "My Quiz Score",
+        value: `${userStats?.avgQuizScore || 0}%`,
+        description: "Average score",
+        icon: Brain,
+      },
+      {
+        title: "Active Trainees",
+        value: mockSystemStats.activeUsers.toString(),
+        description: "Currently training",
+        icon: Users,
+      },
+    ];
+
+    return (
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {instructorStats.map((stat) => (
+          <StatCard key={stat.title} {...stat} />
+        ))}
+      </div>
+    );
+  }
+
+  // Trainee sees only personal stats
+  const traineeStats: StatCardProps[] = [
     {
-      title: "Total Queries",
-      value: "1,247",
+      title: "My Queries",
+      value: userStats?.queriesThisMonth.toString() || "0",
       description: "This month",
       icon: Search,
-      trend: { value: 12, positive: true },
     },
     {
-      title: "Documents Indexed",
-      value: "156",
-      description: "Technical manuals & SOPs",
-      icon: FileText,
+      title: "Quizzes Taken",
+      value: userStats?.quizzesTaken.toString() || "0",
+      description: "Total completed",
+      icon: Brain,
     },
     {
-      title: "Simulator Sessions",
-      value: "89",
-      description: "This month",
+      title: "Quiz Score",
+      value: `${userStats?.avgQuizScore || 0}%`,
+      description: "Average score",
       icon: Target,
-      trend: { value: 8, positive: true },
     },
     {
-      title: "Active Users",
-      value: "34",
-      description: "Instructors & Trainees",
-      icon: Users,
+      title: "Training Sessions",
+      value: userStats?.trainingSessionsCompleted.toString() || "0",
+      description: "Completed",
+      icon: Crosshair,
     },
   ];
 
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {stats.map((stat) => (
+      {traineeStats.map((stat) => (
         <StatCard key={stat.title} {...stat} />
       ))}
     </div>
