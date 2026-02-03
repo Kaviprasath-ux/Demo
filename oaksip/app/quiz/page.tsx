@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useQuizStore } from "@/lib/quiz-store";
-import { useLeaderboardStore } from "@/lib/leaderboard-store";
 import { soundEffects } from "@/lib/sound-effects";
 import {
   Brain,
@@ -354,17 +353,12 @@ function QuizQuestion() {
 // Quiz Results Screen
 function QuizResults({ onRetry, onExit }: { onRetry: () => void; onExit: () => void }) {
   const { currentQuiz, selectedAnswers, getScore } = useQuizStore();
-  const { addPoints } = useLeaderboardStore();
   const [showReview, setShowReview] = useState(false);
 
   const score = getScore();
 
   useEffect(() => {
-    // Add points based on score
-    const points = Math.round(score.percentage * 0.5);
-    addPoints("quiz", points);
-
-    // Play sound
+    // Play sound on completion
     if (score.percentage >= 70) {
       soundEffects.playSuccess();
     }

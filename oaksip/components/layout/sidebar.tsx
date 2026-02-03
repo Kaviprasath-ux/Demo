@@ -12,7 +12,6 @@ import {
   ChevronRight,
   Crosshair,
   Brain,
-  TrendingUp,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -24,7 +23,6 @@ const navigation = [
   { name: "Knowledge Search", href: "/search", icon: Search },
   { name: "Quiz", href: "/quiz", icon: Brain },
   { name: "3D Training", href: "/training", icon: Crosshair },
-  { name: "My Progress", href: "/leaderboard", icon: TrendingUp },
   { name: "Simulator Intel", href: "/simulator", icon: Target },
   { name: "Documents", href: "/documents", icon: FileText, roles: ["admin", "instructor"] },
   { name: "Audit Logs", href: "/audit", icon: Shield, roles: ["admin"] },
