@@ -239,29 +239,17 @@ export function TrajectoryVisualization() {
 
   // Get gun system info
   const gunSystem = getGunSystemById(selectedGunSystem);
-  const isSmallArm = gunSystem?.category === "assault-rifle" ||
-                     gunSystem?.category === "pistol" ||
-                     gunSystem?.category === "machine-gun";
+  const isArtillery = gunSystem?.category === "towed";
 
-  // Generate trajectory when firing
+  // Generate trajectory when firing (only for artillery)
   useEffect(() => {
-    if (currentAnimation === "firing") {
-      // Different parameters based on weapon type
-      let muzzleVelocity: number;
-      let elevation: number;
-      let startPosition: [number, number, number];
+    if (!isArtillery) return; // Skip for small arms
 
-      if (isSmallArm) {
-        // Small arms: flatter trajectory, starts from muzzle
-        muzzleVelocity = 900; // ~900 m/s for rifles
-        elevation = 1 + Math.random() * 2; // Very flat, 1-3 degrees
-        startPosition = [0, 0.8, 0]; // Near muzzle
-      } else {
-        // Artillery: high arc trajectory
-        muzzleVelocity = 827; // Standard 155mm muzzle velocity
-        elevation = 30 + Math.random() * 15; // 30-45 degrees for howitzers
-        startPosition = [0, 0.6, 3.6]; // At muzzle brake of howitzer
-      }
+    if (currentAnimation === "firing") {
+      // Artillery: high arc trajectory
+      const muzzleVelocity = 827; // Standard 155mm muzzle velocity
+      const elevation = 30 + Math.random() * 15; // 30-45 degrees for howitzers
+      const startPosition: [number, number, number] = [0, 0.6, 3.6]; // At muzzle brake of howitzer
 
       setStartPos(new THREE.Vector3(...startPosition));
 
@@ -269,8 +257,8 @@ export function TrajectoryVisualization() {
         muzzleVelocity,
         elevation,
         gravity: 9.81,
-        airResistance: isSmallArm ? 0.001 : 0.002,
-        isSmallArm,
+        airResistance: 0.002,
+        isSmallArm: false,
         startPosition,
       });
 
@@ -279,7 +267,13 @@ export function TrajectoryVisualization() {
       setShowTrajectory(true);
       setShowImpact(false);
     }
-  }, [currentAnimation, isSmallArm]);
+  }, [currentAnimation, isArtillery]);
+
+  // Only show trajectory visualization for artillery (towed guns)
+  // Small arms (pistols, rifles, machine guns) don't need ballistic arc visualization
+  if (!isArtillery) {
+    return null;
+  }
 
   const handleProjectileComplete = () => {
     setShowProjectile(false);
