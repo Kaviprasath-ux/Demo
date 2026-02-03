@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 150 10% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 150 10% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 150 10% 10%;
+    --primary: 82 25% 35%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 80 10% 90%;
+    --secondary-foreground: 150 10% 10%;
+    --muted: 80 10% 95%;
+    --muted-foreground: 150 10% 40%;
+    --accent: 82 25% 35%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 80 10% 85%;
+    --input: 80 10% 85%;
+    --ring: 82 25% 35%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 150 15% 8%;
+    --foreground: 60 10% 95%;
+    --card: 150 15% 10%;
+    --card-foreground: 60 10% 95%;
+    --popover: 150 15% 10%;
+    --popover-foreground: 60 10% 95%;
+    --primary: 82 40% 45%;
+    --primary-foreground: 150 15% 8%;
+    --secondary: 150 10% 15%;
+    --secondary-foreground: 60 10% 95%;
+    --muted: 150 10% 15%;
+    --muted-foreground: 60 10% 60%;
+    --accent: 82 40% 45%;
+    --accent-foreground: 150 15% 8%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 60 10% 95%;
+    --border: 150 10% 18%;
+    --input: 150 10% 18%;
+    --ring: 82 40% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar for dark theme */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: hsl(150 15% 10%);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: hsl(150 10% 25%);
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: hsl(150 10% 35%);
+}
