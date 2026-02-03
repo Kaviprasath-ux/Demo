@@ -14,6 +14,7 @@ import { CrewPositionOverlay } from "./crew-position-overlay";
 import { TargetRange } from "./target-range";
 import { AimingOverlay, SimpleCrosshair } from "./aiming-overlay";
 import { ScoreDisplay } from "./scoring-panel";
+import { SmallArmsShooter, ArtilleryCrew } from "./soldier-model";
 import { useTrainingStore, cameraPresetPositions } from "@/lib/training-store";
 import { getGunSystemById } from "@/lib/gun-systems";
 
@@ -115,6 +116,10 @@ export function GunViewer({ className }: GunViewerProps) {
         <Suspense fallback={<LoadingFallback />}>
           <GunModel />
         </Suspense>
+
+        {/* Soldier/Crew Models - Digital Twin */}
+        <SmallArmsShooter />
+        <ArtilleryCrew />
 
         {/* Crew Position Overlay - SOW Section 8.4 */}
         <CrewPositionOverlay />
