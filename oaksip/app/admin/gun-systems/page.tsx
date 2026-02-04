@@ -9,6 +9,13 @@ import {
   Ruler,
   Swords,
   CircleDot,
+  Clock,
+  CheckCircle,
+  AlertTriangle,
+  History,
+  FileText,
+  Calendar,
+  Rocket,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -34,6 +41,97 @@ const categoryLabels: Record<GunCategory, string> = {
   "assault-rifle": "Assault Rifles",
   pistol: "Pistols",
   "machine-gun": "Machine Guns",
+};
+
+// Lifecycle Status Data
+const lifecycleStatus: Record<string, {
+  status: "active" | "legacy" | "induction" | "planned";
+  doctrineVersion: string;
+  lastDoctrineUpdate: string;
+  digitalTwinVersion: string;
+  lastModelUpdate: string;
+  nextScheduledUpdate: string;
+}> = {
+  dhanush: {
+    status: "active",
+    doctrineVersion: "3.2.1",
+    lastDoctrineUpdate: "2025-01-15",
+    digitalTwinVersion: "2.1.0",
+    lastModelUpdate: "2025-01-10",
+    nextScheduledUpdate: "2025-04-01",
+  },
+  "k9-vajra": {
+    status: "active",
+    doctrineVersion: "3.1.0",
+    lastDoctrineUpdate: "2024-12-20",
+    digitalTwinVersion: "2.0.5",
+    lastModelUpdate: "2024-12-15",
+    nextScheduledUpdate: "2025-03-15",
+  },
+  pinaka: {
+    status: "active",
+    doctrineVersion: "2.8.3",
+    lastDoctrineUpdate: "2024-11-30",
+    digitalTwinVersion: "1.9.2",
+    lastModelUpdate: "2024-11-25",
+    nextScheduledUpdate: "2025-02-28",
+  },
+  "ak-47": {
+    status: "active",
+    doctrineVersion: "4.0.0",
+    lastDoctrineUpdate: "2024-10-15",
+    digitalTwinVersion: "2.2.0",
+    lastModelUpdate: "2024-10-10",
+    nextScheduledUpdate: "2025-04-15",
+  },
+  "glock-17": {
+    status: "active",
+    doctrineVersion: "3.5.0",
+    lastDoctrineUpdate: "2024-09-20",
+    digitalTwinVersion: "2.0.0",
+    lastModelUpdate: "2024-09-15",
+    nextScheduledUpdate: "2025-03-20",
+  },
+  pkm: {
+    status: "active",
+    doctrineVersion: "2.9.0",
+    lastDoctrineUpdate: "2024-08-30",
+    digitalTwinVersion: "1.8.0",
+    lastModelUpdate: "2024-08-25",
+    nextScheduledUpdate: "2025-02-28",
+  },
+  "m249-saw": {
+    status: "active",
+    doctrineVersion: "3.0.0",
+    lastDoctrineUpdate: "2024-07-15",
+    digitalTwinVersion: "1.7.5",
+    lastModelUpdate: "2024-07-10",
+    nextScheduledUpdate: "2025-01-31",
+  },
+};
+
+// Version History Data
+const versionHistory = [
+  { date: "2025-01-15", system: "Dhanush", component: "Doctrine", version: "3.2.1", change: "Updated firing procedures for extreme cold conditions", author: "School of Artillery" },
+  { date: "2025-01-10", system: "Dhanush", component: "3D Model", version: "2.1.0", change: "Enhanced breech detail and animation", author: "3D Team" },
+  { date: "2024-12-20", system: "K9 Vajra", component: "Doctrine", version: "3.1.0", change: "Added shoot-and-scoot procedures", author: "School of Artillery" },
+  { date: "2024-12-15", system: "AK-47", component: "3D Model", version: "2.2.0", change: "Improved wood texture and recoil animation", author: "3D Team" },
+  { date: "2024-11-30", system: "Pinaka", component: "Doctrine", version: "2.8.3", change: "Updated salvo patterns for area targets", author: "DRDO" },
+  { date: "2024-10-15", system: "All Systems", component: "Safety Protocols", version: "5.1.2", change: "Enhanced safety override rules", author: "Safety Directorate" },
+];
+
+const statusColors: Record<string, string> = {
+  active: "bg-green-500/20 text-green-500 border-green-500/30",
+  legacy: "bg-yellow-500/20 text-yellow-500 border-yellow-500/30",
+  induction: "bg-blue-500/20 text-blue-500 border-blue-500/30",
+  planned: "bg-purple-500/20 text-purple-500 border-purple-500/30",
+};
+
+const statusIcons: Record<string, React.ReactNode> = {
+  active: <CheckCircle className="h-4 w-4" />,
+  legacy: <Clock className="h-4 w-4" />,
+  induction: <Rocket className="h-4 w-4" />,
+  planned: <Calendar className="h-4 w-4" />,
 };
 
 export default function GunSystemsPage() {
@@ -164,6 +262,119 @@ export default function GunSystemsPage() {
               </TabsContent>
             ))}
           </Tabs>
+        </CardContent>
+      </Card>
+
+      {/* Version History */}
+      <Card className="border-border/50">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <History className="h-5 w-5" />
+            Recent Version Updates
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3">
+            {versionHistory.map((entry, idx) => (
+              <div
+                key={idx}
+                className="flex items-start gap-4 p-3 bg-muted/30 rounded-lg border border-border/50"
+              >
+                <div className="flex-shrink-0">
+                  <Badge variant="outline" className="text-xs">
+                    {entry.date}
+                  </Badge>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="font-medium">{entry.system}</span>
+                    <Badge variant="secondary" className="text-xs">
+                      {entry.component}
+                    </Badge>
+                    <Badge className="text-xs bg-primary">v{entry.version}</Badge>
+                  </div>
+                  <p className="text-sm text-muted-foreground">{entry.change}</p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Updated by: {entry.author}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Lifecycle Status Overview */}
+      <Card className="border-border/50">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <FileText className="h-5 w-5" />
+            System Lifecycle & Version Status
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b">
+                  <th className="text-left py-2 px-3">System</th>
+                  <th className="text-center py-2 px-3">Status</th>
+                  <th className="text-center py-2 px-3">Doctrine Ver.</th>
+                  <th className="text-center py-2 px-3">Last Doctrine Update</th>
+                  <th className="text-center py-2 px-3">3D Model Ver.</th>
+                  <th className="text-center py-2 px-3">Next Scheduled</th>
+                </tr>
+              </thead>
+              <tbody>
+                {gunSystems.map((system) => {
+                  const lifecycle = lifecycleStatus[system.id] || {
+                    status: "active",
+                    doctrineVersion: "1.0.0",
+                    lastDoctrineUpdate: "N/A",
+                    digitalTwinVersion: "1.0.0",
+                    lastModelUpdate: "N/A",
+                    nextScheduledUpdate: "TBD",
+                  };
+                  return (
+                    <tr key={system.id} className="border-b border-border/50">
+                      <td className="py-3 px-3">
+                        <div className="flex items-center gap-2">
+                          <div
+                            className="h-6 w-6 rounded flex items-center justify-center flex-shrink-0"
+                            style={{ backgroundColor: system.modelColor }}
+                          >
+                            {categoryIcons[system.category]}
+                          </div>
+                          <span className="font-medium">{system.name}</span>
+                        </div>
+                      </td>
+                      <td className="py-3 px-3 text-center">
+                        <Badge
+                          variant="outline"
+                          className={`${statusColors[lifecycle.status]} flex items-center gap-1 justify-center`}
+                        >
+                          {statusIcons[lifecycle.status]}
+                          {lifecycle.status}
+                        </Badge>
+                      </td>
+                      <td className="py-3 px-3 text-center">
+                        <Badge variant="outline">v{lifecycle.doctrineVersion}</Badge>
+                      </td>
+                      <td className="py-3 px-3 text-center text-muted-foreground">
+                        {lifecycle.lastDoctrineUpdate}
+                      </td>
+                      <td className="py-3 px-3 text-center">
+                        <Badge variant="secondary">v{lifecycle.digitalTwinVersion}</Badge>
+                      </td>
+                      <td className="py-3 px-3 text-center text-muted-foreground">
+                        {lifecycle.nextScheduledUpdate}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </CardContent>
       </Card>
 

@@ -22,6 +22,8 @@ import {
   Sparkles,
   Tags,
   GitBranch,
+  Activity,
+  Map,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -59,6 +61,7 @@ const getNavigationForRole = (role: UserRole | undefined): NavItem[] => {
       // Full access to training tools + course management
       return [
         { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+        { name: "Command Center", href: "/instructor/command-dashboard", icon: Activity },
         { name: "AI Generator", href: "/instructor/ai-generator", icon: Sparkles },
         { name: "Content Tagging", href: "/instructor/content-tagging", icon: Tags },
         { name: "Knowledge Graph", href: "/instructor/knowledge-graph", icon: GitBranch },
@@ -67,6 +70,7 @@ const getNavigationForRole = (role: UserRole | undefined): NavItem[] => {
         { name: "Scheduling", href: "/instructor/scheduling", icon: Calendar },
         { name: "Answer Scripts", href: "/instructor/scripts", icon: BookOpen },
         { name: "Trainee List", href: "/instructor/trainees", icon: GraduationCap },
+        { name: "AI Safety Rules", href: "/instructor/ai-safety-examples", icon: Shield },
         { name: "Knowledge Search", href: "/search", icon: Search },
         { name: "Quiz", href: "/quiz", icon: Brain },
         { name: "3D Training", href: "/training", icon: Crosshair },
@@ -79,6 +83,8 @@ const getNavigationForRole = (role: UserRole | undefined): NavItem[] => {
       // NO direct training access - only dashboards and reports
       return [
         { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+        { name: "Command Center", href: "/instructor/command-dashboard", icon: Activity },
+        { name: "Lifecycle & Roadmap", href: "/leadership/lifecycle", icon: Map },
         { name: "Reports", href: "/leadership/reports", icon: BarChart3 },
         { name: "Simulator Intel", href: "/simulator", icon: Target },
         { name: "Documents", href: "/documents", icon: FileText },

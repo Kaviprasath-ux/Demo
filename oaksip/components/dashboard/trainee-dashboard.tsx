@@ -25,6 +25,7 @@ import { useQueryStore, useAuthStore } from "@/lib/store";
 import { getUserStats, getTraineeProgressHistory, getUpcomingAssessments } from "@/lib/mock-data";
 import { useQuizStore, TopicScore } from "@/lib/quiz-store";
 import { Calendar, Flag, Clock } from "lucide-react";
+import { TraineeProgressionCard } from "./trainee-progression-card";
 
 // Calculate aggregate topic performance from all quiz attempts
 function calculateTopicPerformance(attempts: { topicBreakdown?: TopicScore[] }[]): TopicScore[] {
@@ -283,6 +284,44 @@ export function TraineeDashboard() {
                 <Search className="h-6 w-6 text-blue-500" />
               </div>
             </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Cognitive Progression Card - Client Improvement 1 */}
+      <div className="grid gap-6 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <TraineeProgressionCard odNumber="OD-2024-001" />
+        </div>
+        <Card className="border-border/50">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg font-semibold flex items-center gap-2">
+              <Target className="h-5 w-5 text-primary" />
+              Next Milestone
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="text-center py-4">
+              <div className="text-4xl font-bold text-primary mb-2">Level 4</div>
+              <p className="text-sm text-muted-foreground">Error-Free Execution</p>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span>Drills Required</span>
+                <span className="font-medium">50 (32 done)</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span>Accuracy Target</span>
+                <span className="font-medium">95% (82% current)</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span>Safety Record</span>
+                <span className="font-medium text-green-500">On track</span>
+              </div>
+            </div>
+            <Button className="w-full" onClick={() => router.push("/training")}>
+              Continue Training
+            </Button>
           </CardContent>
         </Card>
       </div>
