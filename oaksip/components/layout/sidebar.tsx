@@ -24,6 +24,7 @@ import {
   GitBranch,
   Activity,
   Map,
+  TrendingUp,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -96,6 +97,7 @@ const getNavigationForRole = (role: UserRole | undefined): NavItem[] => {
       // Access to learning tools and personal progress
       return [
         { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+        { name: "My Progression", href: "/trainee/my-progression", icon: TrendingUp },
         { name: "Knowledge Search", href: "/search", icon: Search },
         { name: "Quiz", href: "/quiz", icon: Brain },
         { name: "3D Training", href: "/training", icon: Crosshair },

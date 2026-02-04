@@ -22,6 +22,8 @@ import {
   getProgressToNextLevel,
   type ProgressionLevel,
 } from "@/lib/progression-model";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 const levelIcons: Record<number, React.ReactNode> = {
   1: <BookOpen className="h-5 w-5" />,
@@ -36,6 +38,7 @@ interface TraineeProgressionCardProps {
 }
 
 export function TraineeProgressionCard({ odNumber = "OD-2024-001" }: TraineeProgressionCardProps) {
+  const router = useRouter();
   const { getCadetProgress } = useProgressionStore();
   const progress = getCadetProgress(odNumber);
 
@@ -224,6 +227,16 @@ export function TraineeProgressionCard({ odNumber = "OD-2024-001" }: TraineeProg
             </Badge>
           ))}
         </div>
+
+        {/* View Details Button */}
+        <Button
+          variant="outline"
+          className="w-full mt-4"
+          onClick={() => router.push("/trainee/my-progression")}
+        >
+          <TrendingUp className="h-4 w-4 mr-2" />
+          View Full Training Journey
+        </Button>
       </CardContent>
     </Card>
   );
