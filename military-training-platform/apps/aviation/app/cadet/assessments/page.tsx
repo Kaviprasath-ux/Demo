@@ -30,24 +30,24 @@ export default function AssessmentsPage() {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "completed":
-        return <CheckCircle2 className="w-5 h-5 text-green-400" />;
+        return <CheckCircle2 className="w-5 h-5 text-primary" />;
       case "missed":
         return <XCircle className="w-5 h-5 text-red-400" />;
       case "in-progress":
-        return <Clock className="w-5 h-5 text-emerald-400" />;
+        return <Clock className="w-5 h-5 text-primary" />;
       default:
-        return <AlertCircle className="w-5 h-5 text-yellow-400" />;
+        return <AlertCircle className="w-5 h-5 text-primary" />;
     }
   };
 
   const getStatusColor = (status: string) => {
     const colors: Record<string, string> = {
-      upcoming: "bg-yellow-500/20 text-yellow-400",
-      "in-progress": "bg-emerald-500/20 text-emerald-400",
-      completed: "bg-green-500/20 text-green-400",
+      upcoming: "bg-primary/20 text-primary",
+      "in-progress": "bg-primary/20 text-primary",
+      completed: "bg-primary/20 text-primary",
       missed: "bg-red-500/20 text-red-400",
     };
-    return colors[status] || "bg-gray-500/20 text-gray-400";
+    return colors[status] || "bg-gray-500/20 text-muted-foreground";
   };
 
   const getTypeLabel = (type: string) => {
@@ -78,19 +78,19 @@ export default function AssessmentsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-3">
-            <ClipboardCheck className="w-8 h-8 text-green-500" />
+          <h1 className="text-2xl font-bold text-foreground flex items-center gap-3">
+            <ClipboardCheck className="w-8 h-8 text-primary" />
             Assessments
           </h1>
-          <p className="text-gray-400 mt-1">Track and complete your assessments</p>
+          <p className="text-muted-foreground mt-1">Track and complete your assessments</p>
         </div>
         <div className="flex gap-2">
           <button
             onClick={() => setViewMode("all")}
             className={`px-4 py-2 rounded-lg text-sm transition-colors ${
               viewMode === "all"
-                ? "bg-green-600 text-white"
-                : "bg-gray-800 text-gray-400 hover:text-white"
+                ? "bg-primary text-foreground"
+                : "bg-muted text-muted-foreground hover:text-foreground"
             }`}
           >
             All
@@ -99,8 +99,8 @@ export default function AssessmentsPage() {
             onClick={() => setViewMode("upcoming")}
             className={`px-4 py-2 rounded-lg text-sm transition-colors ${
               viewMode === "upcoming"
-                ? "bg-green-600 text-white"
-                : "bg-gray-800 text-gray-400 hover:text-white"
+                ? "bg-primary text-foreground"
+                : "bg-muted text-muted-foreground hover:text-foreground"
             }`}
           >
             Upcoming
@@ -109,8 +109,8 @@ export default function AssessmentsPage() {
             onClick={() => setViewMode("completed")}
             className={`px-4 py-2 rounded-lg text-sm transition-colors ${
               viewMode === "completed"
-                ? "bg-green-600 text-white"
-                : "bg-gray-800 text-gray-400 hover:text-white"
+                ? "bg-primary text-foreground"
+                : "bg-muted text-muted-foreground hover:text-foreground"
             }`}
           >
             Completed
@@ -120,25 +120,25 @@ export default function AssessmentsPage() {
 
       {/* Summary Stats */}
       <div className="grid grid-cols-4 gap-4">
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
-          <p className="text-gray-400 text-sm">Total</p>
-          <p className="text-2xl font-bold text-white">{assessments.length}</p>
+        <div className="bg-card border border-border rounded-lg p-4">
+          <p className="text-muted-foreground text-sm">Total</p>
+          <p className="text-2xl font-bold text-foreground">{assessments.length}</p>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
-          <p className="text-gray-400 text-sm">Upcoming</p>
-          <p className="text-2xl font-bold text-yellow-400">
+        <div className="bg-card border border-border rounded-lg p-4">
+          <p className="text-muted-foreground text-sm">Upcoming</p>
+          <p className="text-2xl font-bold text-primary">
             {assessments.filter((a) => a.status === "upcoming").length}
           </p>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
-          <p className="text-gray-400 text-sm">Passed</p>
-          <p className="text-2xl font-bold text-green-400">
+        <div className="bg-card border border-border rounded-lg p-4">
+          <p className="text-muted-foreground text-sm">Passed</p>
+          <p className="text-2xl font-bold text-primary">
             {assessments.filter((a) => a.passed === true).length}
           </p>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
-          <p className="text-gray-400 text-sm">Avg Score</p>
-          <p className="text-2xl font-bold text-emerald-400">
+        <div className="bg-card border border-border rounded-lg p-4">
+          <p className="text-muted-foreground text-sm">Avg Score</p>
+          <p className="text-2xl font-bold text-primary">
             {Math.round(
               assessments
                 .filter((a) => a.score !== undefined)
@@ -155,12 +155,12 @@ export default function AssessmentsPage() {
         {filteredAssessments.map((assessment) => (
           <div
             key={assessment.id}
-            className="bg-[#12121a] border border-gray-800 rounded-xl p-5"
+            className="bg-card border border-border rounded-lg p-5"
           >
             <div className="flex items-start justify-between">
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-lg font-semibold text-foreground">
                     {assessment.moduleName}
                   </h3>
                   <span
@@ -172,7 +172,7 @@ export default function AssessmentsPage() {
                   </span>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400">
+                <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
                   <span className="flex items-center gap-1">
                     <ClipboardCheck className="w-4 h-4" />
                     {getTypeLabel(assessment.type)}
@@ -200,24 +200,24 @@ export default function AssessmentsPage() {
                     <div
                       className={`flex items-center gap-2 px-4 py-2 rounded-lg ${
                         assessment.passed
-                          ? "bg-green-500/20 border border-green-500/30"
+                          ? "bg-primary/20 border border-primary/30"
                           : "bg-red-500/20 border border-red-500/30"
                       }`}
                     >
                       {assessment.passed ? (
-                        <CheckCircle2 className="w-5 h-5 text-green-400" />
+                        <CheckCircle2 className="w-5 h-5 text-primary" />
                       ) : (
                         <XCircle className="w-5 h-5 text-red-400" />
                       )}
                       <span
                         className={`text-lg font-bold ${
-                          assessment.passed ? "text-green-400" : "text-red-400"
+                          assessment.passed ? "text-primary" : "text-red-400"
                         }`}
                       >
                         {assessment.score}%
                       </span>
                       <span
-                        className={assessment.passed ? "text-green-400" : "text-red-400"}
+                        className={assessment.passed ? "text-primary" : "text-red-400"}
                       >
                         {assessment.passed ? "PASSED" : "FAILED"}
                       </span>
@@ -225,10 +225,10 @@ export default function AssessmentsPage() {
 
                     {/* Progress bar */}
                     <div className="flex-1 max-w-xs">
-                      <div className="h-3 bg-gray-800 rounded-full overflow-hidden">
+                      <div className="h-3 bg-muted rounded-full overflow-hidden">
                         <div
                           className={`h-3 rounded-full ${
-                            assessment.passed ? "bg-green-500" : "bg-red-500"
+                            assessment.passed ? "bg-primary" : "bg-red-500"
                           }`}
                           style={{ width: `${assessment.score}%` }}
                         />
@@ -239,9 +239,9 @@ export default function AssessmentsPage() {
 
                 {/* Feedback */}
                 {assessment.feedback && (
-                  <div className="mt-4 p-3 bg-[#0a0a0f] rounded-lg">
-                    <p className="text-sm text-gray-400">
-                      <span className="text-gray-500">Feedback: </span>
+                  <div className="mt-4 p-3 bg-muted/50 rounded-lg">
+                    <p className="text-sm text-muted-foreground">
+                      <span className="text-muted-foreground">Feedback: </span>
                       {assessment.feedback}
                     </p>
                   </div>
@@ -253,7 +253,7 @@ export default function AssessmentsPage() {
                 {assessment.status === "upcoming" && (
                   <Button
                     onClick={() => handleStartAssessment(assessment.id)}
-                    className="bg-green-600 hover:bg-green-700"
+                    className="bg-primary hover:bg-primary/90"
                   >
                     <Play className="w-4 h-4 mr-2" />
                     Start
@@ -262,7 +262,7 @@ export default function AssessmentsPage() {
                 {assessment.status === "in-progress" && (
                   <Button
                     onClick={() => handleSubmitAssessment(assessment.id)}
-                    className="bg-emerald-600 hover:bg-emerald-700"
+                    className="bg-primary hover:bg-primary/90"
                   >
                     Submit
                   </Button>
@@ -273,7 +273,7 @@ export default function AssessmentsPage() {
                     <Button
                       onClick={() => handleStartAssessment(assessment.id)}
                       variant="outline"
-                      className="border-gray-700"
+                      className="border-border"
                     >
                       <RotateCcw className="w-4 h-4 mr-2" />
                       Retake
@@ -287,34 +287,34 @@ export default function AssessmentsPage() {
 
       {filteredAssessments.length === 0 && (
         <div className="text-center py-12">
-          <ClipboardCheck className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-          <p className="text-gray-400">No assessments found</p>
+          <ClipboardCheck className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+          <p className="text-muted-foreground">No assessments found</p>
         </div>
       )}
 
       {/* Taking Assessment Modal */}
       {takingAssessment && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-lg m-4 p-6">
+          <div className="bg-card border border-border rounded-lg w-full max-w-lg m-4 p-6">
             <div className="text-center">
-              <div className="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <ClipboardCheck className="w-8 h-8 text-emerald-400" />
+              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <ClipboardCheck className="w-8 h-8 text-primary" />
               </div>
-              <h2 className="text-xl font-semibold text-white mb-2">Assessment in Progress</h2>
-              <p className="text-gray-400 mb-6">
+              <h2 className="text-xl font-semibold text-foreground mb-2">Assessment in Progress</h2>
+              <p className="text-muted-foreground mb-6">
                 Complete the assessment questions. This is a demo - click submit to finish.
               </p>
               <div className="flex gap-3 justify-center">
                 <Button
                   variant="ghost"
                   onClick={() => setTakingAssessment(null)}
-                  className="border-gray-700"
+                  className="border-border"
                 >
                   Cancel
                 </Button>
                 <Button
                   onClick={() => handleSubmitAssessment(takingAssessment)}
-                  className="bg-green-600 hover:bg-green-700"
+                  className="bg-primary hover:bg-primary/90"
                 >
                   <Award className="w-4 h-4 mr-2" />
                   Submit Assessment

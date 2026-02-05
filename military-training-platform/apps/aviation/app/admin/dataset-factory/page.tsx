@@ -21,18 +21,18 @@ import { Button } from "@military/ui";
 import { useDatasetStore, type Dataset } from "@/lib/stores/dataset-store";
 
 const categoryConfig = {
-  doctrine: { label: "Doctrine", color: "text-emerald-500", bg: "bg-emerald-500/20" },
-  sop: { label: "SOP", color: "text-green-500", bg: "bg-green-500/20" },
-  technical: { label: "Technical", color: "text-emerald-500", bg: "bg-emerald-500/20" },
-  training: { label: "Training", color: "text-emerald-500", bg: "bg-emerald-500/20" },
-  assessment: { label: "Assessment", color: "text-yellow-500", bg: "bg-yellow-500/20" },
-  general: { label: "General", color: "text-gray-500", bg: "bg-gray-500/20" },
+  doctrine: { label: "Doctrine", color: "text-primary", bg: "bg-primary/20" },
+  sop: { label: "SOP", color: "text-primary", bg: "bg-primary/20" },
+  technical: { label: "Technical", color: "text-primary", bg: "bg-primary/20" },
+  training: { label: "Training", color: "text-primary", bg: "bg-primary/20" },
+  assessment: { label: "Assessment", color: "text-primary", bg: "bg-primary/20" },
+  general: { label: "General", color: "text-muted-foreground", bg: "bg-gray-500/20" },
 };
 
 const statusConfig = {
-  draft: { label: "Draft", color: "text-gray-500", bg: "bg-gray-500/20" },
-  processing: { label: "Processing", color: "text-yellow-500", bg: "bg-yellow-500/20" },
-  ready: { label: "Ready", color: "text-green-500", bg: "bg-green-500/20" },
+  draft: { label: "Draft", color: "text-muted-foreground", bg: "bg-gray-500/20" },
+  processing: { label: "Processing", color: "text-primary", bg: "bg-primary/20" },
+  ready: { label: "Ready", color: "text-primary", bg: "bg-primary/20" },
   archived: { label: "Archived", color: "text-muted-foreground", bg: "bg-muted" },
 };
 
@@ -112,7 +112,7 @@ export default function DatasetFactoryPage() {
             label="Ready"
             value={stats.ready}
             icon={CheckCircle}
-            color="text-green-500"
+            color="text-primary"
           />
           <StatCard label="Documents" value={stats.totalDocs} icon={FileText} />
           <StatCard label="Total Chunks" value={stats.totalChunks} icon={FolderOpen} />
@@ -237,7 +237,7 @@ function DatasetCard({
   const statConfig = statusConfig[dataset.status];
 
   return (
-    <div className="bg-card border border-border rounded-xl overflow-hidden">
+    <div className="bg-card border border-border rounded-lg overflow-hidden">
       <button
         onClick={onToggle}
         className="w-full p-4 flex items-center justify-between hover:bg-muted/50 transition-colors"
@@ -395,7 +395,7 @@ function DatasetCard({
 function CreateDatasetModal({ onClose }: { onClose: () => void }) {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div className="bg-card border border-border rounded-xl max-w-lg w-full p-6">
+      <div className="bg-card border border-border rounded-lg max-w-lg w-full p-6">
         <h2 className="text-xl font-bold mb-4">Create Dataset</h2>
         <p className="text-muted-foreground mb-4">
           Dataset creation form would go here. For now, datasets are pre-populated with mock data.

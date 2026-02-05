@@ -65,32 +65,32 @@ export default function AssessmentsPage() {
   const getTypeColor = (type: FOOAssessment["type"]) => {
     switch (type) {
       case "written":
-        return "bg-emerald-500/20 text-emerald-400";
+        return "bg-primary/20 text-primary";
       case "practical":
-        return "bg-green-500/20 text-green-400";
+        return "bg-primary/20 text-primary";
       case "simulator":
-        return "bg-emerald-500/20 text-emerald-400";
+        return "bg-primary/20 text-primary";
       case "field":
-        return "bg-emerald-500/20 text-emerald-400";
+        return "bg-primary/20 text-primary";
       case "final-checkride":
         return "bg-red-500/20 text-red-400";
       default:
-        return "bg-gray-500/20 text-gray-400";
+        return "bg-gray-500/20 text-muted-foreground";
     }
   };
 
   const getStatusColor = (status: FOOAssessment["status"]) => {
     switch (status) {
       case "pending":
-        return "bg-yellow-500/20 text-yellow-400";
+        return "bg-primary/20 text-primary";
       case "passed":
-        return "bg-green-500/20 text-green-400";
+        return "bg-primary/20 text-primary";
       case "failed":
         return "bg-red-500/20 text-red-400";
       case "incomplete":
-        return "bg-gray-500/20 text-gray-400";
+        return "bg-gray-500/20 text-muted-foreground";
       default:
-        return "bg-gray-500/20 text-gray-400";
+        return "bg-gray-500/20 text-muted-foreground";
     }
   };
 
@@ -185,17 +185,17 @@ export default function AssessmentsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-3">
-            <ClipboardCheck className="w-8 h-8 text-emerald-500" />
+          <h1 className="text-2xl font-bold text-foreground flex items-center gap-3">
+            <ClipboardCheck className="w-8 h-8 text-primary" />
             FOO Assessments
           </h1>
-          <p className="text-gray-400 mt-1">
+          <p className="text-muted-foreground mt-1">
             Evaluate and grade trainee performance
           </p>
         </div>
         <Button
           onClick={() => setShowAddDialog(true)}
-          className="bg-emerald-600 hover:bg-emerald-700"
+          className="bg-primary hover:bg-primary/90"
         >
           <Plus className="w-4 h-4 mr-2" />
           New Assessment
@@ -204,47 +204,47 @@ export default function AssessmentsPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-4 gap-4">
-        <div className="bg-[#12121a] border border-gray-800 rounded-lg p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-500/20 rounded-lg">
-              <ClipboardCheck className="w-5 h-5 text-emerald-500" />
+            <div className="p-2 bg-primary/20 rounded-lg">
+              <ClipboardCheck className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-white">{stats.total}</p>
-              <p className="text-sm text-gray-400">Total Assessments</p>
+              <p className="text-2xl font-bold text-foreground">{stats.total}</p>
+              <p className="text-sm text-muted-foreground">Total Assessments</p>
             </div>
           </div>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-lg p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-yellow-500/20 rounded-lg">
-              <Clock className="w-5 h-5 text-yellow-500" />
+            <div className="p-2 bg-primary/20 rounded-lg">
+              <Clock className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-white">{stats.pending}</p>
-              <p className="text-sm text-gray-400">Pending</p>
+              <p className="text-2xl font-bold text-foreground">{stats.pending}</p>
+              <p className="text-sm text-muted-foreground">Pending</p>
             </div>
           </div>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-lg p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-green-500/20 rounded-lg">
-              <CheckCircle2 className="w-5 h-5 text-green-500" />
+            <div className="p-2 bg-primary/20 rounded-lg">
+              <CheckCircle2 className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-white">{stats.passed}</p>
-              <p className="text-sm text-gray-400">Passed</p>
+              <p className="text-2xl font-bold text-foreground">{stats.passed}</p>
+              <p className="text-sm text-muted-foreground">Passed</p>
             </div>
           </div>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-lg p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-red-500/20 rounded-lg">
               <XCircle className="w-5 h-5 text-red-500" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-white">{stats.failed}</p>
-              <p className="text-sm text-gray-400">Failed</p>
+              <p className="text-2xl font-bold text-foreground">{stats.failed}</p>
+              <p className="text-sm text-muted-foreground">Failed</p>
             </div>
           </div>
         </div>
@@ -253,21 +253,21 @@ export default function AssessmentsPage() {
       {/* Filters */}
       <div className="flex items-center gap-4 flex-wrap">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
             placeholder="Search by trainee name or phase..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
+            className="w-full pl-10 pr-4 py-2 bg-card border border-border rounded-lg focus:outline-none focus:border-primary text-foreground"
           />
         </div>
         <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-gray-500" />
+          <Filter className="w-4 h-4 text-muted-foreground" />
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
+            className="px-4 py-2 bg-card border border-border rounded-lg focus:outline-none focus:border-primary text-foreground"
           >
             <option value="all">All Types</option>
             <option value="written">Written</option>
@@ -279,7 +279,7 @@ export default function AssessmentsPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
+            className="px-4 py-2 bg-card border border-border rounded-lg focus:outline-none focus:border-primary text-foreground"
           >
             <option value="all">All Status</option>
             <option value="pending">Pending</option>
@@ -295,18 +295,18 @@ export default function AssessmentsPage() {
         {sortedAssessments.map((assessment) => (
           <div
             key={assessment.id}
-            className="bg-[#12121a] border border-gray-800 rounded-lg hover:border-gray-700 transition-colors cursor-pointer"
+            className="bg-card border border-border rounded-lg hover:border-border transition-colors cursor-pointer"
             onClick={() => setSelectedAssessment(assessment)}
           >
             <div className="p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center text-lg font-bold text-white">
+                  <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center text-lg font-bold text-foreground">
                     {assessment.traineeName.split(" ").pop()?.charAt(0) || "?"}
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white">{assessment.traineeName}</h3>
-                    <p className="text-sm text-gray-400">{assessment.phase}</p>
+                    <h3 className="font-semibold text-foreground">{assessment.traineeName}</h3>
+                    <p className="text-sm text-muted-foreground">{assessment.phase}</p>
                   </div>
                 </div>
 
@@ -324,15 +324,15 @@ export default function AssessmentsPage() {
                   {assessment.score !== undefined && (
                     <div className="text-right">
                       <p className={`text-2xl font-bold ${
-                        assessment.score >= assessment.passingScore ? 'text-green-400' : 'text-red-400'
+                        assessment.score >= assessment.passingScore ? 'text-primary' : 'text-red-400'
                       }`}>
                         {assessment.score}%
                       </p>
-                      <p className="text-xs text-gray-500">Pass: {assessment.passingScore}%</p>
+                      <p className="text-xs text-muted-foreground">Pass: {assessment.passingScore}%</p>
                     </div>
                   )}
 
-                  <div className="text-right text-sm text-gray-400">
+                  <div className="text-right text-sm text-muted-foreground">
                     <p>{assessment.date}</p>
                     <p>{assessment.duration}</p>
                   </div>
@@ -340,7 +340,7 @@ export default function AssessmentsPage() {
               </div>
 
               {assessment.scenarioName && (
-                <div className="mt-3 flex items-center gap-2 text-sm text-emerald-400">
+                <div className="mt-3 flex items-center gap-2 text-sm text-primary">
                   <Target className="w-4 h-4" />
                   {assessment.scenarioName}
                 </div>
@@ -351,7 +351,7 @@ export default function AssessmentsPage() {
       </div>
 
       {filteredAssessments.length === 0 && (
-        <div className="text-center py-12 text-gray-500">
+        <div className="text-center py-12 text-muted-foreground">
           <ClipboardCheck className="w-12 h-12 mx-auto mb-4 opacity-50" />
           <p>No assessments found matching your criteria</p>
         </div>
@@ -360,8 +360,8 @@ export default function AssessmentsPage() {
       {/* View Assessment Detail Modal */}
       {selectedAssessment && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-800">
+          <div className="bg-card border border-border rounded-lg w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-border">
               <div className="flex items-center justify-between">
                 <div>
                   <div className="flex items-center gap-2 mb-2">
@@ -373,14 +373,14 @@ export default function AssessmentsPage() {
                       {selectedAssessment.status}
                     </span>
                   </div>
-                  <h2 className="text-xl font-bold text-white">{selectedAssessment.traineeName}</h2>
-                  <p className="text-gray-400">{selectedAssessment.phase}</p>
+                  <h2 className="text-xl font-bold text-foreground">{selectedAssessment.traineeName}</h2>
+                  <p className="text-muted-foreground">{selectedAssessment.phase}</p>
                 </div>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setSelectedAssessment(null)}
-                  className="text-gray-400"
+                  className="text-muted-foreground"
                 >
                   <X className="w-5 h-5" />
                 </Button>
@@ -390,33 +390,33 @@ export default function AssessmentsPage() {
             <div className="p-6 space-y-6">
               {/* Assessment Info */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="bg-[#0a0a0f] rounded-lg p-3">
-                  <p className="text-xs text-gray-500">Date</p>
-                  <p className="text-white font-medium">{selectedAssessment.date}</p>
+                <div className="bg-muted/50 rounded-lg p-3">
+                  <p className="text-xs text-muted-foreground">Date</p>
+                  <p className="text-foreground font-medium">{selectedAssessment.date}</p>
                 </div>
-                <div className="bg-[#0a0a0f] rounded-lg p-3">
-                  <p className="text-xs text-gray-500">Duration</p>
-                  <p className="text-white font-medium">{selectedAssessment.duration}</p>
+                <div className="bg-muted/50 rounded-lg p-3">
+                  <p className="text-xs text-muted-foreground">Duration</p>
+                  <p className="text-foreground font-medium">{selectedAssessment.duration}</p>
                 </div>
-                <div className="bg-[#0a0a0f] rounded-lg p-3">
-                  <p className="text-xs text-gray-500">Max Score</p>
-                  <p className="text-white font-medium">{selectedAssessment.maxScore}</p>
+                <div className="bg-muted/50 rounded-lg p-3">
+                  <p className="text-xs text-muted-foreground">Max Score</p>
+                  <p className="text-foreground font-medium">{selectedAssessment.maxScore}</p>
                 </div>
-                <div className="bg-[#0a0a0f] rounded-lg p-3">
-                  <p className="text-xs text-gray-500">Passing Score</p>
-                  <p className="text-white font-medium">{selectedAssessment.passingScore}%</p>
+                <div className="bg-muted/50 rounded-lg p-3">
+                  <p className="text-xs text-muted-foreground">Passing Score</p>
+                  <p className="text-foreground font-medium">{selectedAssessment.passingScore}%</p>
                 </div>
               </div>
 
               {/* Scenario */}
               {selectedAssessment.scenarioName && (
                 <div>
-                  <h3 className="font-semibold text-white mb-2 flex items-center gap-2">
-                    <Target className="w-4 h-4 text-emerald-500" />
+                  <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                    <Target className="w-4 h-4 text-primary" />
                     Scenario
                   </h3>
-                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-3">
-                    <p className="text-emerald-400 font-medium">{selectedAssessment.scenarioName}</p>
+                  <div className="bg-primary/10 border border-primary/30 rounded-lg p-3">
+                    <p className="text-primary font-medium">{selectedAssessment.scenarioName}</p>
                   </div>
                 </div>
               )}
@@ -424,20 +424,20 @@ export default function AssessmentsPage() {
               {/* Score */}
               {selectedAssessment.score !== undefined && (
                 <div>
-                  <h3 className="font-semibold text-white mb-3">Score</h3>
+                  <h3 className="font-semibold text-foreground mb-3">Score</h3>
                   <div className={`rounded-lg p-6 text-center ${
                     selectedAssessment.score >= selectedAssessment.passingScore
-                      ? 'bg-green-500/10 border border-green-500/30'
+                      ? 'bg-primary/10 border border-primary/30'
                       : 'bg-red-500/10 border border-red-500/30'
                   }`}>
                     <p className={`text-5xl font-bold ${
                       selectedAssessment.score >= selectedAssessment.passingScore
-                        ? 'text-green-400'
+                        ? 'text-primary'
                         : 'text-red-400'
                     }`}>
                       {selectedAssessment.score}%
                     </p>
-                    <p className="text-gray-400 mt-2">
+                    <p className="text-muted-foreground mt-2">
                       {selectedAssessment.score >= selectedAssessment.passingScore ? 'PASSED' : 'FAILED'}
                     </p>
                   </div>
@@ -449,38 +449,38 @@ export default function AssessmentsPage() {
                 selectedAssessment.communicationScore ||
                 selectedAssessment.safetyScore) && (
                 <div>
-                  <h3 className="font-semibold text-white mb-3">Performance Metrics</h3>
+                  <h3 className="font-semibold text-foreground mb-3">Performance Metrics</h3>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {selectedAssessment.fireCallAccuracy && (
-                      <div className="bg-[#0a0a0f] rounded-lg p-4 text-center">
-                        <p className="text-2xl font-bold text-emerald-400">
+                      <div className="bg-muted/50 rounded-lg p-4 text-center">
+                        <p className="text-2xl font-bold text-primary">
                           {selectedAssessment.fireCallAccuracy}%
                         </p>
-                        <p className="text-xs text-gray-500">Fire Call Accuracy</p>
+                        <p className="text-xs text-muted-foreground">Fire Call Accuracy</p>
                       </div>
                     )}
                     {selectedAssessment.targetEngagementTime && (
-                      <div className="bg-[#0a0a0f] rounded-lg p-4 text-center">
-                        <p className="text-2xl font-bold text-emerald-400">
+                      <div className="bg-muted/50 rounded-lg p-4 text-center">
+                        <p className="text-2xl font-bold text-primary">
                           {selectedAssessment.targetEngagementTime}min
                         </p>
-                        <p className="text-xs text-gray-500">Engagement Time</p>
+                        <p className="text-xs text-muted-foreground">Engagement Time</p>
                       </div>
                     )}
                     {selectedAssessment.communicationScore && (
-                      <div className="bg-[#0a0a0f] rounded-lg p-4 text-center">
-                        <p className="text-2xl font-bold text-emerald-400">
+                      <div className="bg-muted/50 rounded-lg p-4 text-center">
+                        <p className="text-2xl font-bold text-primary">
                           {selectedAssessment.communicationScore}%
                         </p>
-                        <p className="text-xs text-gray-500">Communication</p>
+                        <p className="text-xs text-muted-foreground">Communication</p>
                       </div>
                     )}
                     {selectedAssessment.safetyScore && (
-                      <div className="bg-[#0a0a0f] rounded-lg p-4 text-center">
-                        <p className="text-2xl font-bold text-green-400">
+                      <div className="bg-muted/50 rounded-lg p-4 text-center">
+                        <p className="text-2xl font-bold text-primary">
                           {selectedAssessment.safetyScore}%
                         </p>
-                        <p className="text-xs text-gray-500">Safety</p>
+                        <p className="text-xs text-muted-foreground">Safety</p>
                       </div>
                     )}
                   </div>
@@ -490,21 +490,21 @@ export default function AssessmentsPage() {
               {/* Evaluations */}
               {selectedAssessment.evaluations.length > 0 && (
                 <div>
-                  <h3 className="font-semibold text-white mb-3">Detailed Evaluations</h3>
+                  <h3 className="font-semibold text-foreground mb-3">Detailed Evaluations</h3>
                   <div className="space-y-2">
                     {selectedAssessment.evaluations.map((evaluation, index) => (
-                      <div key={index} className="bg-[#0a0a0f] rounded-lg p-3">
+                      <div key={index} className="bg-muted/50 rounded-lg p-3">
                         <div className="flex items-center justify-between mb-1">
                           <div>
-                            <span className="text-xs text-gray-500">{evaluation.category}</span>
-                            <p className="text-white font-medium">{evaluation.criterion}</p>
+                            <span className="text-xs text-muted-foreground">{evaluation.category}</span>
+                            <p className="text-foreground font-medium">{evaluation.criterion}</p>
                           </div>
                           <div className="text-right">
                             <p className={`font-bold ${
                               evaluation.points >= evaluation.maxPoints * 0.8
-                                ? 'text-green-400'
+                                ? 'text-primary'
                                 : evaluation.points >= evaluation.maxPoints * 0.6
-                                  ? 'text-yellow-400'
+                                  ? 'text-primary'
                                   : 'text-red-400'
                             }`}>
                               {evaluation.points}/{evaluation.maxPoints}
@@ -512,7 +512,7 @@ export default function AssessmentsPage() {
                           </div>
                         </div>
                         {evaluation.remarks && (
-                          <p className="text-sm text-gray-400 mt-1">{evaluation.remarks}</p>
+                          <p className="text-sm text-muted-foreground mt-1">{evaluation.remarks}</p>
                         )}
                       </div>
                     ))}
@@ -523,8 +523,8 @@ export default function AssessmentsPage() {
               {/* Remarks */}
               {selectedAssessment.overallRemarks && (
                 <div>
-                  <h3 className="font-semibold text-white mb-2">Overall Remarks</h3>
-                  <div className="bg-[#0a0a0f] rounded-lg p-4 text-gray-300">
+                  <h3 className="font-semibold text-foreground mb-2">Overall Remarks</h3>
+                  <div className="bg-muted/50 rounded-lg p-4 text-gray-300">
                     {selectedAssessment.overallRemarks}
                   </div>
                 </div>
@@ -533,11 +533,11 @@ export default function AssessmentsPage() {
               {/* Recommendations */}
               {selectedAssessment.recommendations.length > 0 && (
                 <div>
-                  <h3 className="font-semibold text-white mb-2">Recommendations</h3>
+                  <h3 className="font-semibold text-foreground mb-2">Recommendations</h3>
                   <ul className="space-y-2">
                     {selectedAssessment.recommendations.map((rec, index) => (
                       <li key={index} className="flex items-start gap-2 text-gray-300">
-                        <CheckCircle2 className="w-4 h-4 text-green-400 mt-1 flex-shrink-0" />
+                        <CheckCircle2 className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
                         {rec}
                       </li>
                     ))}
@@ -553,14 +553,14 @@ export default function AssessmentsPage() {
                     : 'bg-red-500/10 border border-red-500/30'
                 }`}>
                   <p className={`font-medium ${
-                    selectedAssessment.retakeAllowed ? 'text-yellow-400' : 'text-red-400'
+                    selectedAssessment.retakeAllowed ? 'text-primary' : 'text-red-400'
                   }`}>
                     {selectedAssessment.retakeAllowed
                       ? 'Retake Allowed'
                       : 'Retake Not Allowed'}
                   </p>
                   {selectedAssessment.retakeDate && (
-                    <p className="text-sm text-gray-400 mt-1">
+                    <p className="text-sm text-muted-foreground mt-1">
                       Scheduled: {selectedAssessment.retakeDate}
                     </p>
                   )}
@@ -568,7 +568,7 @@ export default function AssessmentsPage() {
               )}
             </div>
 
-            <div className="p-6 border-t border-gray-800 flex justify-between">
+            <div className="p-6 border-t border-border flex justify-between">
               <Button
                 variant="outline"
                 className="border-red-500/50 text-red-400 hover:bg-red-500/10"
@@ -578,12 +578,12 @@ export default function AssessmentsPage() {
                 Delete
               </Button>
               <div className="flex gap-3">
-                <Button variant="outline" onClick={() => setSelectedAssessment(null)} className="border-gray-700">
+                <Button variant="outline" onClick={() => setSelectedAssessment(null)} className="border-border">
                   Close
                 </Button>
                 {selectedAssessment.status === "pending" && (
                   <Button
-                    className="bg-emerald-600 hover:bg-emerald-700"
+                    className="bg-primary hover:bg-primary/90"
                     onClick={() => {
                       setGradingAssessment(selectedAssessment);
                       setShowGradeDialog(true);
@@ -603,25 +603,25 @@ export default function AssessmentsPage() {
       {/* Add Assessment Dialog */}
       {showAddDialog && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-800 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-white">Schedule New Assessment</h2>
+          <div className="bg-card border border-border rounded-lg w-full max-w-lg max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-border flex items-center justify-between">
+              <h2 className="text-xl font-bold text-foreground">Schedule New Assessment</h2>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setShowAddDialog(false)}
-                className="text-gray-400"
+                className="text-muted-foreground"
               >
                 <X className="w-5 h-5" />
               </Button>
             </div>
             <form onSubmit={handleAddAssessment} className="p-6 space-y-4">
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Trainee</label>
+                <label className="block text-sm text-muted-foreground mb-1">Trainee</label>
                 <select
                   name="trainee"
                   required
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                 >
                   <option value="">Select trainee</option>
                   {activeTrainees.map((trainee) => (
@@ -634,11 +634,11 @@ export default function AssessmentsPage() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Type</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Type</label>
                   <select
                     name="type"
                     required
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   >
                     <option value="written">Written</option>
                     <option value="practical">Practical</option>
@@ -648,11 +648,11 @@ export default function AssessmentsPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Phase</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Phase</label>
                   <select
                     name="phase"
                     required
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   >
                     <option value="Phase I">Phase I</option>
                     <option value="Phase II">Phase II</option>
@@ -662,10 +662,10 @@ export default function AssessmentsPage() {
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Scenario (Optional)</label>
+                <label className="block text-sm text-muted-foreground mb-1">Scenario (Optional)</label>
                 <select
                   name="scenario"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                 >
                   <option value="">No scenario</option>
                   {activeScenarios.map((scenario) => (
@@ -678,39 +678,39 @@ export default function AssessmentsPage() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Date</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Date</label>
                   <input
                     name="date"
                     type="date"
                     required
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Duration</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Duration</label>
                   <input
                     name="duration"
                     required
                     placeholder="e.g., 2h"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Max Score</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Max Score</label>
                   <input
                     name="maxScore"
                     type="number"
                     required
                     defaultValue={100}
                     min={1}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Passing Score (%)</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Passing Score (%)</label>
                   <input
                     name="passingScore"
                     type="number"
@@ -718,7 +718,7 @@ export default function AssessmentsPage() {
                     defaultValue={70}
                     min={1}
                     max={100}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
               </div>
@@ -728,11 +728,11 @@ export default function AssessmentsPage() {
                   type="button"
                   variant="outline"
                   onClick={() => setShowAddDialog(false)}
-                  className="border-gray-700"
+                  className="border-border"
                 >
                   Cancel
                 </Button>
-                <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700">
+                <Button type="submit" className="bg-primary hover:bg-primary/90">
                   Schedule Assessment
                 </Button>
               </div>
@@ -744,11 +744,11 @@ export default function AssessmentsPage() {
       {/* Grade Assessment Dialog */}
       {showGradeDialog && gradingAssessment && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-800 flex items-center justify-between">
+          <div className="bg-card border border-border rounded-lg w-full max-w-lg max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-border flex items-center justify-between">
               <div>
-                <h2 className="text-xl font-bold text-white">Grade Assessment</h2>
-                <p className="text-gray-400">{gradingAssessment.traineeName}</p>
+                <h2 className="text-xl font-bold text-foreground">Grade Assessment</h2>
+                <p className="text-muted-foreground">{gradingAssessment.traineeName}</p>
               </div>
               <Button
                 variant="ghost"
@@ -757,14 +757,14 @@ export default function AssessmentsPage() {
                   setShowGradeDialog(false);
                   setGradingAssessment(null);
                 }}
-                className="text-gray-400"
+                className="text-muted-foreground"
               >
                 <X className="w-5 h-5" />
               </Button>
             </div>
             <form onSubmit={handleGradeAssessment} className="p-6 space-y-4">
               <div>
-                <label className="block text-sm text-gray-400 mb-1">
+                <label className="block text-sm text-muted-foreground mb-1">
                   Score (Passing: {gradingAssessment.passingScore}%)
                 </label>
                 <input
@@ -773,74 +773,74 @@ export default function AssessmentsPage() {
                   required
                   min={0}
                   max={100}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none text-2xl font-bold"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none text-2xl font-bold"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Fire Call Accuracy (%)</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Fire Call Accuracy (%)</label>
                   <input
                     name="fireCallAccuracy"
                     type="number"
                     min={0}
                     max={100}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Engagement Time (min)</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Engagement Time (min)</label>
                   <input
                     name="targetEngagementTime"
                     type="number"
                     step="0.1"
                     min={0}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Communication Score (%)</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Communication Score (%)</label>
                   <input
                     name="communicationScore"
                     type="number"
                     min={0}
                     max={100}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Safety Score (%)</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Safety Score (%)</label>
                   <input
                     name="safetyScore"
                     type="number"
                     min={0}
                     max={100}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Overall Remarks</label>
+                <label className="block text-sm text-muted-foreground mb-1">Overall Remarks</label>
                 <textarea
                   name="overallRemarks"
                   required
                   rows={3}
                   placeholder="Assessment feedback and observations..."
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none resize-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none resize-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Recommendations (one per line)</label>
+                <label className="block text-sm text-muted-foreground mb-1">Recommendations (one per line)</label>
                 <textarea
                   name="recommendations"
                   rows={3}
                   placeholder="Practice abort procedures&#10;Continue to advanced scenarios"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none resize-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none resize-none"
                 />
               </div>
 
@@ -850,9 +850,9 @@ export default function AssessmentsPage() {
                   name="retakeAllowed"
                   id="retakeAllowed"
                   defaultChecked={true}
-                  className="rounded border-gray-700 bg-[#12121a]"
+                  className="rounded border-border bg-card"
                 />
-                <label htmlFor="retakeAllowed" className="text-sm text-white cursor-pointer">
+                <label htmlFor="retakeAllowed" className="text-sm text-foreground cursor-pointer">
                   Allow retake if failed
                 </label>
               </div>
@@ -865,11 +865,11 @@ export default function AssessmentsPage() {
                     setShowGradeDialog(false);
                     setGradingAssessment(null);
                   }}
-                  className="border-gray-700"
+                  className="border-border"
                 >
                   Cancel
                 </Button>
-                <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700">
+                <Button type="submit" className="bg-primary hover:bg-primary/90">
                   Submit Grade
                 </Button>
               </div>
@@ -881,16 +881,16 @@ export default function AssessmentsPage() {
       {/* Delete Confirmation Dialog */}
       {showDeleteConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-md p-6">
-            <h2 className="text-xl font-bold text-white mb-4">Confirm Delete</h2>
-            <p className="text-gray-400 mb-6">
+          <div className="bg-card border border-border rounded-lg w-full max-w-md p-6">
+            <h2 className="text-xl font-bold text-foreground mb-4">Confirm Delete</h2>
+            <p className="text-muted-foreground mb-6">
               Are you sure you want to delete this assessment? This action cannot be undone.
             </p>
             <div className="flex justify-end gap-3">
               <Button
                 variant="outline"
                 onClick={() => setShowDeleteConfirm(null)}
-                className="border-gray-700"
+                className="border-border"
               >
                 Cancel
               </Button>

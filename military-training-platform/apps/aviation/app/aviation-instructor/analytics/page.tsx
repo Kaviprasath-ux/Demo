@@ -99,7 +99,7 @@ export default function AnalyticsPage() {
         {/* Charts Row */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* Weekly Trend */}
-          <div className="bg-card border border-border rounded-xl p-4">
+          <div className="bg-card border border-border rounded-lg p-4">
             <h3 className="font-semibold mb-4 flex items-center gap-2">
               <TrendingUp className="w-4 h-4 text-primary" />
               Weekly Performance Trend
@@ -121,7 +121,7 @@ export default function AnalyticsPage() {
           </div>
 
           {/* Mission Types */}
-          <div className="bg-card border border-border rounded-xl p-4">
+          <div className="bg-card border border-border rounded-lg p-4">
             <h3 className="font-semibold mb-4 flex items-center gap-2">
               <Target className="w-4 h-4 text-primary" />
               Missions by Type
@@ -151,7 +151,7 @@ export default function AnalyticsPage() {
         </div>
 
         {/* Helicopter Utilization */}
-        <div className="bg-card border border-border rounded-xl p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <h3 className="font-semibold mb-4 flex items-center gap-2">
             <Plane className="w-4 h-4 text-primary" />
             Helicopter Utilization
@@ -200,7 +200,7 @@ export default function AnalyticsPage() {
         {/* Bottom Row */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* Top Performers */}
-          <div className="bg-card border border-border rounded-xl p-4">
+          <div className="bg-card border border-border rounded-lg p-4">
             <h3 className="font-semibold mb-4 flex items-center gap-2">
               <Award className="w-4 h-4 text-primary" />
               Top Performers
@@ -215,9 +215,9 @@ export default function AnalyticsPage() {
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
                         i === 0
-                          ? "bg-yellow-500/20 text-yellow-500"
+                          ? "bg-primary/20 text-primary"
                           : i === 1
-                          ? "bg-gray-400/20 text-gray-400"
+                          ? "bg-gray-400/20 text-muted-foreground"
                           : i === 2
                           ? "bg-amber-600/20 text-amber-600"
                           : "bg-muted-foreground/20 text-muted-foreground"
@@ -237,7 +237,7 @@ export default function AnalyticsPage() {
           </div>
 
           {/* Safety Metrics */}
-          <div className="bg-card border border-border rounded-xl p-4">
+          <div className="bg-card border border-border rounded-lg p-4">
             <h3 className="font-semibold mb-4 flex items-center gap-2">
               <Shield className="w-4 h-4 text-primary" />
               Safety Metrics
@@ -265,8 +265,8 @@ export default function AnalyticsPage() {
               />
             </div>
 
-            <div className="mt-4 p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
-              <div className="flex items-center gap-2 text-green-500">
+            <div className="mt-4 p-3 bg-primary/10 border border-primary/20 rounded-lg">
+              <div className="flex items-center gap-2 text-primary">
                 <Shield className="w-4 h-4" />
                 <span className="text-sm font-medium">All safety parameters within limits</span>
               </div>
@@ -275,7 +275,7 @@ export default function AnalyticsPage() {
         </div>
 
         {/* Recent Missions Table */}
-        <div className="bg-card border border-border rounded-xl p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <h3 className="font-semibold mb-4 flex items-center gap-2">
             <Calendar className="w-4 h-4 text-primary" />
             Recent Missions
@@ -322,9 +322,9 @@ export default function AnalyticsPage() {
                         <span
                           className={`px-2 py-1 rounded text-xs font-medium ${
                             mission.overallScore >= 90
-                              ? "bg-green-500/20 text-green-500"
+                              ? "bg-primary/20 text-primary"
                               : mission.overallScore >= 75
-                              ? "bg-yellow-500/20 text-yellow-500"
+                              ? "bg-primary/20 text-primary"
                               : "bg-red-500/20 text-red-500"
                           }`}
                         >
@@ -357,14 +357,14 @@ function MetricCard({
   trendUp: boolean;
 }) {
   return (
-    <div className="bg-card border border-border rounded-xl p-4">
+    <div className="bg-card border border-border rounded-lg p-4">
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm text-muted-foreground">{label}</p>
           <p className="text-2xl font-bold mt-1">{value}</p>
           <div
             className={`flex items-center gap-1 mt-1 text-xs ${
-              trendUp ? "text-green-500" : "text-red-500"
+              trendUp ? "text-primary" : "text-red-500"
             }`}
           >
             <TrendingUp className={`w-3 h-3 ${!trendUp && "rotate-180"}`} />
@@ -389,8 +389,8 @@ function SafetyMetric({
   status: "good" | "warning" | "critical";
 }) {
   const statusColors = {
-    good: "text-green-500",
-    warning: "text-yellow-500",
+    good: "text-primary",
+    warning: "text-primary",
     critical: "text-red-500",
   };
 

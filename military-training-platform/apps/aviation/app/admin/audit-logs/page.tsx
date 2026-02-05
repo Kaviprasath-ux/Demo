@@ -45,26 +45,26 @@ export default function AuditLogsPage() {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "success":
-        return <CheckCircle2 className="w-4 h-4 text-green-400" />;
+        return <CheckCircle2 className="w-4 h-4 text-primary" />;
       case "failed":
         return <AlertTriangle className="w-4 h-4 text-red-400" />;
       case "warning":
-        return <Clock className="w-4 h-4 text-yellow-400" />;
+        return <Clock className="w-4 h-4 text-primary" />;
       default:
-        return <Activity className="w-4 h-4 text-gray-400" />;
+        return <Activity className="w-4 h-4 text-muted-foreground" />;
     }
   };
 
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "success":
-        return "bg-green-500/20 text-green-400";
+        return "bg-primary/20 text-primary";
       case "failed":
         return "bg-red-500/20 text-red-400";
       case "warning":
-        return "bg-yellow-500/20 text-yellow-400";
+        return "bg-primary/20 text-primary";
       default:
-        return "bg-gray-500/20 text-gray-400";
+        return "bg-gray-500/20 text-muted-foreground";
     }
   };
 
@@ -88,19 +88,19 @@ export default function AuditLogsPage() {
   const getActionColor = (action: string) => {
     switch (action) {
       case "LOGIN":
-        return "bg-emerald-500/20 text-emerald-400";
+        return "bg-primary/20 text-primary";
       case "CREATE":
-        return "bg-green-500/20 text-green-400";
+        return "bg-primary/20 text-primary";
       case "UPDATE":
-        return "bg-yellow-500/20 text-yellow-400";
+        return "bg-primary/20 text-primary";
       case "DELETE":
         return "bg-red-500/20 text-red-400";
       case "CONFIG_CHANGE":
-        return "bg-emerald-500/20 text-emerald-400";
+        return "bg-primary/20 text-primary";
       case "BACKUP":
-        return "bg-emerald-500/20 text-emerald-400";
+        return "bg-primary/20 text-primary";
       default:
-        return "bg-gray-500/20 text-gray-400";
+        return "bg-gray-500/20 text-muted-foreground";
     }
   };
 
@@ -118,15 +118,15 @@ export default function AuditLogsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-3">
-            <Activity className="w-8 h-8 text-emerald-500" />
+          <h1 className="text-2xl font-bold text-foreground flex items-center gap-3">
+            <Activity className="w-8 h-8 text-primary" />
             Audit Logs
           </h1>
-          <p className="text-gray-400 mt-1">
+          <p className="text-muted-foreground mt-1">
             System activity and security logs
           </p>
         </div>
-        <Button className="bg-emerald-600 hover:bg-emerald-700">
+        <Button className="bg-primary hover:bg-primary/90">
           <Download className="w-4 h-4 mr-2" />
           Export Logs
         </Button>
@@ -134,49 +134,49 @@ export default function AuditLogsPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-4 gap-4">
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
-          <Activity className="w-5 h-5 text-emerald-500 mb-2" />
-          <p className="text-2xl font-bold text-white">{stats.total}</p>
-          <p className="text-xs text-gray-500">Total Events</p>
+        <div className="bg-card border border-border rounded-lg p-4">
+          <Activity className="w-5 h-5 text-primary mb-2" />
+          <p className="text-2xl font-bold text-foreground">{stats.total}</p>
+          <p className="text-xs text-muted-foreground">Total Events</p>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
-          <CheckCircle2 className="w-5 h-5 text-green-500 mb-2" />
-          <p className="text-2xl font-bold text-white">{stats.success}</p>
-          <p className="text-xs text-gray-500">Successful</p>
+        <div className="bg-card border border-border rounded-lg p-4">
+          <CheckCircle2 className="w-5 h-5 text-primary mb-2" />
+          <p className="text-2xl font-bold text-foreground">{stats.success}</p>
+          <p className="text-xs text-muted-foreground">Successful</p>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <AlertTriangle className="w-5 h-5 text-red-500 mb-2" />
-          <p className="text-2xl font-bold text-white">{stats.failed}</p>
-          <p className="text-xs text-gray-500">Failed</p>
+          <p className="text-2xl font-bold text-foreground">{stats.failed}</p>
+          <p className="text-xs text-muted-foreground">Failed</p>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
-          <Clock className="w-5 h-5 text-yellow-500 mb-2" />
-          <p className="text-2xl font-bold text-white">{stats.warning}</p>
-          <p className="text-xs text-gray-500">Warnings</p>
+        <div className="bg-card border border-border rounded-lg p-4">
+          <Clock className="w-5 h-5 text-primary mb-2" />
+          <p className="text-2xl font-bold text-foreground">{stats.warning}</p>
+          <p className="text-xs text-muted-foreground">Warnings</p>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
+      <div className="bg-card border border-border rounded-lg p-4">
         <div className="flex flex-wrap gap-4">
           <div className="flex-1 min-w-[200px]">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 type="text"
                 placeholder="Search logs..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                className="w-full pl-10 pr-4 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
               />
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Filter className="w-4 h-4 text-gray-500" />
+            <Filter className="w-4 h-4 text-muted-foreground" />
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+              className="px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
             >
               <option value="all">All Status</option>
               <option value="success">Success</option>
@@ -186,7 +186,7 @@ export default function AuditLogsPage() {
             <select
               value={actionFilter}
               onChange={(e) => setActionFilter(e.target.value)}
-              className="px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+              className="px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
             >
               <option value="all">All Actions</option>
               {uniqueActions.map((action) => (
@@ -200,48 +200,48 @@ export default function AuditLogsPage() {
       </div>
 
       {/* Logs Table */}
-      <div className="bg-[#12121a] border border-gray-800 rounded-xl overflow-hidden">
+      <div className="bg-card border border-border rounded-lg overflow-hidden">
         <table className="w-full">
-          <thead className="bg-[#0a0a0f]">
+          <thead className="bg-muted/50">
             <tr>
-              <th className="text-left p-4 text-sm font-medium text-gray-400">
+              <th className="text-left p-4 text-sm font-medium text-muted-foreground">
                 Timestamp
               </th>
-              <th className="text-left p-4 text-sm font-medium text-gray-400">
+              <th className="text-left p-4 text-sm font-medium text-muted-foreground">
                 User
               </th>
-              <th className="text-left p-4 text-sm font-medium text-gray-400">
+              <th className="text-left p-4 text-sm font-medium text-muted-foreground">
                 Action
               </th>
-              <th className="text-left p-4 text-sm font-medium text-gray-400">
+              <th className="text-left p-4 text-sm font-medium text-muted-foreground">
                 Resource
               </th>
-              <th className="text-left p-4 text-sm font-medium text-gray-400">
+              <th className="text-left p-4 text-sm font-medium text-muted-foreground">
                 Status
               </th>
-              <th className="text-left p-4 text-sm font-medium text-gray-400">
+              <th className="text-left p-4 text-sm font-medium text-muted-foreground">
                 IP Address
               </th>
-              <th className="text-right p-4 text-sm font-medium text-gray-400">
+              <th className="text-right p-4 text-sm font-medium text-muted-foreground">
                 Actions
               </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-800">
             {filteredLogs.map((log) => (
-              <tr key={log.id} className="hover:bg-[#0a0a0f]/50">
+              <tr key={log.id} className="hover:bg-muted/50/50">
                 <td className="p-4">
-                  <div className="flex items-center gap-2 text-gray-400">
+                  <div className="flex items-center gap-2 text-muted-foreground">
                     <Calendar className="w-4 h-4" />
                     <span className="text-sm">{log.timestamp}</span>
                   </div>
                 </td>
                 <td className="p-4">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                    <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center text-foreground text-sm font-bold">
                       {log.userName.charAt(0)}
                     </div>
-                    <span className="text-white text-sm">{log.userName}</span>
+                    <span className="text-foreground text-sm">{log.userName}</span>
                   </div>
                 </td>
                 <td className="p-4">
@@ -254,7 +254,7 @@ export default function AuditLogsPage() {
                     {log.action}
                   </span>
                 </td>
-                <td className="p-4 text-gray-400 text-sm">{log.resource}</td>
+                <td className="p-4 text-muted-foreground text-sm">{log.resource}</td>
                 <td className="p-4">
                   <span
                     className={`inline-flex items-center gap-1.5 text-xs px-2 py-1 rounded ${getStatusBadge(
@@ -265,14 +265,14 @@ export default function AuditLogsPage() {
                     {log.status}
                   </span>
                 </td>
-                <td className="p-4 text-gray-500 text-sm font-mono">
+                <td className="p-4 text-muted-foreground text-sm font-mono">
                   {log.ipAddress}
                 </td>
                 <td className="p-4">
                   <div className="flex items-center justify-end">
                     <button
                       onClick={() => setSelectedLog(log)}
-                      className="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+                      className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
                     >
                       <Eye className="w-4 h-4" />
                     </button>
@@ -287,16 +287,16 @@ export default function AuditLogsPage() {
       {/* Detail Modal */}
       {selectedLog && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-xl">
+          <div className="bg-card border border-border rounded-lg w-full max-w-xl">
             {/* Modal Header */}
-            <div className="p-4 border-b border-gray-800 flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-white flex items-center gap-2">
-                <Shield className="w-5 h-5 text-emerald-500" />
+            <div className="p-4 border-b border-border flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-foreground flex items-center gap-2">
+                <Shield className="w-5 h-5 text-primary" />
                 Log Details
               </h2>
               <button
                 onClick={() => setSelectedLog(null)}
-                className="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg"
+                className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -308,51 +308,51 @@ export default function AuditLogsPage() {
                 <div
                   className={`w-12 h-12 rounded-full flex items-center justify-center ${
                     selectedLog.status === "success"
-                      ? "bg-green-500/20"
+                      ? "bg-primary/20"
                       : selectedLog.status === "failed"
                       ? "bg-red-500/20"
-                      : "bg-yellow-500/20"
+                      : "bg-primary/20"
                   }`}
                 >
                   {selectedLog.status === "success" ? (
-                    <CheckCircle2 className="w-6 h-6 text-green-400" />
+                    <CheckCircle2 className="w-6 h-6 text-primary" />
                   ) : selectedLog.status === "failed" ? (
                     <AlertTriangle className="w-6 h-6 text-red-400" />
                   ) : (
-                    <Clock className="w-6 h-6 text-yellow-400" />
+                    <Clock className="w-6 h-6 text-primary" />
                   )}
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-lg font-semibold text-foreground">
                     {selectedLog.action}
                   </h3>
-                  <p className="text-gray-400">{selectedLog.resource}</p>
+                  <p className="text-muted-foreground">{selectedLog.resource}</p>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-[#0a0a0f] p-4 rounded-lg">
-                  <p className="text-sm text-gray-500 mb-1">Log ID</p>
-                  <p className="text-white font-mono">{selectedLog.id}</p>
+                <div className="bg-muted/50 p-4 rounded-lg">
+                  <p className="text-sm text-muted-foreground mb-1">Log ID</p>
+                  <p className="text-foreground font-mono">{selectedLog.id}</p>
                 </div>
-                <div className="bg-[#0a0a0f] p-4 rounded-lg">
-                  <p className="text-sm text-gray-500 mb-1">Timestamp</p>
-                  <p className="text-white">{selectedLog.timestamp}</p>
+                <div className="bg-muted/50 p-4 rounded-lg">
+                  <p className="text-sm text-muted-foreground mb-1">Timestamp</p>
+                  <p className="text-foreground">{selectedLog.timestamp}</p>
                 </div>
-                <div className="bg-[#0a0a0f] p-4 rounded-lg">
-                  <p className="text-sm text-gray-500 mb-1">User</p>
-                  <p className="text-white">{selectedLog.userName}</p>
+                <div className="bg-muted/50 p-4 rounded-lg">
+                  <p className="text-sm text-muted-foreground mb-1">User</p>
+                  <p className="text-foreground">{selectedLog.userName}</p>
                 </div>
-                <div className="bg-[#0a0a0f] p-4 rounded-lg">
-                  <p className="text-sm text-gray-500 mb-1">User ID</p>
-                  <p className="text-white font-mono">{selectedLog.userId}</p>
+                <div className="bg-muted/50 p-4 rounded-lg">
+                  <p className="text-sm text-muted-foreground mb-1">User ID</p>
+                  <p className="text-foreground font-mono">{selectedLog.userId}</p>
                 </div>
-                <div className="bg-[#0a0a0f] p-4 rounded-lg">
-                  <p className="text-sm text-gray-500 mb-1">IP Address</p>
-                  <p className="text-white font-mono">{selectedLog.ipAddress}</p>
+                <div className="bg-muted/50 p-4 rounded-lg">
+                  <p className="text-sm text-muted-foreground mb-1">IP Address</p>
+                  <p className="text-foreground font-mono">{selectedLog.ipAddress}</p>
                 </div>
-                <div className="bg-[#0a0a0f] p-4 rounded-lg">
-                  <p className="text-sm text-gray-500 mb-1">Status</p>
+                <div className="bg-muted/50 p-4 rounded-lg">
+                  <p className="text-sm text-muted-foreground mb-1">Status</p>
                   <span
                     className={`inline-flex items-center gap-1.5 text-sm px-2 py-1 rounded ${getStatusBadge(
                       selectedLog.status
@@ -364,14 +364,14 @@ export default function AuditLogsPage() {
                 </div>
               </div>
 
-              <div className="bg-[#0a0a0f] p-4 rounded-lg">
-                <p className="text-sm text-gray-500 mb-2">Details</p>
-                <p className="text-white">{selectedLog.details}</p>
+              <div className="bg-muted/50 p-4 rounded-lg">
+                <p className="text-sm text-muted-foreground mb-2">Details</p>
+                <p className="text-foreground">{selectedLog.details}</p>
               </div>
             </div>
 
             {/* Modal Footer */}
-            <div className="p-4 border-t border-gray-800 flex justify-end">
+            <div className="p-4 border-t border-border flex justify-end">
               <Button variant="outline" onClick={() => setSelectedLog(null)}>
                 Close
               </Button>

@@ -155,34 +155,34 @@ export default function ScenariosPage() {
   const getTypeColor = (type: string) => {
     const colors: Record<string, string> = {
       "cas-mission": "bg-red-500/20 text-red-400",
-      reconnaissance: "bg-emerald-500/20 text-emerald-400",
-      "troop-transport": "bg-green-500/20 text-green-400",
-      medevac: "bg-yellow-500/20 text-yellow-400",
-      "search-rescue": "bg-emerald-500/20 text-emerald-400",
-      "nap-of-earth": "bg-emerald-500/20 text-emerald-400",
-      "night-ops": "bg-gray-500/20 text-gray-400",
+      reconnaissance: "bg-primary/20 text-primary",
+      "troop-transport": "bg-primary/20 text-primary",
+      medevac: "bg-primary/20 text-primary",
+      "search-rescue": "bg-primary/20 text-primary",
+      "nap-of-earth": "bg-primary/20 text-primary",
+      "night-ops": "bg-gray-500/20 text-muted-foreground",
     };
-    return colors[type] || "bg-gray-500/20 text-gray-400";
+    return colors[type] || "bg-gray-500/20 text-muted-foreground";
   };
 
   const getDifficultyColor = (difficulty: string) => {
     const colors: Record<string, string> = {
-      basic: "bg-green-500/20 text-green-400",
-      intermediate: "bg-yellow-500/20 text-yellow-400",
-      advanced: "bg-emerald-500/20 text-emerald-400",
+      basic: "bg-primary/20 text-primary",
+      intermediate: "bg-primary/20 text-primary",
+      advanced: "bg-primary/20 text-primary",
       "combat-ready": "bg-red-500/20 text-red-400",
     };
-    return colors[difficulty] || "bg-gray-500/20 text-gray-400";
+    return colors[difficulty] || "bg-gray-500/20 text-muted-foreground";
   };
 
   const getThreatColor = (threat: string) => {
     const colors: Record<string, string> = {
-      none: "text-green-400",
-      low: "text-yellow-400",
-      medium: "text-emerald-400",
+      none: "text-primary",
+      low: "text-primary",
+      medium: "text-primary",
       high: "text-red-400",
     };
-    return colors[threat] || "text-gray-400";
+    return colors[threat] || "text-muted-foreground";
   };
 
   const addObjective = () => {
@@ -207,11 +207,11 @@ export default function ScenariosPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-3">
-            <Crosshair className="w-8 h-8 text-emerald-500" />
+          <h1 className="text-2xl font-bold text-foreground flex items-center gap-3">
+            <Crosshair className="w-8 h-8 text-primary" />
             Flight Scenarios
           </h1>
-          <p className="text-gray-400 mt-1">
+          <p className="text-muted-foreground mt-1">
             Create and manage flight training scenarios for CAS and joint operations
           </p>
         </div>
@@ -220,7 +220,7 @@ export default function ScenariosPage() {
             resetForm();
             setShowAddModal(true);
           }}
-          className="bg-emerald-600 hover:bg-emerald-700"
+          className="bg-primary hover:bg-primary/90"
         >
           <Plus className="w-4 h-4 mr-2" />
           Create Scenario
@@ -230,19 +230,19 @@ export default function ScenariosPage() {
       {/* Filters */}
       <div className="flex flex-wrap gap-4">
         <div className="relative flex-1 min-w-[200px]">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
             placeholder="Search scenarios..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg text-white placeholder-gray-500 focus:border-emerald-500 focus:outline-none"
+            className="w-full pl-10 pr-4 py-2 bg-card border border-border rounded-lg text-foreground placeholder-gray-500 focus:border-primary focus:outline-none"
           />
         </div>
         <select
           value={typeFilter}
           onChange={(e) => setTypeFilter(e.target.value)}
-          className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+          className="px-4 py-2 bg-card border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
         >
           <option value="all">All Types</option>
           <option value="cas-mission">CAS Mission</option>
@@ -256,7 +256,7 @@ export default function ScenariosPage() {
         <select
           value={difficultyFilter}
           onChange={(e) => setDifficultyFilter(e.target.value)}
-          className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+          className="px-4 py-2 bg-card border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
         >
           <option value="all">All Difficulty</option>
           <option value="basic">Basic</option>
@@ -271,13 +271,13 @@ export default function ScenariosPage() {
         {filteredScenarios.map((scenario) => (
           <div
             key={scenario.id}
-            className={`bg-[#12121a] border rounded-xl p-4 hover:border-gray-700 transition-colors ${
-              scenario.isActive ? "border-gray-800" : "border-gray-800 opacity-60"
+            className={`bg-card border rounded-lg p-4 hover:border-border transition-colors ${
+              scenario.isActive ? "border-border" : "border-border opacity-60"
             }`}
           >
             <div className="flex items-start justify-between mb-3">
               <div>
-                <h3 className="font-semibold text-white">{scenario.name}</h3>
+                <h3 className="font-semibold text-foreground">{scenario.name}</h3>
                 <div className="flex gap-2 mt-1">
                   <span className={`text-xs px-2 py-0.5 rounded ${getTypeColor(scenario.type)}`}>
                     {scenario.type.replace("-", " ")}
@@ -290,27 +290,27 @@ export default function ScenariosPage() {
                 </div>
               </div>
               {!scenario.isActive && (
-                <span className="text-xs px-2 py-1 rounded bg-gray-700 text-gray-400">
+                <span className="text-xs px-2 py-1 rounded bg-muted text-muted-foreground">
                   Inactive
                 </span>
               )}
             </div>
 
-            <p className="text-sm text-gray-400 mb-4 line-clamp-2">{scenario.description}</p>
+            <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{scenario.description}</p>
 
             {/* Quick Info */}
             <div className="grid grid-cols-2 gap-2 mb-4">
               <div className="flex items-center gap-2 text-sm">
-                <Plane className="w-4 h-4 text-emerald-400" />
-                <span className="text-gray-400">{scenario.helicopterType}</span>
+                <Plane className="w-4 h-4 text-primary" />
+                <span className="text-muted-foreground">{scenario.helicopterType}</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
-                <Clock className="w-4 h-4 text-yellow-400" />
-                <span className="text-gray-400">{scenario.duration} min</span>
+                <Clock className="w-4 h-4 text-primary" />
+                <span className="text-muted-foreground">{scenario.duration} min</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
-                <Mountain className="w-4 h-4 text-green-400" />
-                <span className="text-gray-400 capitalize">{scenario.terrainType}</span>
+                <Mountain className="w-4 h-4 text-primary" />
+                <span className="text-muted-foreground capitalize">{scenario.terrainType}</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <Shield className={`w-4 h-4 ${getThreatColor(scenario.threatLevel)}`} />
@@ -321,8 +321,8 @@ export default function ScenariosPage() {
             </div>
 
             {scenario.coordinationRequired && (
-              <div className="mb-4 px-2 py-1 bg-emerald-500/10 rounded-lg">
-                <span className="text-xs text-emerald-400">Requires FOO Coordination</span>
+              <div className="mb-4 px-2 py-1 bg-primary/10 rounded-lg">
+                <span className="text-xs text-primary">Requires FOO Coordination</span>
               </div>
             )}
 
@@ -335,7 +335,7 @@ export default function ScenariosPage() {
                   setSelectedScenario(scenario);
                   setShowViewModal(true);
                 }}
-                className="flex-1 text-gray-400 hover:text-white"
+                className="flex-1 text-muted-foreground hover:text-foreground"
               >
                 <Eye className="w-4 h-4 mr-1" />
                 View
@@ -344,7 +344,7 @@ export default function ScenariosPage() {
                 variant="ghost"
                 size="sm"
                 onClick={() => openEditModal(scenario)}
-                className="flex-1 text-gray-400 hover:text-white"
+                className="flex-1 text-muted-foreground hover:text-foreground"
               >
                 <Edit className="w-4 h-4 mr-1" />
                 Edit
@@ -353,7 +353,7 @@ export default function ScenariosPage() {
                 variant="ghost"
                 size="sm"
                 onClick={() => handleDuplicate(scenario)}
-                className="text-gray-400 hover:text-white"
+                className="text-muted-foreground hover:text-foreground"
               >
                 <Copy className="w-4 h-4" />
               </Button>
@@ -375,51 +375,51 @@ export default function ScenariosPage() {
 
       {filteredScenarios.length === 0 && (
         <div className="text-center py-12">
-          <Crosshair className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-          <p className="text-gray-400">No scenarios found matching your criteria</p>
+          <Crosshair className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+          <p className="text-muted-foreground">No scenarios found matching your criteria</p>
         </div>
       )}
 
       {/* Add Modal */}
       {showAddModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto m-4">
-            <div className="p-4 border-b border-gray-800 flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-white">Create Flight Scenario</h2>
-              <button onClick={() => setShowAddModal(false)} className="text-gray-400 hover:text-white">
+          <div className="bg-card border border-border rounded-lg w-full max-w-3xl max-h-[90vh] overflow-y-auto m-4">
+            <div className="p-4 border-b border-border flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-foreground">Create Flight Scenario</h2>
+              <button onClick={() => setShowAddModal(false)} className="text-muted-foreground hover:text-foreground">
                 <X className="w-5 h-5" />
               </button>
             </div>
             <div className="p-4 space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2">
-                  <label className="block text-sm text-gray-400 mb-1">Scenario Name *</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Scenario Name *</label>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                     placeholder="e.g., Mountain CAS - Advanced"
                   />
                 </div>
                 <div className="col-span-2">
-                  <label className="block text-sm text-gray-400 mb-1">Description *</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Description *</label>
                   <textarea
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                     rows={2}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                     placeholder="Describe the scenario..."
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Type *</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Type *</label>
                   <select
                     value={formData.type}
                     onChange={(e) =>
                       setFormData({ ...formData, type: e.target.value as FlightScenario["type"] })
                     }
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   >
                     <option value="cas-mission">CAS Mission</option>
                     <option value="reconnaissance">Reconnaissance</option>
@@ -431,7 +431,7 @@ export default function ScenariosPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Difficulty *</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Difficulty *</label>
                   <select
                     value={formData.difficulty}
                     onChange={(e) =>
@@ -440,7 +440,7 @@ export default function ScenariosPage() {
                         difficulty: e.target.value as FlightScenario["difficulty"],
                       })
                     }
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   >
                     <option value="basic">Basic</option>
                     <option value="intermediate">Intermediate</option>
@@ -449,11 +449,11 @@ export default function ScenariosPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Helicopter Type *</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Helicopter Type *</label>
                   <select
                     value={formData.helicopterType}
                     onChange={(e) => setFormData({ ...formData, helicopterType: e.target.value })}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   >
                     <option value="">Select helicopter</option>
                     <option value="ALH Dhruv">ALH Dhruv</option>
@@ -463,18 +463,18 @@ export default function ScenariosPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Duration (minutes)</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Duration (minutes)</label>
                   <input
                     type="number"
                     value={formData.duration}
                     onChange={(e) =>
                       setFormData({ ...formData, duration: parseInt(e.target.value) || 60 })
                     }
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Terrain Type</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Terrain Type</label>
                   <select
                     value={formData.terrainType}
                     onChange={(e) =>
@@ -483,7 +483,7 @@ export default function ScenariosPage() {
                         terrainType: e.target.value as FlightScenario["terrainType"],
                       })
                     }
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   >
                     <option value="plains">Plains</option>
                     <option value="mountains">Mountains</option>
@@ -494,7 +494,7 @@ export default function ScenariosPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Threat Level</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Threat Level</label>
                   <select
                     value={formData.threatLevel}
                     onChange={(e) =>
@@ -503,7 +503,7 @@ export default function ScenariosPage() {
                         threatLevel: e.target.value as FlightScenario["threatLevel"],
                       })
                     }
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   >
                     <option value="none">None</option>
                     <option value="low">Low</option>
@@ -512,7 +512,7 @@ export default function ScenariosPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Passing Score (%)</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Passing Score (%)</label>
                   <input
                     type="number"
                     min="0"
@@ -521,14 +521,14 @@ export default function ScenariosPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, passingScore: parseInt(e.target.value) || 70 })
                     }
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
               </div>
 
               {/* Weather Conditions */}
               <div>
-                <label className="block text-sm text-gray-400 mb-2">Weather Conditions</label>
+                <label className="block text-sm text-muted-foreground mb-2">Weather Conditions</label>
                 <div className="grid grid-cols-4 gap-2">
                   <input
                     type="text"
@@ -540,7 +540,7 @@ export default function ScenariosPage() {
                         weatherConditions: { ...formData.weatherConditions, visibility: e.target.value },
                       })
                     }
-                    className="px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white text-sm focus:border-emerald-500 focus:outline-none"
+                    className="px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground text-sm focus:border-primary focus:outline-none"
                   />
                   <input
                     type="text"
@@ -552,7 +552,7 @@ export default function ScenariosPage() {
                         weatherConditions: { ...formData.weatherConditions, windSpeed: e.target.value },
                       })
                     }
-                    className="px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white text-sm focus:border-emerald-500 focus:outline-none"
+                    className="px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground text-sm focus:border-primary focus:outline-none"
                   />
                   <input
                     type="text"
@@ -564,7 +564,7 @@ export default function ScenariosPage() {
                         weatherConditions: { ...formData.weatherConditions, ceiling: e.target.value },
                       })
                     }
-                    className="px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white text-sm focus:border-emerald-500 focus:outline-none"
+                    className="px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground text-sm focus:border-primary focus:outline-none"
                   />
                   <select
                     value={formData.weatherConditions.conditions}
@@ -577,7 +577,7 @@ export default function ScenariosPage() {
                         },
                       })
                     }
-                    className="px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white text-sm focus:border-emerald-500 focus:outline-none"
+                    className="px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground text-sm focus:border-primary focus:outline-none"
                   >
                     <option value="clear">Clear</option>
                     <option value="overcast">Overcast</option>
@@ -590,14 +590,14 @@ export default function ScenariosPage() {
 
               {/* Objectives */}
               <div>
-                <label className="block text-sm text-gray-400 mb-2">Objectives</label>
+                <label className="block text-sm text-muted-foreground mb-2">Objectives</label>
                 {formData.objectives.map((obj, index) => (
                   <div key={index} className="flex gap-2 mb-2">
                     <input
                       type="text"
                       value={obj}
                       onChange={(e) => updateObjective(index, e.target.value)}
-                      className="flex-1 px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                      className="flex-1 px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                       placeholder={`Objective ${index + 1}`}
                     />
                     {formData.objectives.length > 1 && (
@@ -612,7 +612,7 @@ export default function ScenariosPage() {
                     )}
                   </div>
                 ))}
-                <Button variant="ghost" size="sm" onClick={addObjective} className="text-emerald-400">
+                <Button variant="ghost" size="sm" onClick={addObjective} className="text-primary">
                   <Plus className="w-4 h-4 mr-1" />
                   Add Objective
                 </Button>
@@ -620,36 +620,36 @@ export default function ScenariosPage() {
 
               {/* Checkboxes */}
               <div className="flex gap-6">
-                <label className="flex items-center gap-2 text-white cursor-pointer">
+                <label className="flex items-center gap-2 text-foreground cursor-pointer">
                   <input
                     type="checkbox"
                     checked={formData.coordinationRequired}
                     onChange={(e) =>
                       setFormData({ ...formData, coordinationRequired: e.target.checked })
                     }
-                    className="w-4 h-4 rounded border-gray-700 bg-[#0a0a0f] text-emerald-500 focus:ring-emerald-500"
+                    className="w-4 h-4 rounded border-border bg-muted/50 text-primary focus:ring-emerald-500"
                   />
                   Requires FOO Coordination
                 </label>
-                <label className="flex items-center gap-2 text-white cursor-pointer">
+                <label className="flex items-center gap-2 text-foreground cursor-pointer">
                   <input
                     type="checkbox"
                     checked={formData.isActive}
                     onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-                    className="w-4 h-4 rounded border-gray-700 bg-[#0a0a0f] text-emerald-500 focus:ring-emerald-500"
+                    className="w-4 h-4 rounded border-border bg-muted/50 text-primary focus:ring-emerald-500"
                   />
                   Active Scenario
                 </label>
               </div>
             </div>
-            <div className="p-4 border-t border-gray-800 flex justify-end gap-3">
+            <div className="p-4 border-t border-border flex justify-end gap-3">
               <Button variant="ghost" onClick={() => setShowAddModal(false)}>
                 Cancel
               </Button>
               <Button
                 onClick={handleAdd}
                 disabled={!formData.name || !formData.description || !formData.helicopterType}
-                className="bg-emerald-600 hover:bg-emerald-700"
+                className="bg-primary hover:bg-primary/90"
               >
                 Create Scenario
               </Button>
@@ -661,41 +661,41 @@ export default function ScenariosPage() {
       {/* Edit Modal */}
       {showEditModal && selectedScenario && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto m-4">
-            <div className="p-4 border-b border-gray-800 flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-white">Edit Scenario</h2>
-              <button onClick={() => setShowEditModal(false)} className="text-gray-400 hover:text-white">
+          <div className="bg-card border border-border rounded-lg w-full max-w-3xl max-h-[90vh] overflow-y-auto m-4">
+            <div className="p-4 border-b border-border flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-foreground">Edit Scenario</h2>
+              <button onClick={() => setShowEditModal(false)} className="text-muted-foreground hover:text-foreground">
                 <X className="w-5 h-5" />
               </button>
             </div>
             <div className="p-4 space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2">
-                  <label className="block text-sm text-gray-400 mb-1">Scenario Name *</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Scenario Name *</label>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
                 <div className="col-span-2">
-                  <label className="block text-sm text-gray-400 mb-1">Description</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Description</label>
                   <textarea
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                     rows={2}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Type</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Type</label>
                   <select
                     value={formData.type}
                     onChange={(e) =>
                       setFormData({ ...formData, type: e.target.value as FlightScenario["type"] })
                     }
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   >
                     <option value="cas-mission">CAS Mission</option>
                     <option value="reconnaissance">Reconnaissance</option>
@@ -707,7 +707,7 @@ export default function ScenariosPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Difficulty</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Difficulty</label>
                   <select
                     value={formData.difficulty}
                     onChange={(e) =>
@@ -716,7 +716,7 @@ export default function ScenariosPage() {
                         difficulty: e.target.value as FlightScenario["difficulty"],
                       })
                     }
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   >
                     <option value="basic">Basic</option>
                     <option value="intermediate">Intermediate</option>
@@ -725,11 +725,11 @@ export default function ScenariosPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Helicopter Type</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Helicopter Type</label>
                   <select
                     value={formData.helicopterType}
                     onChange={(e) => setFormData({ ...formData, helicopterType: e.target.value })}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   >
                     <option value="ALH Dhruv">ALH Dhruv</option>
                     <option value="Rudra">Rudra (ALH WSI)</option>
@@ -738,18 +738,18 @@ export default function ScenariosPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Duration (minutes)</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Duration (minutes)</label>
                   <input
                     type="number"
                     value={formData.duration}
                     onChange={(e) =>
                       setFormData({ ...formData, duration: parseInt(e.target.value) || 60 })
                     }
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Terrain Type</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Terrain Type</label>
                   <select
                     value={formData.terrainType}
                     onChange={(e) =>
@@ -758,7 +758,7 @@ export default function ScenariosPage() {
                         terrainType: e.target.value as FlightScenario["terrainType"],
                       })
                     }
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   >
                     <option value="plains">Plains</option>
                     <option value="mountains">Mountains</option>
@@ -769,7 +769,7 @@ export default function ScenariosPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Threat Level</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Threat Level</label>
                   <select
                     value={formData.threatLevel}
                     onChange={(e) =>
@@ -778,7 +778,7 @@ export default function ScenariosPage() {
                         threatLevel: e.target.value as FlightScenario["threatLevel"],
                       })
                     }
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   >
                     <option value="none">None</option>
                     <option value="low">Low</option>
@@ -787,7 +787,7 @@ export default function ScenariosPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Passing Score (%)</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Passing Score (%)</label>
                   <input
                     type="number"
                     min="0"
@@ -796,21 +796,21 @@ export default function ScenariosPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, passingScore: parseInt(e.target.value) || 70 })
                     }
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
               </div>
 
               {/* Objectives */}
               <div>
-                <label className="block text-sm text-gray-400 mb-2">Objectives</label>
+                <label className="block text-sm text-muted-foreground mb-2">Objectives</label>
                 {formData.objectives.map((obj, index) => (
                   <div key={index} className="flex gap-2 mb-2">
                     <input
                       type="text"
                       value={obj}
                       onChange={(e) => updateObjective(index, e.target.value)}
-                      className="flex-1 px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                      className="flex-1 px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                     />
                     {formData.objectives.length > 1 && (
                       <Button
@@ -824,7 +824,7 @@ export default function ScenariosPage() {
                     )}
                   </div>
                 ))}
-                <Button variant="ghost" size="sm" onClick={addObjective} className="text-emerald-400">
+                <Button variant="ghost" size="sm" onClick={addObjective} className="text-primary">
                   <Plus className="w-4 h-4 mr-1" />
                   Add Objective
                 </Button>
@@ -832,33 +832,33 @@ export default function ScenariosPage() {
 
               {/* Checkboxes */}
               <div className="flex gap-6">
-                <label className="flex items-center gap-2 text-white cursor-pointer">
+                <label className="flex items-center gap-2 text-foreground cursor-pointer">
                   <input
                     type="checkbox"
                     checked={formData.coordinationRequired}
                     onChange={(e) =>
                       setFormData({ ...formData, coordinationRequired: e.target.checked })
                     }
-                    className="w-4 h-4 rounded border-gray-700 bg-[#0a0a0f] text-emerald-500 focus:ring-emerald-500"
+                    className="w-4 h-4 rounded border-border bg-muted/50 text-primary focus:ring-emerald-500"
                   />
                   Requires FOO Coordination
                 </label>
-                <label className="flex items-center gap-2 text-white cursor-pointer">
+                <label className="flex items-center gap-2 text-foreground cursor-pointer">
                   <input
                     type="checkbox"
                     checked={formData.isActive}
                     onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-                    className="w-4 h-4 rounded border-gray-700 bg-[#0a0a0f] text-emerald-500 focus:ring-emerald-500"
+                    className="w-4 h-4 rounded border-border bg-muted/50 text-primary focus:ring-emerald-500"
                   />
                   Active Scenario
                 </label>
               </div>
             </div>
-            <div className="p-4 border-t border-gray-800 flex justify-end gap-3">
+            <div className="p-4 border-t border-border flex justify-end gap-3">
               <Button variant="ghost" onClick={() => setShowEditModal(false)}>
                 Cancel
               </Button>
-              <Button onClick={handleEdit} className="bg-emerald-600 hover:bg-emerald-700">
+              <Button onClick={handleEdit} className="bg-primary hover:bg-primary/90">
                 Save Changes
               </Button>
             </div>
@@ -869,10 +869,10 @@ export default function ScenariosPage() {
       {/* View Modal */}
       {showViewModal && selectedScenario && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto m-4">
-            <div className="p-4 border-b border-gray-800 flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-white">Scenario Details</h2>
-              <button onClick={() => setShowViewModal(false)} className="text-gray-400 hover:text-white">
+          <div className="bg-card border border-border rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto m-4">
+            <div className="p-4 border-b border-border flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-foreground">Scenario Details</h2>
+              <button onClick={() => setShowViewModal(false)} className="text-muted-foreground hover:text-foreground">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -880,7 +880,7 @@ export default function ScenariosPage() {
               {/* Header */}
               <div>
                 <div className="flex items-start justify-between mb-2">
-                  <h3 className="text-xl font-bold text-white">{selectedScenario.name}</h3>
+                  <h3 className="text-xl font-bold text-foreground">{selectedScenario.name}</h3>
                   <div className="flex gap-2">
                     <span className={`text-xs px-2 py-1 rounded ${getTypeColor(selectedScenario.type)}`}>
                       {selectedScenario.type.replace("-", " ")}
@@ -892,36 +892,36 @@ export default function ScenariosPage() {
                     </span>
                   </div>
                 </div>
-                <p className="text-gray-400">{selectedScenario.description}</p>
+                <p className="text-muted-foreground">{selectedScenario.description}</p>
               </div>
 
               {/* Quick Info */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-[#0a0a0f] rounded-lg p-4">
+                <div className="bg-muted/50 rounded-lg p-4">
                   <div className="flex items-center gap-2 mb-1">
-                    <Plane className="w-4 h-4 text-emerald-400" />
-                    <span className="text-sm text-gray-500">Helicopter</span>
+                    <Plane className="w-4 h-4 text-primary" />
+                    <span className="text-sm text-muted-foreground">Helicopter</span>
                   </div>
-                  <p className="text-white font-medium">{selectedScenario.helicopterType}</p>
+                  <p className="text-foreground font-medium">{selectedScenario.helicopterType}</p>
                 </div>
-                <div className="bg-[#0a0a0f] rounded-lg p-4">
+                <div className="bg-muted/50 rounded-lg p-4">
                   <div className="flex items-center gap-2 mb-1">
-                    <Clock className="w-4 h-4 text-yellow-400" />
-                    <span className="text-sm text-gray-500">Duration</span>
+                    <Clock className="w-4 h-4 text-primary" />
+                    <span className="text-sm text-muted-foreground">Duration</span>
                   </div>
-                  <p className="text-white font-medium">{selectedScenario.duration} minutes</p>
+                  <p className="text-foreground font-medium">{selectedScenario.duration} minutes</p>
                 </div>
-                <div className="bg-[#0a0a0f] rounded-lg p-4">
+                <div className="bg-muted/50 rounded-lg p-4">
                   <div className="flex items-center gap-2 mb-1">
-                    <Mountain className="w-4 h-4 text-green-400" />
-                    <span className="text-sm text-gray-500">Terrain</span>
+                    <Mountain className="w-4 h-4 text-primary" />
+                    <span className="text-sm text-muted-foreground">Terrain</span>
                   </div>
-                  <p className="text-white font-medium capitalize">{selectedScenario.terrainType}</p>
+                  <p className="text-foreground font-medium capitalize">{selectedScenario.terrainType}</p>
                 </div>
-                <div className="bg-[#0a0a0f] rounded-lg p-4">
+                <div className="bg-muted/50 rounded-lg p-4">
                   <div className="flex items-center gap-2 mb-1">
                     <Shield className={`w-4 h-4 ${getThreatColor(selectedScenario.threatLevel)}`} />
-                    <span className="text-sm text-gray-500">Threat Level</span>
+                    <span className="text-sm text-muted-foreground">Threat Level</span>
                   </div>
                   <p className={`font-medium capitalize ${getThreatColor(selectedScenario.threatLevel)}`}>
                     {selectedScenario.threatLevel}
@@ -931,23 +931,23 @@ export default function ScenariosPage() {
 
               {/* Weather Conditions */}
               <div>
-                <h4 className="text-white font-semibold mb-3">Weather Conditions</h4>
+                <h4 className="text-foreground font-semibold mb-3">Weather Conditions</h4>
                 <div className="grid grid-cols-4 gap-2">
-                  <div className="bg-[#0a0a0f] rounded-lg p-3 text-center">
-                    <p className="text-xs text-gray-500 mb-1">Visibility</p>
-                    <p className="text-white text-sm">{selectedScenario.weatherConditions.visibility}</p>
+                  <div className="bg-muted/50 rounded-lg p-3 text-center">
+                    <p className="text-xs text-muted-foreground mb-1">Visibility</p>
+                    <p className="text-foreground text-sm">{selectedScenario.weatherConditions.visibility}</p>
                   </div>
-                  <div className="bg-[#0a0a0f] rounded-lg p-3 text-center">
-                    <p className="text-xs text-gray-500 mb-1">Wind</p>
-                    <p className="text-white text-sm">{selectedScenario.weatherConditions.windSpeed}</p>
+                  <div className="bg-muted/50 rounded-lg p-3 text-center">
+                    <p className="text-xs text-muted-foreground mb-1">Wind</p>
+                    <p className="text-foreground text-sm">{selectedScenario.weatherConditions.windSpeed}</p>
                   </div>
-                  <div className="bg-[#0a0a0f] rounded-lg p-3 text-center">
-                    <p className="text-xs text-gray-500 mb-1">Ceiling</p>
-                    <p className="text-white text-sm">{selectedScenario.weatherConditions.ceiling}</p>
+                  <div className="bg-muted/50 rounded-lg p-3 text-center">
+                    <p className="text-xs text-muted-foreground mb-1">Ceiling</p>
+                    <p className="text-foreground text-sm">{selectedScenario.weatherConditions.ceiling}</p>
                   </div>
-                  <div className="bg-[#0a0a0f] rounded-lg p-3 text-center">
-                    <p className="text-xs text-gray-500 mb-1">Conditions</p>
-                    <p className="text-white text-sm capitalize">
+                  <div className="bg-muted/50 rounded-lg p-3 text-center">
+                    <p className="text-xs text-muted-foreground mb-1">Conditions</p>
+                    <p className="text-foreground text-sm capitalize">
                       {selectedScenario.weatherConditions.conditions}
                     </p>
                   </div>
@@ -956,11 +956,11 @@ export default function ScenariosPage() {
 
               {/* Objectives */}
               <div>
-                <h4 className="text-white font-semibold mb-3">Objectives</h4>
+                <h4 className="text-foreground font-semibold mb-3">Objectives</h4>
                 <ul className="space-y-2">
                   {selectedScenario.objectives.map((obj, index) => (
                     <li key={index} className="flex items-start gap-2">
-                      <Target className="w-4 h-4 text-emerald-400 mt-0.5" />
+                      <Target className="w-4 h-4 text-primary mt-0.5" />
                       <span className="text-gray-300">{obj}</span>
                     </li>
                   ))}
@@ -969,18 +969,18 @@ export default function ScenariosPage() {
 
               {/* Additional Info */}
               <div className="flex flex-wrap gap-4">
-                <div className="bg-[#0a0a0f] rounded-lg px-4 py-2">
-                  <span className="text-sm text-gray-500">Passing Score: </span>
-                  <span className="text-white font-medium">{selectedScenario.passingScore}%</span>
+                <div className="bg-muted/50 rounded-lg px-4 py-2">
+                  <span className="text-sm text-muted-foreground">Passing Score: </span>
+                  <span className="text-foreground font-medium">{selectedScenario.passingScore}%</span>
                 </div>
                 {selectedScenario.coordinationRequired && (
-                  <div className="bg-emerald-500/10 rounded-lg px-4 py-2">
-                    <span className="text-emerald-400">Requires FOO Coordination</span>
+                  <div className="bg-primary/10 rounded-lg px-4 py-2">
+                    <span className="text-primary">Requires FOO Coordination</span>
                   </div>
                 )}
               </div>
             </div>
-            <div className="p-4 border-t border-gray-800 flex justify-end">
+            <div className="p-4 border-t border-border flex justify-end">
               <Button variant="ghost" onClick={() => setShowViewModal(false)}>
                 Close
               </Button>
@@ -992,15 +992,15 @@ export default function ScenariosPage() {
       {/* Delete Modal */}
       {showDeleteModal && selectedScenario && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-md m-4">
+          <div className="bg-card border border-border rounded-lg w-full max-w-md m-4">
             <div className="p-6 text-center">
               <div className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Trash2 className="w-6 h-6 text-red-500" />
               </div>
-              <h2 className="text-lg font-semibold text-white mb-2">Delete Scenario</h2>
-              <p className="text-gray-400 mb-6">
+              <h2 className="text-lg font-semibold text-foreground mb-2">Delete Scenario</h2>
+              <p className="text-muted-foreground mb-6">
                 Are you sure you want to delete{" "}
-                <span className="text-white font-medium">{selectedScenario.name}</span>? This action
+                <span className="text-foreground font-medium">{selectedScenario.name}</span>? This action
                 cannot be undone.
               </p>
               <div className="flex gap-3">

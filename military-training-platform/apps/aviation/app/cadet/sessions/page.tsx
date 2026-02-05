@@ -28,34 +28,34 @@ export default function SessionsPage() {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "confirmed":
-        return <CheckCircle2 className="w-5 h-5 text-green-400" />;
+        return <CheckCircle2 className="w-5 h-5 text-primary" />;
       case "cancelled":
         return <XCircle className="w-5 h-5 text-red-400" />;
       default:
-        return <AlertCircle className="w-5 h-5 text-yellow-400" />;
+        return <AlertCircle className="w-5 h-5 text-primary" />;
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case "confirmed":
-        return "bg-green-500/20 text-green-400 border-green-500/30";
+        return "bg-primary/20 text-primary border-primary/30";
       case "cancelled":
         return "bg-red-500/20 text-red-400 border-red-500/30";
       default:
-        return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
+        return "bg-primary/20 text-primary border-yellow-500/30";
     }
   };
 
   const getTypeColor = (type: string) => {
     const colors: Record<string, string> = {
-      classroom: "bg-emerald-500/20 text-emerald-400",
-      simulator: "bg-emerald-500/20 text-emerald-400",
-      field: "bg-emerald-500/20 text-emerald-400",
+      classroom: "bg-primary/20 text-primary",
+      simulator: "bg-primary/20 text-primary",
+      field: "bg-primary/20 text-primary",
       "live-fire": "bg-red-500/20 text-red-400",
-      "joint-exercise": "bg-green-500/20 text-green-400",
+      "joint-exercise": "bg-primary/20 text-primary",
     };
-    return colors[type] || "bg-gray-500/20 text-gray-400";
+    return colors[type] || "bg-gray-500/20 text-muted-foreground";
   };
 
   return (
@@ -63,11 +63,11 @@ export default function SessionsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-3">
-            <Calendar className="w-8 h-8 text-green-500" />
+          <h1 className="text-2xl font-bold text-foreground flex items-center gap-3">
+            <Calendar className="w-8 h-8 text-primary" />
             My Sessions
           </h1>
-          <p className="text-gray-400 mt-1">
+          <p className="text-muted-foreground mt-1">
             View your scheduled training sessions
           </p>
         </div>
@@ -76,8 +76,8 @@ export default function SessionsPage() {
             onClick={() => setViewMode("upcoming")}
             className={`px-4 py-2 rounded-lg text-sm transition-colors ${
               viewMode === "upcoming"
-                ? "bg-green-600 text-white"
-                : "bg-gray-800 text-gray-400 hover:text-white"
+                ? "bg-primary text-foreground"
+                : "bg-muted text-muted-foreground hover:text-foreground"
             }`}
           >
             Upcoming
@@ -86,8 +86,8 @@ export default function SessionsPage() {
             onClick={() => setViewMode("all")}
             className={`px-4 py-2 rounded-lg text-sm transition-colors ${
               viewMode === "all"
-                ? "bg-green-600 text-white"
-                : "bg-gray-800 text-gray-400 hover:text-white"
+                ? "bg-primary text-foreground"
+                : "bg-muted text-muted-foreground hover:text-foreground"
             }`}
           >
             All Sessions
@@ -97,30 +97,30 @@ export default function SessionsPage() {
 
       {/* Sessions Summary */}
       <div className="grid grid-cols-3 gap-4">
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center gap-2 mb-2">
-            <CheckCircle2 className="w-5 h-5 text-green-400" />
-            <span className="text-gray-400">Confirmed</span>
+            <CheckCircle2 className="w-5 h-5 text-primary" />
+            <span className="text-muted-foreground">Confirmed</span>
           </div>
-          <p className="text-2xl font-bold text-white">
+          <p className="text-2xl font-bold text-foreground">
             {sessions.filter((s) => s.status === "confirmed").length}
           </p>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center gap-2 mb-2">
-            <AlertCircle className="w-5 h-5 text-yellow-400" />
-            <span className="text-gray-400">Scheduled</span>
+            <AlertCircle className="w-5 h-5 text-primary" />
+            <span className="text-muted-foreground">Scheduled</span>
           </div>
-          <p className="text-2xl font-bold text-white">
+          <p className="text-2xl font-bold text-foreground">
             {sessions.filter((s) => s.status === "scheduled").length}
           </p>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center gap-2 mb-2">
             <XCircle className="w-5 h-5 text-red-400" />
-            <span className="text-gray-400">Cancelled</span>
+            <span className="text-muted-foreground">Cancelled</span>
           </div>
-          <p className="text-2xl font-bold text-white">
+          <p className="text-2xl font-bold text-foreground">
             {sessions.filter((s) => s.status === "cancelled").length}
           </p>
         </div>
@@ -131,16 +131,16 @@ export default function SessionsPage() {
         {filteredSessions.map((session) => (
           <div
             key={session.id}
-            className={`bg-[#12121a] border rounded-xl p-5 ${
+            className={`bg-card border rounded-lg p-5 ${
               session.status === "cancelled"
                 ? "border-red-500/30 opacity-60"
-                : "border-gray-800"
+                : "border-border"
             }`}
           >
             <div className="flex items-start justify-between mb-4">
               <div>
                 <div className="flex items-center gap-3 mb-2">
-                  <h3 className="text-lg font-semibold text-white">{session.title}</h3>
+                  <h3 className="text-lg font-semibold text-foreground">{session.title}</h3>
                   <span className={`text-xs px-2 py-0.5 rounded ${getTypeColor(session.type)}`}>
                     {session.type.replace("-", " ")}
                   </span>
@@ -154,65 +154,65 @@ export default function SessionsPage() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center">
-                  <Calendar className="w-5 h-5 text-emerald-400" />
+                <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center">
+                  <Calendar className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500">Date</p>
-                  <p className="text-white">{session.date}</p>
+                  <p className="text-xs text-muted-foreground">Date</p>
+                  <p className="text-foreground">{session.date}</p>
                 </div>
               </div>
 
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center">
-                  <Clock className="w-5 h-5 text-emerald-400" />
+                <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center">
+                  <Clock className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500">Time</p>
-                  <p className="text-white">
+                  <p className="text-xs text-muted-foreground">Time</p>
+                  <p className="text-foreground">
                     {session.startTime} - {session.endTime}
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center">
-                  <MapPin className="w-5 h-5 text-emerald-400" />
+                <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center">
+                  <MapPin className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500">Location</p>
-                  <p className="text-white">{session.location}</p>
+                  <p className="text-xs text-muted-foreground">Location</p>
+                  <p className="text-foreground">{session.location}</p>
                 </div>
               </div>
 
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
-                  <User className="w-5 h-5 text-green-400" />
+                <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center">
+                  <User className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500">Instructor</p>
-                  <p className="text-white">{session.instructorName}</p>
+                  <p className="text-xs text-muted-foreground">Instructor</p>
+                  <p className="text-foreground">{session.instructorName}</p>
                 </div>
               </div>
             </div>
 
             {/* Equipment Info */}
             {(session.helicopterType || session.artillerySystem) && (
-              <div className="mt-4 pt-4 border-t border-gray-800">
+              <div className="mt-4 pt-4 border-t border-border">
                 <div className="flex flex-wrap gap-4">
                   {session.helicopterType && (
                     <div className="flex items-center gap-2">
-                      <Plane className="w-4 h-4 text-emerald-400" />
-                      <span className="text-sm text-gray-400">
-                        Helicopter: <span className="text-white">{session.helicopterType}</span>
+                      <Plane className="w-4 h-4 text-primary" />
+                      <span className="text-sm text-muted-foreground">
+                        Helicopter: <span className="text-foreground">{session.helicopterType}</span>
                       </span>
                     </div>
                   )}
                   {session.artillerySystem && (
                     <div className="flex items-center gap-2">
-                      <Target className="w-4 h-4 text-emerald-400" />
-                      <span className="text-sm text-gray-400">
-                        Artillery: <span className="text-white">{session.artillerySystem}</span>
+                      <Target className="w-4 h-4 text-primary" />
+                      <span className="text-sm text-muted-foreground">
+                        Artillery: <span className="text-foreground">{session.artillerySystem}</span>
                       </span>
                     </div>
                   )}
@@ -222,9 +222,9 @@ export default function SessionsPage() {
 
             {/* Notes */}
             {session.notes && (
-              <div className="mt-4 p-3 bg-[#0a0a0f] rounded-lg">
-                <p className="text-sm text-gray-400">
-                  <span className="text-gray-500">Notes: </span>
+              <div className="mt-4 p-3 bg-muted/50 rounded-lg">
+                <p className="text-sm text-muted-foreground">
+                  <span className="text-muted-foreground">Notes: </span>
                   {session.notes}
                 </p>
               </div>
@@ -235,8 +235,8 @@ export default function SessionsPage() {
 
       {filteredSessions.length === 0 && (
         <div className="text-center py-12">
-          <Calendar className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-          <p className="text-gray-400">No sessions found</p>
+          <Calendar className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+          <p className="text-muted-foreground">No sessions found</p>
         </div>
       )}
     </div>

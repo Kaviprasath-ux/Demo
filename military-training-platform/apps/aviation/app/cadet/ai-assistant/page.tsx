@@ -248,7 +248,7 @@ function WelcomeScreen({ onSelectTopic }: { onSelectTopic: (query: string) => vo
             <button
               key={topic.title}
               onClick={() => onSelectTopic(topic.query)}
-              className="flex items-start gap-3 p-4 bg-card border border-border rounded-xl hover:border-primary/50 transition-colors text-left"
+              className="flex items-start gap-3 p-4 bg-card border border-border rounded-lg hover:border-primary/50 transition-colors text-left"
             >
               <div className="p-2 rounded-lg bg-primary/10">
                 <topic.icon className="w-5 h-5 text-primary" />
@@ -282,9 +282,9 @@ function WelcomeScreen({ onSelectTopic }: { onSelectTopic: (query: string) => vo
       </div>
 
       {/* Tips */}
-      <div className="bg-muted rounded-xl p-4">
+      <div className="bg-muted rounded-lg p-4">
         <div className="flex items-start gap-3">
-          <Lightbulb className="w-5 h-5 text-yellow-500 mt-0.5" />
+          <Lightbulb className="w-5 h-5 text-primary mt-0.5" />
           <div>
             <h4 className="font-medium mb-1">Tips for Better Answers</h4>
             <ul className="text-sm text-muted-foreground space-y-1">
@@ -316,7 +316,7 @@ function MessageBubble({ message }: { message: Message }) {
         )}
       </div>
       <div
-        className={`max-w-[80%] rounded-xl px-4 py-3 ${
+        className={`max-w-[80%] rounded-lg px-4 py-3 ${
           isUser
             ? "bg-primary text-primary-foreground"
             : "bg-card border border-border"

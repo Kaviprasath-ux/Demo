@@ -68,34 +68,34 @@ export default function JointExercisesPage() {
   const getTypeColor = (type: JointExercise["type"]) => {
     switch (type) {
       case "coordination":
-        return "bg-emerald-500/20 text-emerald-400";
+        return "bg-primary/20 text-primary";
       case "live-fire":
         return "bg-red-500/20 text-red-400";
       case "tactical":
-        return "bg-emerald-500/20 text-emerald-400";
+        return "bg-primary/20 text-primary";
       case "search-rescue":
-        return "bg-green-500/20 text-green-400";
+        return "bg-primary/20 text-primary";
       case "medevac":
-        return "bg-emerald-500/20 text-emerald-400";
+        return "bg-primary/20 text-primary";
       default:
-        return "bg-gray-500/20 text-gray-400";
+        return "bg-gray-500/20 text-muted-foreground";
     }
   };
 
   const getStatusColor = (status: JointExercise["status"]) => {
     switch (status) {
       case "planning":
-        return "bg-yellow-500/20 text-yellow-400";
+        return "bg-primary/20 text-primary";
       case "scheduled":
-        return "bg-emerald-500/20 text-emerald-400";
+        return "bg-primary/20 text-primary";
       case "in-progress":
-        return "bg-green-500/20 text-green-400";
+        return "bg-primary/20 text-primary";
       case "completed":
-        return "bg-gray-500/20 text-gray-400";
+        return "bg-gray-500/20 text-muted-foreground";
       case "cancelled":
         return "bg-red-500/20 text-red-400";
       default:
-        return "bg-gray-500/20 text-gray-400";
+        return "bg-gray-500/20 text-muted-foreground";
     }
   };
 
@@ -200,17 +200,17 @@ export default function JointExercisesPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-3">
-            <Plane className="w-8 h-8 text-emerald-500" />
+          <h1 className="text-2xl font-bold text-foreground flex items-center gap-3">
+            <Plane className="w-8 h-8 text-primary" />
             Joint Exercises
           </h1>
-          <p className="text-gray-400 mt-1">
+          <p className="text-muted-foreground mt-1">
             Plan and manage joint artillery-aviation exercises
           </p>
         </div>
         <Button
           onClick={() => setShowAddDialog(true)}
-          className="bg-emerald-600 hover:bg-emerald-700"
+          className="bg-primary hover:bg-primary/90"
         >
           <Plus className="w-4 h-4 mr-2" />
           Plan Exercise
@@ -219,47 +219,47 @@ export default function JointExercisesPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-4 gap-4">
-        <div className="bg-[#12121a] border border-gray-800 rounded-lg p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-500/20 rounded-lg">
-              <Plane className="w-5 h-5 text-emerald-500" />
+            <div className="p-2 bg-primary/20 rounded-lg">
+              <Plane className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-white">{stats.total}</p>
-              <p className="text-sm text-gray-400">Total Exercises</p>
+              <p className="text-2xl font-bold text-foreground">{stats.total}</p>
+              <p className="text-sm text-muted-foreground">Total Exercises</p>
             </div>
           </div>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-lg p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-yellow-500/20 rounded-lg">
-              <Clock className="w-5 h-5 text-yellow-500" />
+            <div className="p-2 bg-primary/20 rounded-lg">
+              <Clock className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-white">{stats.planning}</p>
-              <p className="text-sm text-gray-400">Planning</p>
+              <p className="text-2xl font-bold text-foreground">{stats.planning}</p>
+              <p className="text-sm text-muted-foreground">Planning</p>
             </div>
           </div>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-lg p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-500/20 rounded-lg">
-              <Calendar className="w-5 h-5 text-emerald-500" />
+            <div className="p-2 bg-primary/20 rounded-lg">
+              <Calendar className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-white">{stats.scheduled}</p>
-              <p className="text-sm text-gray-400">Scheduled</p>
+              <p className="text-2xl font-bold text-foreground">{stats.scheduled}</p>
+              <p className="text-sm text-muted-foreground">Scheduled</p>
             </div>
           </div>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-lg p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-green-500/20 rounded-lg">
-              <CheckCircle2 className="w-5 h-5 text-green-500" />
+            <div className="p-2 bg-primary/20 rounded-lg">
+              <CheckCircle2 className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-white">{stats.completed}</p>
-              <p className="text-sm text-gray-400">Completed</p>
+              <p className="text-2xl font-bold text-foreground">{stats.completed}</p>
+              <p className="text-sm text-muted-foreground">Completed</p>
             </div>
           </div>
         </div>
@@ -268,21 +268,21 @@ export default function JointExercisesPage() {
       {/* Filters */}
       <div className="flex items-center gap-4 flex-wrap">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
             placeholder="Search exercises..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
+            className="w-full pl-10 pr-4 py-2 bg-card border border-border rounded-lg focus:outline-none focus:border-primary text-foreground"
           />
         </div>
         <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-gray-500" />
+          <Filter className="w-4 h-4 text-muted-foreground" />
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
+            className="px-4 py-2 bg-card border border-border rounded-lg focus:outline-none focus:border-primary text-foreground"
           >
             <option value="all">All Types</option>
             <option value="coordination">Coordination</option>
@@ -294,7 +294,7 @@ export default function JointExercisesPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
+            className="px-4 py-2 bg-card border border-border rounded-lg focus:outline-none focus:border-primary text-foreground"
           >
             <option value="all">All Status</option>
             <option value="planning">Planning</option>
@@ -311,7 +311,7 @@ export default function JointExercisesPage() {
         {sortedExercises.map((exercise) => (
           <div
             key={exercise.id}
-            className="bg-[#12121a] border border-gray-800 rounded-lg hover:border-gray-700 transition-colors cursor-pointer"
+            className="bg-card border border-border rounded-lg hover:border-border transition-colors cursor-pointer"
             onClick={() => setSelectedExercise(exercise)}
           >
             <div className="p-5">
@@ -325,14 +325,14 @@ export default function JointExercisesPage() {
                       {exercise.status.replace("-", " ")}
                     </span>
                   </div>
-                  <h3 className="font-semibold text-white text-xl">{exercise.name}</h3>
-                  <p className="text-gray-500">{exercise.code}</p>
+                  <h3 className="font-semibold text-foreground text-xl">{exercise.name}</h3>
+                  <p className="text-muted-foreground">{exercise.code}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-white font-medium">
+                  <p className="text-foreground font-medium">
                     {exercise.startDate} - {exercise.endDate}
                   </p>
-                  <p className="text-sm text-gray-400 flex items-center justify-end gap-1">
+                  <p className="text-sm text-muted-foreground flex items-center justify-end gap-1">
                     <MapPin className="w-4 h-4" />
                     {exercise.location}
                   </p>
@@ -341,40 +341,40 @@ export default function JointExercisesPage() {
 
               {/* Participants Summary */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-3">
+                <div className="bg-primary/10 border border-primary/30 rounded-lg p-3">
                   <div className="flex items-center gap-2 mb-1">
-                    <Crosshair className="w-4 h-4 text-emerald-400" />
-                    <span className="text-sm text-emerald-400">Artillery</span>
+                    <Crosshair className="w-4 h-4 text-primary" />
+                    <span className="text-sm text-primary">Artillery</span>
                   </div>
-                  <p className="text-white font-medium">{exercise.artilleryTrainees.length} FOOs</p>
-                  <p className="text-xs text-gray-500">{exercise.artilleryInstructorName}</p>
+                  <p className="text-foreground font-medium">{exercise.artilleryTrainees.length} FOOs</p>
+                  <p className="text-xs text-muted-foreground">{exercise.artilleryInstructorName}</p>
                 </div>
-                <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-3">
+                <div className="bg-primary/10 border border-primary/30 rounded-lg p-3">
                   <div className="flex items-center gap-2 mb-1">
-                    <Plane className="w-4 h-4 text-emerald-400" />
-                    <span className="text-sm text-emerald-400">Aviation</span>
+                    <Plane className="w-4 h-4 text-primary" />
+                    <span className="text-sm text-primary">Aviation</span>
                   </div>
-                  <p className="text-white font-medium">{exercise.aviationTrainees.length} Pilots</p>
-                  <p className="text-xs text-gray-500">{exercise.aviationInstructorName}</p>
+                  <p className="text-foreground font-medium">{exercise.aviationTrainees.length} Pilots</p>
+                  <p className="text-xs text-muted-foreground">{exercise.aviationInstructorName}</p>
                 </div>
-                <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-3">
+                <div className="bg-primary/10 border border-primary/30 rounded-lg p-3">
                   <div className="flex items-center gap-2 mb-1">
-                    <Target className="w-4 h-4 text-emerald-400" />
-                    <span className="text-sm text-emerald-400">Scenarios</span>
+                    <Target className="w-4 h-4 text-primary" />
+                    <span className="text-sm text-primary">Scenarios</span>
                   </div>
-                  <p className="text-white font-medium">{exercise.scenarios.length}</p>
+                  <p className="text-foreground font-medium">{exercise.scenarios.length}</p>
                 </div>
-                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3">
+                <div className="bg-primary/10 border border-primary/30 rounded-lg p-3">
                   <div className="flex items-center gap-2 mb-1">
-                    <Shield className="w-4 h-4 text-green-400" />
-                    <span className="text-sm text-green-400">Safety</span>
+                    <Shield className="w-4 h-4 text-primary" />
+                    <span className="text-sm text-primary">Safety</span>
                   </div>
-                  <p className="text-white font-medium text-sm truncate">{exercise.safetyOfficer}</p>
+                  <p className="text-foreground font-medium text-sm truncate">{exercise.safetyOfficer}</p>
                 </div>
               </div>
 
               {/* Objectives Preview */}
-              <div className="text-sm text-gray-400">
+              <div className="text-sm text-muted-foreground">
                 <span className="font-medium text-gray-300">Objectives: </span>
                 {exercise.objectives.slice(0, 2).join(", ")}
                 {exercise.objectives.length > 2 && ` +${exercise.objectives.length - 2} more`}
@@ -382,10 +382,10 @@ export default function JointExercisesPage() {
 
               {/* Results if completed */}
               {exercise.status === "completed" && exercise.results && (
-                <div className="mt-4 pt-4 border-t border-gray-800">
+                <div className="mt-4 pt-4 border-t border-border">
                   <div className="flex items-center gap-4">
-                    <span className="text-sm text-gray-400">Results:</span>
-                    <span className="text-green-400 text-sm flex items-center gap-1">
+                    <span className="text-sm text-muted-foreground">Results:</span>
+                    <span className="text-primary text-sm flex items-center gap-1">
                       <CheckCircle2 className="w-4 h-4" />
                       {exercise.results.filter((r) => r.achieved).length}/{exercise.results.length} objectives achieved
                     </span>
@@ -398,7 +398,7 @@ export default function JointExercisesPage() {
       </div>
 
       {filteredExercises.length === 0 && (
-        <div className="text-center py-12 text-gray-500">
+        <div className="text-center py-12 text-muted-foreground">
           <Plane className="w-12 h-12 mx-auto mb-4 opacity-50" />
           <p>No exercises found matching your criteria</p>
         </div>
@@ -407,8 +407,8 @@ export default function JointExercisesPage() {
       {/* View Exercise Detail Modal */}
       {selectedExercise && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-800">
+          <div className="bg-card border border-border rounded-lg w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-border">
               <div className="flex items-center justify-between">
                 <div>
                   <div className="flex items-center gap-2 mb-2">
@@ -419,14 +419,14 @@ export default function JointExercisesPage() {
                       {selectedExercise.status.replace("-", " ")}
                     </span>
                   </div>
-                  <h2 className="text-xl font-bold text-white">{selectedExercise.name}</h2>
-                  <p className="text-gray-400">{selectedExercise.code}</p>
+                  <h2 className="text-xl font-bold text-foreground">{selectedExercise.name}</h2>
+                  <p className="text-muted-foreground">{selectedExercise.code}</p>
                 </div>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setSelectedExercise(null)}
-                  className="text-gray-400"
+                  className="text-muted-foreground"
                 >
                   <X className="w-5 h-5" />
                 </Button>
@@ -436,30 +436,30 @@ export default function JointExercisesPage() {
             <div className="p-6 space-y-6">
               {/* Schedule & Location */}
               <div className="grid grid-cols-3 gap-4">
-                <div className="bg-[#0a0a0f] rounded-lg p-4">
-                  <p className="text-xs text-gray-500">Start Date</p>
-                  <p className="text-white font-medium">{selectedExercise.startDate}</p>
+                <div className="bg-muted/50 rounded-lg p-4">
+                  <p className="text-xs text-muted-foreground">Start Date</p>
+                  <p className="text-foreground font-medium">{selectedExercise.startDate}</p>
                 </div>
-                <div className="bg-[#0a0a0f] rounded-lg p-4">
-                  <p className="text-xs text-gray-500">End Date</p>
-                  <p className="text-white font-medium">{selectedExercise.endDate}</p>
+                <div className="bg-muted/50 rounded-lg p-4">
+                  <p className="text-xs text-muted-foreground">End Date</p>
+                  <p className="text-foreground font-medium">{selectedExercise.endDate}</p>
                 </div>
-                <div className="bg-[#0a0a0f] rounded-lg p-4">
-                  <p className="text-xs text-gray-500">Location</p>
-                  <p className="text-white font-medium">{selectedExercise.location}</p>
+                <div className="bg-muted/50 rounded-lg p-4">
+                  <p className="text-xs text-muted-foreground">Location</p>
+                  <p className="text-foreground font-medium">{selectedExercise.location}</p>
                 </div>
               </div>
 
               {/* Objectives */}
               <div>
-                <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
-                  <Target className="w-4 h-4 text-emerald-500" />
+                <h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+                  <Target className="w-4 h-4 text-primary" />
                   Objectives
                 </h3>
                 <ul className="space-y-2">
                   {selectedExercise.objectives.map((obj, index) => (
                     <li key={index} className="flex items-start gap-2 text-gray-300">
-                      <span className="w-5 h-5 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center text-xs flex-shrink-0 mt-0.5">
+                      <span className="w-5 h-5 bg-primary/20 text-primary rounded-full flex items-center justify-center text-xs flex-shrink-0 mt-0.5">
                         {index + 1}
                       </span>
                       {obj}
@@ -470,15 +470,15 @@ export default function JointExercisesPage() {
 
               {/* Instructors */}
               <div>
-                <h3 className="font-semibold text-white mb-3">Instructors</h3>
+                <h3 className="font-semibold text-foreground mb-3">Instructors</h3>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
-                    <p className="text-xs text-emerald-400">Artillery Instructor</p>
-                    <p className="text-white font-medium">{selectedExercise.artilleryInstructorName}</p>
+                  <div className="bg-primary/10 border border-primary/30 rounded-lg p-4">
+                    <p className="text-xs text-primary">Artillery Instructor</p>
+                    <p className="text-foreground font-medium">{selectedExercise.artilleryInstructorName}</p>
                   </div>
-                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
-                    <p className="text-xs text-emerald-400">Aviation Instructor</p>
-                    <p className="text-white font-medium">{selectedExercise.aviationInstructorName}</p>
+                  <div className="bg-primary/10 border border-primary/30 rounded-lg p-4">
+                    <p className="text-xs text-primary">Aviation Instructor</p>
+                    <p className="text-foreground font-medium">{selectedExercise.aviationInstructorName}</p>
                   </div>
                 </div>
               </div>
@@ -486,42 +486,42 @@ export default function JointExercisesPage() {
               {/* Participants */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
-                    <Crosshair className="w-4 h-4 text-emerald-500" />
+                  <h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+                    <Crosshair className="w-4 h-4 text-primary" />
                     Artillery Trainees ({selectedExercise.artilleryTrainees.length})
                   </h3>
                   <div className="space-y-2">
                     {selectedExercise.artilleryTrainees.map((trainee) => (
                       <div
                         key={trainee.id}
-                        className="flex items-center justify-between p-2 bg-[#0a0a0f] rounded-lg"
+                        className="flex items-center justify-between p-2 bg-muted/50 rounded-lg"
                       >
-                        <span className="text-white">{trainee.name}</span>
-                        <span className="text-xs text-emerald-400">{trainee.role}</span>
+                        <span className="text-foreground">{trainee.name}</span>
+                        <span className="text-xs text-primary">{trainee.role}</span>
                       </div>
                     ))}
                     {selectedExercise.artilleryTrainees.length === 0 && (
-                      <p className="text-gray-500 text-sm">No trainees assigned</p>
+                      <p className="text-muted-foreground text-sm">No trainees assigned</p>
                     )}
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
-                    <Plane className="w-4 h-4 text-emerald-500" />
+                  <h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+                    <Plane className="w-4 h-4 text-primary" />
                     Aviation Trainees ({selectedExercise.aviationTrainees.length})
                   </h3>
                   <div className="space-y-2">
                     {selectedExercise.aviationTrainees.map((trainee) => (
                       <div
                         key={trainee.id}
-                        className="flex items-center justify-between p-2 bg-[#0a0a0f] rounded-lg"
+                        className="flex items-center justify-between p-2 bg-muted/50 rounded-lg"
                       >
-                        <span className="text-white">{trainee.name}</span>
-                        <span className="text-xs text-emerald-400">{trainee.role}</span>
+                        <span className="text-foreground">{trainee.name}</span>
+                        <span className="text-xs text-primary">{trainee.role}</span>
                       </div>
                     ))}
                     {selectedExercise.aviationTrainees.length === 0 && (
-                      <p className="text-gray-500 text-sm">To be assigned by Aviation Instructor</p>
+                      <p className="text-muted-foreground text-sm">To be assigned by Aviation Instructor</p>
                     )}
                   </div>
                 </div>
@@ -529,29 +529,29 @@ export default function JointExercisesPage() {
 
               {/* Safety & Support */}
               <div>
-                <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
-                  <Shield className="w-4 h-4 text-green-500" />
+                <h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+                  <Shield className="w-4 h-4 text-primary" />
                   Safety & Support
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-[#0a0a0f] rounded-lg p-3">
-                    <p className="text-xs text-gray-500">Safety Officer</p>
-                    <p className="text-white">{selectedExercise.safetyOfficer}</p>
+                  <div className="bg-muted/50 rounded-lg p-3">
+                    <p className="text-xs text-muted-foreground">Safety Officer</p>
+                    <p className="text-foreground">{selectedExercise.safetyOfficer}</p>
                   </div>
-                  <div className="bg-[#0a0a0f] rounded-lg p-3">
-                    <p className="text-xs text-gray-500">Medical Support</p>
-                    <p className="text-white">{selectedExercise.medicalSupport}</p>
+                  <div className="bg-muted/50 rounded-lg p-3">
+                    <p className="text-xs text-muted-foreground">Medical Support</p>
+                    <p className="text-foreground">{selectedExercise.medicalSupport}</p>
                   </div>
                 </div>
               </div>
 
               {/* Communication */}
               <div>
-                <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
-                  <Radio className="w-4 h-4 text-emerald-500" />
+                <h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+                  <Radio className="w-4 h-4 text-primary" />
                   Communication Plan
                 </h3>
-                <div className="bg-[#0a0a0f] rounded-lg p-4 text-gray-300 font-mono text-sm">
+                <div className="bg-muted/50 rounded-lg p-4 text-gray-300 font-mono text-sm">
                   {selectedExercise.communicationPlan}
                 </div>
               </div>
@@ -559,8 +559,8 @@ export default function JointExercisesPage() {
               {/* Contingency */}
               {selectedExercise.contingencyPlan && (
                 <div>
-                  <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
-                    <AlertTriangle className="w-4 h-4 text-yellow-500" />
+                  <h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+                    <AlertTriangle className="w-4 h-4 text-primary" />
                     Contingency Plan
                   </h3>
                   <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 text-gray-300">
@@ -571,40 +571,40 @@ export default function JointExercisesPage() {
 
               {/* Schedule */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-[#0a0a0f] rounded-lg p-3">
-                  <p className="text-xs text-gray-500">Briefing Schedule</p>
-                  <p className="text-white">{selectedExercise.briefingSchedule}</p>
+                <div className="bg-muted/50 rounded-lg p-3">
+                  <p className="text-xs text-muted-foreground">Briefing Schedule</p>
+                  <p className="text-foreground">{selectedExercise.briefingSchedule}</p>
                 </div>
-                <div className="bg-[#0a0a0f] rounded-lg p-3">
-                  <p className="text-xs text-gray-500">Debrief Schedule</p>
-                  <p className="text-white">{selectedExercise.debriefSchedule}</p>
+                <div className="bg-muted/50 rounded-lg p-3">
+                  <p className="text-xs text-muted-foreground">Debrief Schedule</p>
+                  <p className="text-foreground">{selectedExercise.debriefSchedule}</p>
                 </div>
               </div>
 
               {/* Results if completed */}
               {selectedExercise.results && selectedExercise.results.length > 0 && (
                 <div>
-                  <h3 className="font-semibold text-white mb-3">Results</h3>
+                  <h3 className="font-semibold text-foreground mb-3">Results</h3>
                   <div className="space-y-2">
                     {selectedExercise.results.map((result, index) => (
                       <div
                         key={index}
                         className={`p-3 rounded-lg border ${
                           result.achieved
-                            ? 'bg-green-500/10 border-green-500/30'
+                            ? 'bg-primary/10 border-primary/30'
                             : 'bg-red-500/10 border-red-500/30'
                         }`}
                       >
                         <div className="flex items-center justify-between mb-1">
-                          <p className="text-white font-medium">{result.objective}</p>
+                          <p className="text-foreground font-medium">{result.objective}</p>
                           {result.achieved ? (
-                            <CheckCircle2 className="w-5 h-5 text-green-400" />
+                            <CheckCircle2 className="w-5 h-5 text-primary" />
                           ) : (
                             <X className="w-5 h-5 text-red-400" />
                           )}
                         </div>
                         {result.remarks && (
-                          <p className="text-sm text-gray-400">{result.remarks}</p>
+                          <p className="text-sm text-muted-foreground">{result.remarks}</p>
                         )}
                       </div>
                     ))}
@@ -614,7 +614,7 @@ export default function JointExercisesPage() {
 
               {/* Status Actions */}
               <div>
-                <h3 className="font-semibold text-white mb-3">Update Status</h3>
+                <h3 className="font-semibold text-foreground mb-3">Update Status</h3>
                 <div className="flex gap-2 flex-wrap">
                   {(["planning", "scheduled", "in-progress", "completed", "cancelled"] as const).map(
                     (status) => (
@@ -628,8 +628,8 @@ export default function JointExercisesPage() {
                         }}
                         className={
                           selectedExercise.status === status
-                            ? "bg-emerald-600"
-                            : "border-gray-700"
+                            ? "bg-primary"
+                            : "border-border"
                         }
                       >
                         {status.replace("-", " ")}
@@ -640,7 +640,7 @@ export default function JointExercisesPage() {
               </div>
             </div>
 
-            <div className="p-6 border-t border-gray-800 flex justify-between">
+            <div className="p-6 border-t border-border flex justify-between">
               <Button
                 variant="outline"
                 className="border-red-500/50 text-red-400 hover:bg-red-500/10"
@@ -650,11 +650,11 @@ export default function JointExercisesPage() {
                 Delete
               </Button>
               <div className="flex gap-3">
-                <Button variant="outline" onClick={() => setSelectedExercise(null)} className="border-gray-700">
+                <Button variant="outline" onClick={() => setSelectedExercise(null)} className="border-border">
                   Close
                 </Button>
                 <Button
-                  className="bg-emerald-600 hover:bg-emerald-700"
+                  className="bg-primary hover:bg-primary/90"
                   onClick={() => {
                     setEditingExercise(selectedExercise);
                     setShowEditDialog(true);
@@ -673,9 +673,9 @@ export default function JointExercisesPage() {
       {/* Add/Edit Dialog */}
       {(showAddDialog || showEditDialog) && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-800 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-white">
+          <div className="bg-card border border-border rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-border flex items-center justify-between">
+              <h2 className="text-xl font-bold text-foreground">
                 {showEditDialog ? "Edit Joint Exercise" : "Plan New Joint Exercise"}
               </h2>
               <Button
@@ -686,7 +686,7 @@ export default function JointExercisesPage() {
                   setShowEditDialog(false);
                   setEditingExercise(null);
                 }}
-                className="text-gray-400"
+                className="text-muted-foreground"
               >
                 <X className="w-5 h-5" />
               </Button>
@@ -696,24 +696,24 @@ export default function JointExercisesPage() {
               className="p-6 space-y-4"
             >
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Exercise Name</label>
+                <label className="block text-sm text-muted-foreground mb-1">Exercise Name</label>
                 <input
                   name="name"
                   required
                   defaultValue={editingExercise?.name}
                   placeholder="e.g., Operation Thunder Strike"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Type</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Type</label>
                   <select
                     name="type"
                     required
                     defaultValue={editingExercise?.type || "coordination"}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   >
                     <option value="coordination">Coordination</option>
                     <option value="live-fire">Live Fire</option>
@@ -724,12 +724,12 @@ export default function JointExercisesPage() {
                 </div>
                 {showEditDialog && (
                   <div>
-                    <label className="block text-sm text-gray-400 mb-1">Status</label>
+                    <label className="block text-sm text-muted-foreground mb-1">Status</label>
                     <select
                       name="status"
                       required
                       defaultValue={editingExercise?.status}
-                      className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                      className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                     >
                       <option value="planning">Planning</option>
                       <option value="scheduled">Scheduled</option>
@@ -743,61 +743,61 @@ export default function JointExercisesPage() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Start Date</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Start Date</label>
                   <input
                     name="startDate"
                     type="date"
                     required
                     defaultValue={editingExercise?.startDate}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">End Date</label>
+                  <label className="block text-sm text-muted-foreground mb-1">End Date</label>
                   <input
                     name="endDate"
                     type="date"
                     required
                     defaultValue={editingExercise?.endDate}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Location</label>
+                <label className="block text-sm text-muted-foreground mb-1">Location</label>
                 <input
                   name="location"
                   required
                   defaultValue={editingExercise?.location}
                   placeholder="e.g., Combined Arms Training Range"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Objectives (one per line)</label>
+                <label className="block text-sm text-muted-foreground mb-1">Objectives (one per line)</label>
                 <textarea
                   name="objectives"
                   required
                   defaultValue={editingExercise?.objectives.join("\n")}
                   rows={3}
                   placeholder="Execute coordinated air-ground fire mission&#10;Validate FOO-Pilot communication procedures"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none resize-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none resize-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Artillery Trainees</label>
-                <div className="grid grid-cols-2 gap-2 max-h-32 overflow-y-auto bg-[#0a0a0f] border border-gray-800 rounded-lg p-3">
+                <label className="block text-sm text-muted-foreground mb-1">Artillery Trainees</label>
+                <div className="grid grid-cols-2 gap-2 max-h-32 overflow-y-auto bg-muted/50 border border-border rounded-lg p-3">
                   {activeTrainees.map((trainee) => (
-                    <label key={trainee.id} className="flex items-center gap-2 text-sm text-white cursor-pointer">
+                    <label key={trainee.id} className="flex items-center gap-2 text-sm text-foreground cursor-pointer">
                       <input
                         type="checkbox"
                         name="artilleryTrainees"
                         value={trainee.id}
                         defaultChecked={editingExercise?.artilleryTrainees.some((t) => t.id === trainee.id)}
-                        className="rounded border-gray-700 bg-[#12121a]"
+                        className="rounded border-border bg-card"
                       />
                       {trainee.rank} {trainee.name}
                     </label>
@@ -806,16 +806,16 @@ export default function JointExercisesPage() {
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Scenarios</label>
-                <div className="grid grid-cols-1 gap-2 max-h-32 overflow-y-auto bg-[#0a0a0f] border border-gray-800 rounded-lg p-3">
+                <label className="block text-sm text-muted-foreground mb-1">Scenarios</label>
+                <div className="grid grid-cols-1 gap-2 max-h-32 overflow-y-auto bg-muted/50 border border-border rounded-lg p-3">
                   {activeScenarios.map((scenario) => (
-                    <label key={scenario.id} className="flex items-center gap-2 text-sm text-white cursor-pointer">
+                    <label key={scenario.id} className="flex items-center gap-2 text-sm text-foreground cursor-pointer">
                       <input
                         type="checkbox"
                         name="scenarios"
                         value={scenario.id}
                         defaultChecked={editingExercise?.scenarios.includes(scenario.id)}
-                        className="rounded border-gray-700 bg-[#12121a]"
+                        className="rounded border-border bg-card"
                       />
                       {scenario.title} ({scenario.code})
                     </label>
@@ -825,81 +825,81 @@ export default function JointExercisesPage() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Safety Officer</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Safety Officer</label>
                   <input
                     name="safetyOfficer"
                     required
                     defaultValue={editingExercise?.safetyOfficer}
                     placeholder="e.g., Lt Col M. Iyer"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Medical Support</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Medical Support</label>
                   <input
                     name="medicalSupport"
                     required
                     defaultValue={editingExercise?.medicalSupport}
                     placeholder="e.g., Medical Team Alpha"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Communication Plan</label>
+                <label className="block text-sm text-muted-foreground mb-1">Communication Plan</label>
                 <input
                   name="communicationPlan"
                   required
                   defaultValue={editingExercise?.communicationPlan}
                   placeholder="e.g., Primary: HF 245.0, Secondary: VHF 121.5"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Contingency Plan</label>
+                <label className="block text-sm text-muted-foreground mb-1">Contingency Plan</label>
                 <textarea
                   name="contingencyPlan"
                   defaultValue={editingExercise?.contingencyPlan}
                   rows={2}
                   placeholder="Abort procedures, rally points..."
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none resize-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none resize-none"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Briefing Schedule</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Briefing Schedule</label>
                   <input
                     name="briefingSchedule"
                     required
                     defaultValue={editingExercise?.briefingSchedule}
                     placeholder="e.g., 2024-12-28 0500hrs at Ops Room"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Debrief Schedule</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Debrief Schedule</label>
                   <input
                     name="debriefSchedule"
                     required
                     defaultValue={editingExercise?.debriefSchedule}
                     placeholder="e.g., 2024-12-30 1800hrs at Ops Room"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
               </div>
 
               {showEditDialog && (
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Remarks</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Remarks</label>
                   <textarea
                     name="remarks"
                     defaultValue={editingExercise?.remarks}
                     rows={2}
                     placeholder="Additional notes..."
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none resize-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none resize-none"
                   />
                 </div>
               )}
@@ -913,11 +913,11 @@ export default function JointExercisesPage() {
                     setShowEditDialog(false);
                     setEditingExercise(null);
                   }}
-                  className="border-gray-700"
+                  className="border-border"
                 >
                   Cancel
                 </Button>
-                <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700">
+                <Button type="submit" className="bg-primary hover:bg-primary/90">
                   {showEditDialog ? "Save Changes" : "Create Exercise"}
                 </Button>
               </div>
@@ -929,16 +929,16 @@ export default function JointExercisesPage() {
       {/* Delete Confirmation Dialog */}
       {showDeleteConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-md p-6">
-            <h2 className="text-xl font-bold text-white mb-4">Confirm Delete</h2>
-            <p className="text-gray-400 mb-6">
+          <div className="bg-card border border-border rounded-lg w-full max-w-md p-6">
+            <h2 className="text-xl font-bold text-foreground mb-4">Confirm Delete</h2>
+            <p className="text-muted-foreground mb-6">
               Are you sure you want to delete this joint exercise? This action cannot be undone.
             </p>
             <div className="flex justify-end gap-3">
               <Button
                 variant="outline"
                 onClick={() => setShowDeleteConfirm(null)}
-                className="border-gray-700"
+                className="border-border"
               >
                 Cancel
               </Button>

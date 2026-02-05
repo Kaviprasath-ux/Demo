@@ -68,34 +68,34 @@ export default function SessionsPage() {
   const getTypeColor = (type: ArtilleryTrainingSession["type"]) => {
     switch (type) {
       case "classroom":
-        return "bg-emerald-500/20 text-emerald-400";
+        return "bg-primary/20 text-primary";
       case "simulator":
-        return "bg-emerald-500/20 text-emerald-400";
+        return "bg-primary/20 text-primary";
       case "field":
-        return "bg-green-500/20 text-green-400";
+        return "bg-primary/20 text-primary";
       case "live-fire":
         return "bg-red-500/20 text-red-400";
       case "joint-exercise":
-        return "bg-emerald-500/20 text-emerald-400";
+        return "bg-primary/20 text-primary";
       default:
-        return "bg-gray-500/20 text-gray-400";
+        return "bg-gray-500/20 text-muted-foreground";
     }
   };
 
   const getStatusColor = (status: ArtilleryTrainingSession["status"]) => {
     switch (status) {
       case "scheduled":
-        return "bg-emerald-500/20 text-emerald-400";
+        return "bg-primary/20 text-primary";
       case "in-progress":
-        return "bg-green-500/20 text-green-400";
+        return "bg-primary/20 text-primary";
       case "completed":
-        return "bg-gray-500/20 text-gray-400";
+        return "bg-gray-500/20 text-muted-foreground";
       case "cancelled":
         return "bg-red-500/20 text-red-400";
       case "postponed":
-        return "bg-yellow-500/20 text-yellow-400";
+        return "bg-primary/20 text-primary";
       default:
-        return "bg-gray-500/20 text-gray-400";
+        return "bg-gray-500/20 text-muted-foreground";
     }
   };
 
@@ -211,17 +211,17 @@ export default function SessionsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-3">
-            <Calendar className="w-8 h-8 text-emerald-500" />
+          <h1 className="text-2xl font-bold text-foreground flex items-center gap-3">
+            <Calendar className="w-8 h-8 text-primary" />
             Training Sessions
           </h1>
-          <p className="text-gray-400 mt-1">
+          <p className="text-muted-foreground mt-1">
             Schedule and manage training sessions for FOO trainees
           </p>
         </div>
         <Button
           onClick={() => setShowAddDialog(true)}
-          className="bg-emerald-600 hover:bg-emerald-700"
+          className="bg-primary hover:bg-primary/90"
         >
           <Plus className="w-4 h-4 mr-2" />
           Schedule Session
@@ -230,47 +230,47 @@ export default function SessionsPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-4 gap-4">
-        <div className="bg-[#12121a] border border-gray-800 rounded-lg p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-500/20 rounded-lg">
-              <Calendar className="w-5 h-5 text-emerald-500" />
+            <div className="p-2 bg-primary/20 rounded-lg">
+              <Calendar className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-white">{stats.total}</p>
-              <p className="text-sm text-gray-400">Total Sessions</p>
+              <p className="text-2xl font-bold text-foreground">{stats.total}</p>
+              <p className="text-sm text-muted-foreground">Total Sessions</p>
             </div>
           </div>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-lg p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-500/20 rounded-lg">
-              <Clock className="w-5 h-5 text-emerald-500" />
+            <div className="p-2 bg-primary/20 rounded-lg">
+              <Clock className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-white">{stats.scheduled}</p>
-              <p className="text-sm text-gray-400">Scheduled</p>
+              <p className="text-2xl font-bold text-foreground">{stats.scheduled}</p>
+              <p className="text-sm text-muted-foreground">Scheduled</p>
             </div>
           </div>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-lg p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-green-500/20 rounded-lg">
-              <PlayCircle className="w-5 h-5 text-green-500" />
+            <div className="p-2 bg-primary/20 rounded-lg">
+              <PlayCircle className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-white">{stats.inProgress}</p>
-              <p className="text-sm text-gray-400">In Progress</p>
+              <p className="text-2xl font-bold text-foreground">{stats.inProgress}</p>
+              <p className="text-sm text-muted-foreground">In Progress</p>
             </div>
           </div>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-lg p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-gray-500/20 rounded-lg">
-              <CheckCircle2 className="w-5 h-5 text-gray-500" />
+              <CheckCircle2 className="w-5 h-5 text-muted-foreground" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-white">{stats.completed}</p>
-              <p className="text-sm text-gray-400">Completed</p>
+              <p className="text-2xl font-bold text-foreground">{stats.completed}</p>
+              <p className="text-sm text-muted-foreground">Completed</p>
             </div>
           </div>
         </div>
@@ -279,21 +279,21 @@ export default function SessionsPage() {
       {/* Filters */}
       <div className="flex items-center gap-4 flex-wrap">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
             placeholder="Search sessions..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
+            className="w-full pl-10 pr-4 py-2 bg-card border border-border rounded-lg focus:outline-none focus:border-primary text-foreground"
           />
         </div>
         <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-gray-500" />
+          <Filter className="w-4 h-4 text-muted-foreground" />
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
+            className="px-4 py-2 bg-card border border-border rounded-lg focus:outline-none focus:border-primary text-foreground"
           >
             <option value="all">All Types</option>
             <option value="classroom">Classroom</option>
@@ -305,7 +305,7 @@ export default function SessionsPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
+            className="px-4 py-2 bg-card border border-border rounded-lg focus:outline-none focus:border-primary text-foreground"
           >
             <option value="all">All Status</option>
             <option value="scheduled">Scheduled</option>
@@ -322,7 +322,7 @@ export default function SessionsPage() {
         {sortedSessions.map((session) => (
           <div
             key={session.id}
-            className="bg-[#12121a] border border-gray-800 rounded-lg hover:border-gray-700 transition-colors cursor-pointer"
+            className="bg-card border border-border rounded-lg hover:border-border transition-colors cursor-pointer"
             onClick={() => setSelectedSession(session)}
           >
             <div className="p-4">
@@ -337,29 +337,29 @@ export default function SessionsPage() {
                       {session.status.replace("-", " ")}
                     </span>
                     {session.aviationInstructorName && (
-                      <span className="px-2 py-0.5 rounded text-xs bg-emerald-500/20 text-emerald-400 flex items-center gap-1">
+                      <span className="px-2 py-0.5 rounded text-xs bg-primary/20 text-primary flex items-center gap-1">
                         <Plane className="w-3 h-3" />
                         Joint
                       </span>
                     )}
                   </div>
-                  <h3 className="font-semibold text-white text-lg">{session.title}</h3>
+                  <h3 className="font-semibold text-foreground text-lg">{session.title}</h3>
                   {session.scenarioName && (
-                    <p className="text-sm text-emerald-400 flex items-center gap-1 mt-1">
+                    <p className="text-sm text-primary flex items-center gap-1 mt-1">
                       <Target className="w-3 h-3" />
                       {session.scenarioName}
                     </p>
                   )}
                 </div>
                 <div className="text-right">
-                  <p className="text-white font-medium">{session.date}</p>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-foreground font-medium">{session.date}</p>
+                  <p className="text-sm text-muted-foreground">
                     {session.startTime} - {session.endTime}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-6 text-sm text-gray-400">
+              <div className="flex items-center gap-6 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1">
                   <MapPin className="w-4 h-4" />
                   {session.location}
@@ -369,7 +369,7 @@ export default function SessionsPage() {
                   {session.traineeNames.length} trainee{session.traineeNames.length !== 1 ? "s" : ""}
                 </span>
                 {session.safetyBriefCompleted && (
-                  <span className="flex items-center gap-1 text-green-400">
+                  <span className="flex items-center gap-1 text-primary">
                     <CheckCircle2 className="w-4 h-4" />
                     Safety Brief Complete
                   </span>
@@ -381,13 +381,13 @@ export default function SessionsPage() {
                   {session.traineeNames.slice(0, 3).map((name, index) => (
                     <span
                       key={index}
-                      className="px-2 py-1 bg-[#0a0a0f] rounded text-xs text-gray-300"
+                      className="px-2 py-1 bg-muted/50 rounded text-xs text-gray-300"
                     >
                       {name}
                     </span>
                   ))}
                   {session.traineeNames.length > 3 && (
-                    <span className="px-2 py-1 bg-[#0a0a0f] rounded text-xs text-gray-500">
+                    <span className="px-2 py-1 bg-muted/50 rounded text-xs text-muted-foreground">
                       +{session.traineeNames.length - 3} more
                     </span>
                   )}
@@ -399,7 +399,7 @@ export default function SessionsPage() {
       </div>
 
       {filteredSessions.length === 0 && (
-        <div className="text-center py-12 text-gray-500">
+        <div className="text-center py-12 text-muted-foreground">
           <Calendar className="w-12 h-12 mx-auto mb-4 opacity-50" />
           <p>No sessions found matching your criteria</p>
         </div>
@@ -408,8 +408,8 @@ export default function SessionsPage() {
       {/* View Session Detail Modal */}
       {selectedSession && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-800">
+          <div className="bg-card border border-border rounded-lg w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-border">
               <div className="flex items-center justify-between">
                 <div>
                   <div className="flex items-center gap-2 mb-2">
@@ -421,13 +421,13 @@ export default function SessionsPage() {
                       {selectedSession.status.replace("-", " ")}
                     </span>
                   </div>
-                  <h2 className="text-xl font-bold text-white">{selectedSession.title}</h2>
+                  <h2 className="text-xl font-bold text-foreground">{selectedSession.title}</h2>
                 </div>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setSelectedSession(null)}
-                  className="text-gray-400"
+                  className="text-muted-foreground"
                 >
                   <X className="w-5 h-5" />
                 </Button>
@@ -437,23 +437,23 @@ export default function SessionsPage() {
             <div className="p-6 space-y-6">
               {/* Schedule Info */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="bg-[#0a0a0f] rounded-lg p-3">
-                  <p className="text-xs text-gray-500">Date</p>
-                  <p className="text-white font-medium">{selectedSession.date}</p>
+                <div className="bg-muted/50 rounded-lg p-3">
+                  <p className="text-xs text-muted-foreground">Date</p>
+                  <p className="text-foreground font-medium">{selectedSession.date}</p>
                 </div>
-                <div className="bg-[#0a0a0f] rounded-lg p-3">
-                  <p className="text-xs text-gray-500">Time</p>
-                  <p className="text-white font-medium">
+                <div className="bg-muted/50 rounded-lg p-3">
+                  <p className="text-xs text-muted-foreground">Time</p>
+                  <p className="text-foreground font-medium">
                     {selectedSession.startTime} - {selectedSession.endTime}
                   </p>
                 </div>
-                <div className="bg-[#0a0a0f] rounded-lg p-3">
-                  <p className="text-xs text-gray-500">Location</p>
-                  <p className="text-white font-medium">{selectedSession.location}</p>
+                <div className="bg-muted/50 rounded-lg p-3">
+                  <p className="text-xs text-muted-foreground">Location</p>
+                  <p className="text-foreground font-medium">{selectedSession.location}</p>
                 </div>
-                <div className="bg-[#0a0a0f] rounded-lg p-3">
-                  <p className="text-xs text-gray-500">Safety Brief</p>
-                  <p className={`font-medium ${selectedSession.safetyBriefCompleted ? 'text-green-400' : 'text-yellow-400'}`}>
+                <div className="bg-muted/50 rounded-lg p-3">
+                  <p className="text-xs text-muted-foreground">Safety Brief</p>
+                  <p className={`font-medium ${selectedSession.safetyBriefCompleted ? 'text-primary' : 'text-primary'}`}>
                     {selectedSession.safetyBriefCompleted ? 'Completed' : 'Pending'}
                   </p>
                 </div>
@@ -462,28 +462,28 @@ export default function SessionsPage() {
               {/* Scenario */}
               {selectedSession.scenarioName && (
                 <div>
-                  <h3 className="font-semibold text-white mb-2 flex items-center gap-2">
-                    <Target className="w-4 h-4 text-emerald-500" />
+                  <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                    <Target className="w-4 h-4 text-primary" />
                     Scenario
                   </h3>
-                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-3">
-                    <p className="text-emerald-400 font-medium">{selectedSession.scenarioName}</p>
+                  <div className="bg-primary/10 border border-primary/30 rounded-lg p-3">
+                    <p className="text-primary font-medium">{selectedSession.scenarioName}</p>
                   </div>
                 </div>
               )}
 
               {/* Instructors */}
               <div>
-                <h3 className="font-semibold text-white mb-2">Instructors</h3>
+                <h3 className="font-semibold text-foreground mb-2">Instructors</h3>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-[#0a0a0f] rounded-lg p-3">
-                    <p className="text-xs text-gray-500">Artillery Instructor</p>
-                    <p className="text-white font-medium">{selectedSession.instructorName}</p>
+                  <div className="bg-muted/50 rounded-lg p-3">
+                    <p className="text-xs text-muted-foreground">Artillery Instructor</p>
+                    <p className="text-foreground font-medium">{selectedSession.instructorName}</p>
                   </div>
                   {selectedSession.aviationInstructorName && (
-                    <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-3">
-                      <p className="text-xs text-emerald-400">Aviation Instructor</p>
-                      <p className="text-white font-medium">{selectedSession.aviationInstructorName}</p>
+                    <div className="bg-primary/10 border border-primary/30 rounded-lg p-3">
+                      <p className="text-xs text-primary">Aviation Instructor</p>
+                      <p className="text-foreground font-medium">{selectedSession.aviationInstructorName}</p>
                     </div>
                   )}
                 </div>
@@ -491,7 +491,7 @@ export default function SessionsPage() {
 
               {/* Trainees */}
               <div>
-                <h3 className="font-semibold text-white mb-2 flex items-center gap-2">
+                <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
                   <Users className="w-4 h-4" />
                   Trainees ({selectedSession.traineeNames.length})
                 </h3>
@@ -499,7 +499,7 @@ export default function SessionsPage() {
                   {selectedSession.traineeNames.map((name, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1 bg-[#0a0a0f] border border-gray-800 rounded-lg text-sm text-white"
+                      className="px-3 py-1 bg-muted/50 border border-border rounded-lg text-sm text-foreground"
                     >
                       {name}
                     </span>
@@ -510,11 +510,11 @@ export default function SessionsPage() {
               {/* Objectives */}
               {selectedSession.objectives.length > 0 && (
                 <div>
-                  <h3 className="font-semibold text-white mb-2">Objectives</h3>
+                  <h3 className="font-semibold text-foreground mb-2">Objectives</h3>
                   <ul className="space-y-2">
                     {selectedSession.objectives.map((objective, index) => (
                       <li key={index} className="flex items-start gap-2 text-gray-300">
-                        <span className="w-5 h-5 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center text-xs flex-shrink-0 mt-0.5">
+                        <span className="w-5 h-5 bg-primary/20 text-primary rounded-full flex items-center justify-center text-xs flex-shrink-0 mt-0.5">
                           {index + 1}
                         </span>
                         {objective}
@@ -527,12 +527,12 @@ export default function SessionsPage() {
               {/* Equipment */}
               {selectedSession.equipment.length > 0 && (
                 <div>
-                  <h3 className="font-semibold text-white mb-2">Equipment</h3>
+                  <h3 className="font-semibold text-foreground mb-2">Equipment</h3>
                   <div className="flex flex-wrap gap-2">
                     {selectedSession.equipment.map((item, index) => (
                       <span
                         key={index}
-                        className="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm"
+                        className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm"
                       >
                         {item}
                       </span>
@@ -544,8 +544,8 @@ export default function SessionsPage() {
               {/* Remarks */}
               {selectedSession.remarks && (
                 <div>
-                  <h3 className="font-semibold text-white mb-2">Remarks</h3>
-                  <div className="bg-[#0a0a0f] rounded-lg p-4 text-gray-300">
+                  <h3 className="font-semibold text-foreground mb-2">Remarks</h3>
+                  <div className="bg-muted/50 rounded-lg p-4 text-gray-300">
                     {selectedSession.remarks}
                   </div>
                 </div>
@@ -554,8 +554,8 @@ export default function SessionsPage() {
               {/* Weather */}
               {selectedSession.weatherConditions && (
                 <div>
-                  <h3 className="font-semibold text-white mb-2">Weather Conditions</h3>
-                  <div className="bg-[#0a0a0f] rounded-lg p-3 text-gray-300">
+                  <h3 className="font-semibold text-foreground mb-2">Weather Conditions</h3>
+                  <div className="bg-muted/50 rounded-lg p-3 text-gray-300">
                     {selectedSession.weatherConditions}
                   </div>
                 </div>
@@ -563,7 +563,7 @@ export default function SessionsPage() {
 
               {/* Status Actions */}
               <div>
-                <h3 className="font-semibold text-white mb-3">Update Status</h3>
+                <h3 className="font-semibold text-foreground mb-3">Update Status</h3>
                 <div className="flex gap-2 flex-wrap">
                   {(["scheduled", "in-progress", "completed", "cancelled", "postponed"] as const).map(
                     (status) => (
@@ -577,8 +577,8 @@ export default function SessionsPage() {
                         }}
                         className={
                           selectedSession.status === status
-                            ? "bg-emerald-600"
-                            : "border-gray-700"
+                            ? "bg-primary"
+                            : "border-border"
                         }
                       >
                         {status.replace("-", " ")}
@@ -589,7 +589,7 @@ export default function SessionsPage() {
               </div>
             </div>
 
-            <div className="p-6 border-t border-gray-800 flex justify-between">
+            <div className="p-6 border-t border-border flex justify-between">
               <Button
                 variant="outline"
                 className="border-red-500/50 text-red-400 hover:bg-red-500/10"
@@ -599,11 +599,11 @@ export default function SessionsPage() {
                 Delete
               </Button>
               <div className="flex gap-3">
-                <Button variant="outline" onClick={() => setSelectedSession(null)} className="border-gray-700">
+                <Button variant="outline" onClick={() => setSelectedSession(null)} className="border-border">
                   Close
                 </Button>
                 <Button
-                  className="bg-emerald-600 hover:bg-emerald-700"
+                  className="bg-primary hover:bg-primary/90"
                   onClick={() => {
                     setEditingSession(selectedSession);
                     setShowEditDialog(true);
@@ -622,9 +622,9 @@ export default function SessionsPage() {
       {/* Add/Edit Session Dialog */}
       {(showAddDialog || showEditDialog) && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-800 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-white">
+          <div className="bg-card border border-border rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-border flex items-center justify-between">
+              <h2 className="text-xl font-bold text-foreground">
                 {showEditDialog ? "Edit Session" : "Schedule New Session"}
               </h2>
               <Button
@@ -635,7 +635,7 @@ export default function SessionsPage() {
                   setShowEditDialog(false);
                   setEditingSession(null);
                 }}
-                className="text-gray-400"
+                className="text-muted-foreground"
               >
                 <X className="w-5 h-5" />
               </Button>
@@ -645,24 +645,24 @@ export default function SessionsPage() {
               className="p-6 space-y-4"
             >
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Title</label>
+                <label className="block text-sm text-muted-foreground mb-1">Title</label>
                 <input
                   name="title"
                   required
                   defaultValue={editingSession?.title}
                   placeholder="e.g., CAS Communication Protocols"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Type</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Type</label>
                   <select
                     name="type"
                     required
                     defaultValue={editingSession?.type || "classroom"}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   >
                     <option value="classroom">Classroom</option>
                     <option value="simulator">Simulator</option>
@@ -673,12 +673,12 @@ export default function SessionsPage() {
                 </div>
                 {showEditDialog && (
                   <div>
-                    <label className="block text-sm text-gray-400 mb-1">Status</label>
+                    <label className="block text-sm text-muted-foreground mb-1">Status</label>
                     <select
                       name="status"
                       required
                       defaultValue={editingSession?.status}
-                      className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                      className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                     >
                       <option value="scheduled">Scheduled</option>
                       <option value="in-progress">In Progress</option>
@@ -691,11 +691,11 @@ export default function SessionsPage() {
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Scenario (Optional)</label>
+                <label className="block text-sm text-muted-foreground mb-1">Scenario (Optional)</label>
                 <select
                   name="scenario"
                   defaultValue={editingSession?.scenarioId || ""}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                 >
                   <option value="">No scenario</option>
                   {activeScenarios.map((scenario) => (
@@ -708,59 +708,59 @@ export default function SessionsPage() {
 
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Date</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Date</label>
                   <input
                     name="date"
                     type="date"
                     required
                     defaultValue={editingSession?.date}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Start Time</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Start Time</label>
                   <input
                     name="startTime"
                     type="time"
                     required
                     defaultValue={editingSession?.startTime}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">End Time</label>
+                  <label className="block text-sm text-muted-foreground mb-1">End Time</label>
                   <input
                     name="endTime"
                     type="time"
                     required
                     defaultValue={editingSession?.endTime}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Location</label>
+                <label className="block text-sm text-muted-foreground mb-1">Location</label>
                 <input
                   name="location"
                   required
                   defaultValue={editingSession?.location}
                   placeholder="e.g., Classroom A - Fire Control Wing"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Trainees</label>
-                <div className="grid grid-cols-2 gap-2 max-h-32 overflow-y-auto bg-[#0a0a0f] border border-gray-800 rounded-lg p-3">
+                <label className="block text-sm text-muted-foreground mb-1">Trainees</label>
+                <div className="grid grid-cols-2 gap-2 max-h-32 overflow-y-auto bg-muted/50 border border-border rounded-lg p-3">
                   {activeTrainees.map((trainee) => (
-                    <label key={trainee.id} className="flex items-center gap-2 text-sm text-white cursor-pointer">
+                    <label key={trainee.id} className="flex items-center gap-2 text-sm text-foreground cursor-pointer">
                       <input
                         type="checkbox"
                         name="trainees"
                         value={trainee.id}
                         defaultChecked={editingSession?.traineeIds.includes(trainee.id)}
-                        className="rounded border-gray-700 bg-[#12121a]"
+                        className="rounded border-border bg-card"
                       />
                       {trainee.rank} {trainee.name}
                     </label>
@@ -774,46 +774,46 @@ export default function SessionsPage() {
                   name="aviationInstructor"
                   id="aviationInstructor"
                   defaultChecked={!!editingSession?.aviationInstructorId}
-                  className="rounded border-gray-700 bg-[#12121a]"
+                  className="rounded border-border bg-card"
                 />
-                <label htmlFor="aviationInstructor" className="text-sm text-white cursor-pointer flex items-center gap-2">
-                  <Plane className="w-4 h-4 text-emerald-400" />
+                <label htmlFor="aviationInstructor" className="text-sm text-foreground cursor-pointer flex items-center gap-2">
+                  <Plane className="w-4 h-4 text-primary" />
                   Include Aviation Instructor (Joint Session)
                 </label>
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Objectives (one per line)</label>
+                <label className="block text-sm text-muted-foreground mb-1">Objectives (one per line)</label>
                 <textarea
                   name="objectives"
                   required
                   defaultValue={editingSession?.objectives.join("\n")}
                   placeholder="Master CAS brevity codes&#10;Practice 9-line brief format"
                   rows={3}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none resize-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none resize-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Equipment (comma-separated)</label>
+                <label className="block text-sm text-muted-foreground mb-1">Equipment (comma-separated)</label>
                 <input
                   name="equipment"
                   defaultValue={editingSession?.equipment.join(", ")}
                   placeholder="e.g., Radio simulator, Projector, Training manuals"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                 />
               </div>
 
               {showEditDialog && (
                 <>
                   <div>
-                    <label className="block text-sm text-gray-400 mb-1">Remarks</label>
+                    <label className="block text-sm text-muted-foreground mb-1">Remarks</label>
                     <textarea
                       name="remarks"
                       defaultValue={editingSession?.remarks}
                       placeholder="Session notes and observations..."
                       rows={2}
-                      className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none resize-none"
+                      className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none resize-none"
                     />
                   </div>
 
@@ -823,9 +823,9 @@ export default function SessionsPage() {
                       name="safetyBriefCompleted"
                       id="safetyBriefCompleted"
                       defaultChecked={editingSession?.safetyBriefCompleted}
-                      className="rounded border-gray-700 bg-[#12121a]"
+                      className="rounded border-border bg-card"
                     />
-                    <label htmlFor="safetyBriefCompleted" className="text-sm text-white cursor-pointer">
+                    <label htmlFor="safetyBriefCompleted" className="text-sm text-foreground cursor-pointer">
                       Safety Brief Completed
                     </label>
                   </div>
@@ -841,11 +841,11 @@ export default function SessionsPage() {
                     setShowEditDialog(false);
                     setEditingSession(null);
                   }}
-                  className="border-gray-700"
+                  className="border-border"
                 >
                   Cancel
                 </Button>
-                <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700">
+                <Button type="submit" className="bg-primary hover:bg-primary/90">
                   {showEditDialog ? "Save Changes" : "Schedule Session"}
                 </Button>
               </div>
@@ -857,16 +857,16 @@ export default function SessionsPage() {
       {/* Delete Confirmation Dialog */}
       {showDeleteConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-md p-6">
-            <h2 className="text-xl font-bold text-white mb-4">Confirm Delete</h2>
-            <p className="text-gray-400 mb-6">
+          <div className="bg-card border border-border rounded-lg w-full max-w-md p-6">
+            <h2 className="text-xl font-bold text-foreground mb-4">Confirm Delete</h2>
+            <p className="text-muted-foreground mb-6">
               Are you sure you want to delete this session? This action cannot be undone.
             </p>
             <div className="flex justify-end gap-3">
               <Button
                 variant="outline"
                 onClick={() => setShowDeleteConfirm(null)}
-                className="border-gray-700"
+                className="border-border"
               >
                 Cancel
               </Button>

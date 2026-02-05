@@ -23,15 +23,15 @@ import { useROENFZStore, type ROERule } from "@/lib/stores/roe-nfz-store";
 
 const categoryConfig = {
   weapons: { icon: Crosshair, color: "text-red-500", bg: "bg-red-500/20" },
-  airspace: { icon: Plane, color: "text-emerald-500", bg: "bg-emerald-500/20" },
-  coordination: { icon: Users, color: "text-green-500", bg: "bg-green-500/20" },
-  safety: { icon: Shield, color: "text-yellow-500", bg: "bg-yellow-500/20" },
-  general: { icon: FileText, color: "text-gray-500", bg: "bg-gray-500/20" },
+  airspace: { icon: Plane, color: "text-primary", bg: "bg-primary/20" },
+  coordination: { icon: Users, color: "text-primary", bg: "bg-primary/20" },
+  safety: { icon: Shield, color: "text-primary", bg: "bg-primary/20" },
+  general: { icon: FileText, color: "text-muted-foreground", bg: "bg-gray-500/20" },
 };
 
 const clearanceConfig = {
-  restricted: { label: "Restricted", color: "text-green-500", bg: "bg-green-500/20" },
-  confidential: { label: "Confidential", color: "text-yellow-500", bg: "bg-yellow-500/20" },
+  restricted: { label: "Restricted", color: "text-primary", bg: "bg-primary/20" },
+  confidential: { label: "Confidential", color: "text-primary", bg: "bg-primary/20" },
   secret: { label: "Secret", color: "text-red-500", bg: "bg-red-500/20" },
 };
 
@@ -93,7 +93,7 @@ export default function ROEManagementPage() {
             label="Active"
             value={roeRules.filter((r) => r.isActive).length}
             icon={CheckCircle}
-            color="text-green-500"
+            color="text-primary"
           />
           <StatCard
             label="Weapons ROE"
@@ -105,7 +105,7 @@ export default function ROEManagementPage() {
             label="Secret Level"
             value={roeRules.filter((r) => r.clearanceRequired === "secret").length}
             icon={Lock}
-            color="text-yellow-500"
+            color="text-primary"
           />
         </div>
 
@@ -216,7 +216,7 @@ function ROERuleCard({
   const CategoryIcon = catConfig.icon;
 
   return (
-    <div className="bg-card border border-border rounded-xl overflow-hidden">
+    <div className="bg-card border border-border rounded-lg overflow-hidden">
       <button
         onClick={onToggle}
         className="w-full p-4 flex items-center justify-between hover:bg-muted/50 transition-colors"
@@ -229,7 +229,7 @@ function ROERuleCard({
             <div className="flex items-center gap-2">
               <h3 className="font-semibold">{rule.name}</h3>
               {rule.isActive ? (
-                <CheckCircle className="w-4 h-4 text-green-500" />
+                <CheckCircle className="w-4 h-4 text-primary" />
               ) : (
                 <XCircle className="w-4 h-4 text-muted-foreground" />
               )}
@@ -271,7 +271,7 @@ function ROERuleCard({
             <ul className="space-y-1">
               {rule.conditions.map((condition, i) => (
                 <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 shrink-0" />
+                  <CheckCircle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
                   {condition}
                 </li>
               ))}
@@ -284,7 +284,7 @@ function ROERuleCard({
             <ul className="space-y-1">
               {rule.restrictions.map((restriction, i) => (
                 <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
-                  <AlertTriangle className="w-4 h-4 text-yellow-500 mt-0.5 shrink-0" />
+                  <AlertTriangle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
                   {restriction}
                 </li>
               ))}
@@ -363,7 +363,7 @@ function AddROEModal({
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div className="bg-card border border-border rounded-xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6">
+      <div className="bg-card border border-border rounded-lg max-w-lg w-full max-h-[90vh] overflow-y-auto p-6">
         <h2 className="text-xl font-bold mb-4">Add ROE Rule</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

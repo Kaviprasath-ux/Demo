@@ -54,13 +54,13 @@ export default function DocumentsPage() {
 
   const getCategoryColor = (category: string) => {
     const colors: Record<string, string> = {
-      manual: "bg-emerald-500/20 text-emerald-400",
-      procedure: "bg-emerald-500/20 text-emerald-400",
-      reference: "bg-green-500/20 text-green-400",
+      manual: "bg-primary/20 text-primary",
+      procedure: "bg-primary/20 text-primary",
+      reference: "bg-primary/20 text-primary",
       safety: "bg-red-500/20 text-red-400",
-      checklist: "bg-emerald-500/20 text-emerald-400",
+      checklist: "bg-primary/20 text-primary",
     };
-    return colors[category] || "bg-gray-500/20 text-gray-400";
+    return colors[category] || "bg-gray-500/20 text-muted-foreground";
   };
 
   const getTypeIcon = (type: string) => {
@@ -81,32 +81,32 @@ export default function DocumentsPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-white flex items-center gap-3">
-          <FileText className="w-8 h-8 text-green-500" />
+        <h1 className="text-2xl font-bold text-foreground flex items-center gap-3">
+          <FileText className="w-8 h-8 text-primary" />
           Training Documents
         </h1>
-        <p className="text-gray-400 mt-1">
+        <p className="text-muted-foreground mt-1">
           Access manuals, procedures, and reference materials
         </p>
       </div>
 
       {/* Required Documents Progress */}
-      <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
+      <div className="bg-card border border-border rounded-lg p-4">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-white font-medium">Required Documents Progress</span>
-          <span className="text-green-400">
+          <span className="text-foreground font-medium">Required Documents Progress</span>
+          <span className="text-primary">
             {readRequiredDocs.length}/{requiredDocs.length} read
           </span>
         </div>
-        <div className="h-2 bg-gray-800 rounded-full">
+        <div className="h-2 bg-muted rounded-full">
           <div
-            className="h-2 bg-green-500 rounded-full transition-all"
+            className="h-2 bg-primary rounded-full transition-all"
             style={{
               width: `${(readRequiredDocs.length / requiredDocs.length) * 100}%`,
             }}
           />
         </div>
-        <p className="text-xs text-gray-500 mt-2">
+        <p className="text-xs text-muted-foreground mt-2">
           Complete all required documents before field training
         </p>
       </div>
@@ -114,19 +114,19 @@ export default function DocumentsPage() {
       {/* Filters */}
       <div className="flex flex-wrap gap-4">
         <div className="relative flex-1 min-w-[200px]">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
             placeholder="Search documents..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
+            className="w-full pl-10 pr-4 py-2 bg-card border border-border rounded-lg text-foreground placeholder-gray-500 focus:border-primary focus:outline-none"
           />
         </div>
         <select
           value={categoryFilter}
           onChange={(e) => setCategoryFilter(e.target.value)}
-          className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg text-white focus:border-green-500 focus:outline-none"
+          className="px-4 py-2 bg-card border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
         >
           <option value="all">All Categories</option>
           <option value="manual">Manuals</option>
@@ -138,7 +138,7 @@ export default function DocumentsPage() {
         <select
           value={readFilter}
           onChange={(e) => setReadFilter(e.target.value)}
-          className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg text-white focus:border-green-500 focus:outline-none"
+          className="px-4 py-2 bg-card border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
         >
           <option value="all">All Status</option>
           <option value="unread">Unread</option>
@@ -155,8 +155,8 @@ export default function DocumentsPage() {
           return (
             <div
               key={doc.id}
-              className={`bg-[#12121a] border rounded-xl p-4 transition-colors ${
-                doc.isRead ? "border-gray-800" : "border-green-500/30"
+              className={`bg-card border rounded-lg p-4 transition-colors ${
+                doc.isRead ? "border-border" : "border-primary/30"
               }`}
             >
               <div className="flex items-start justify-between mb-3">
@@ -174,17 +174,17 @@ export default function DocumentsPage() {
                     </span>
                   )}
                   {doc.isRead ? (
-                    <CheckCircle2 className="w-5 h-5 text-green-400" />
+                    <CheckCircle2 className="w-5 h-5 text-primary" />
                   ) : (
-                    <Circle className="w-5 h-5 text-gray-600" />
+                    <Circle className="w-5 h-5 text-muted-foreground" />
                   )}
                 </div>
               </div>
 
-              <h3 className="font-semibold text-white mb-1">{doc.title}</h3>
-              <p className="text-sm text-gray-400 mb-3 line-clamp-2">{doc.description}</p>
+              <h3 className="font-semibold text-foreground mb-1">{doc.title}</h3>
+              <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{doc.description}</p>
 
-              <div className="flex items-center justify-between text-xs text-gray-500 mb-4">
+              <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
                 <div className="flex items-center gap-2">
                   <TypeIcon className="w-4 h-4" />
                   <span className="capitalize">{doc.type}</span>
@@ -193,13 +193,13 @@ export default function DocumentsPage() {
               </div>
 
               <div className="flex items-center justify-between">
-                <span className="text-xs text-gray-500">Updated: {doc.lastUpdated}</span>
+                <span className="text-xs text-muted-foreground">Updated: {doc.lastUpdated}</span>
                 <div className="flex gap-2">
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => markDocumentRead(doc.id)}
-                    className="text-gray-400 hover:text-white"
+                    className="text-muted-foreground hover:text-foreground"
                   >
                     <Eye className="w-4 h-4 mr-1" />
                     View
@@ -207,7 +207,7 @@ export default function DocumentsPage() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="text-gray-400 hover:text-white"
+                    className="text-muted-foreground hover:text-foreground"
                   >
                     <Download className="w-4 h-4" />
                   </Button>
@@ -220,8 +220,8 @@ export default function DocumentsPage() {
 
       {filteredDocuments.length === 0 && (
         <div className="text-center py-12">
-          <FileText className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-          <p className="text-gray-400">No documents found</p>
+          <FileText className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+          <p className="text-muted-foreground">No documents found</p>
         </div>
       )}
     </div>

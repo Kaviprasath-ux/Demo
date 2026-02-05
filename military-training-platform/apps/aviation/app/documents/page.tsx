@@ -71,13 +71,13 @@ export default function DocumentsPage() {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "completed":
-        return <CheckCircle className="h-4 w-4 text-green-500" />;
+        return <CheckCircle className="h-4 w-4 text-primary" />;
       case "processing":
-        return <Clock className="h-4 w-4 text-emerald-500 animate-spin" />;
+        return <Clock className="h-4 w-4 text-primary animate-spin" />;
       case "review_required":
-        return <AlertCircle className="h-4 w-4 text-yellow-500" />;
+        return <AlertCircle className="h-4 w-4 text-primary" />;
       default:
-        return <Clock className="h-4 w-4 text-gray-500" />;
+        return <Clock className="h-4 w-4 text-muted-foreground" />;
     }
   };
 
@@ -151,19 +151,19 @@ export default function DocumentsPage() {
         </div>
         <div className="bg-card p-4 rounded-lg border">
           <p className="text-sm text-muted-foreground">Approved</p>
-          <p className="text-2xl font-bold text-green-500">
+          <p className="text-2xl font-bold text-primary">
             {mockIngestedDocuments.filter((d) => d.status === "completed" && d.approvedBy).length}
           </p>
         </div>
         <div className="bg-card p-4 rounded-lg border">
           <p className="text-sm text-muted-foreground">Pending Review</p>
-          <p className="text-2xl font-bold text-yellow-500">
+          <p className="text-2xl font-bold text-primary">
             {mockIngestedDocuments.filter((d) => d.status === "review_required").length}
           </p>
         </div>
         <div className="bg-card p-4 rounded-lg border">
           <p className="text-sm text-muted-foreground">Processing</p>
-          <p className="text-2xl font-bold text-emerald-500">
+          <p className="text-2xl font-bold text-primary">
             {mockIngestedDocuments.filter((d) => d.status === "processing").length}
           </p>
         </div>
@@ -179,7 +179,7 @@ export default function DocumentsPage() {
           >
             <div className="flex items-start gap-4">
               <div className={`p-3 rounded-lg ${getClassificationColor(doc.classification)}`}>
-                <FileText className="h-6 w-6 text-white" />
+                <FileText className="h-6 w-6 text-foreground" />
               </div>
 
               <div className="flex-1 min-w-0">
@@ -191,13 +191,13 @@ export default function DocumentsPage() {
 
                 <div className="flex flex-wrap gap-2 mt-2">
                   {/* Classification badge */}
-                  <span className={`px-2 py-0.5 rounded text-xs text-white ${getClassificationColor(doc.classification)}`}>
+                  <span className={`px-2 py-0.5 rounded text-xs text-foreground ${getClassificationColor(doc.classification)}`}>
                     {doc.classification.replace(/_/g, " ")}
                   </span>
 
                   {/* Platforms */}
                   {doc.helicopterPlatforms.slice(0, 2).map((platform) => (
-                    <span key={platform} className="px-2 py-0.5 rounded text-xs bg-emerald-500/20 text-emerald-400">
+                    <span key={platform} className="px-2 py-0.5 rounded text-xs bg-primary/20 text-primary">
                       {platform}
                     </span>
                   ))}
@@ -215,7 +215,7 @@ export default function DocumentsPage() {
                 <p>{doc.metadata.pageCount} pages</p>
                 <p>{new Date(doc.uploadedAt).toLocaleDateString()}</p>
                 {doc.approvedBy && (
-                  <p className="text-green-500 text-xs mt-1">
+                  <p className="text-primary text-xs mt-1">
                     Approved by {doc.approvedBy}
                   </p>
                 )}
@@ -256,7 +256,7 @@ export default function DocumentsPage() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Classification</p>
-                  <span className={`px-2 py-0.5 rounded text-xs text-white ${getClassificationColor(selectedDocument.classification)}`}>
+                  <span className={`px-2 py-0.5 rounded text-xs text-foreground ${getClassificationColor(selectedDocument.classification)}`}>
                     {selectedDocument.classification.replace(/_/g, " ")}
                   </span>
                 </div>
@@ -283,7 +283,7 @@ export default function DocumentsPage() {
                 <p className="text-sm text-muted-foreground mb-2">Applicable Platforms</p>
                 <div className="flex flex-wrap gap-2">
                   {selectedDocument.helicopterPlatforms.map((platform) => (
-                    <span key={platform} className="px-3 py-1 rounded-full text-sm bg-emerald-500/20 text-emerald-400">
+                    <span key={platform} className="px-3 py-1 rounded-full text-sm bg-primary/20 text-primary">
                       <Plane className="h-3 w-3 inline mr-1" />
                       {platform}
                     </span>
@@ -309,7 +309,7 @@ export default function DocumentsPage() {
                 <p className="text-sm text-muted-foreground mb-2">Course Associations</p>
                 <div className="flex flex-wrap gap-2">
                   {selectedDocument.courseAssociations.map((course) => (
-                    <span key={course} className="px-3 py-1 rounded-full text-sm bg-green-500/20 text-green-400">
+                    <span key={course} className="px-3 py-1 rounded-full text-sm bg-primary/20 text-primary">
                       <BookOpen className="h-3 w-3 inline mr-1" />
                       {course}
                     </span>
@@ -319,10 +319,10 @@ export default function DocumentsPage() {
 
               {/* Approval Status */}
               {selectedDocument.approvedBy && (
-                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
+                <div className="bg-primary/10 border border-primary/30 rounded-lg p-4">
                   <div className="flex items-center gap-2">
-                    <Shield className="h-5 w-5 text-green-500" />
-                    <span className="font-medium text-green-500">Approved</span>
+                    <Shield className="h-5 w-5 text-primary" />
+                    <span className="font-medium text-primary">Approved</span>
                   </div>
                   <p className="text-sm text-muted-foreground mt-1">
                     Approved by {selectedDocument.approvedBy} on{" "}
@@ -335,8 +335,8 @@ export default function DocumentsPage() {
               {selectedDocument.warnings && selectedDocument.warnings.length > 0 && (
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
                   <div className="flex items-center gap-2">
-                    <AlertCircle className="h-5 w-5 text-yellow-500" />
-                    <span className="font-medium text-yellow-500">Warnings</span>
+                    <AlertCircle className="h-5 w-5 text-primary" />
+                    <span className="font-medium text-primary">Warnings</span>
                   </div>
                   <ul className="text-sm text-muted-foreground mt-1 list-disc list-inside">
                     {selectedDocument.warnings.map((warning, i) => (

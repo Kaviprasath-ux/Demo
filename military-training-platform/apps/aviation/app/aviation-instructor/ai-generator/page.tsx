@@ -134,7 +134,7 @@ export default function AIGeneratorPage() {
             <button
               key={m.id}
               onClick={() => setMode(m.id as GeneratorMode)}
-              className={`p-4 rounded-xl border text-left transition-all ${
+              className={`p-4 rounded-lg border text-left transition-all ${
                 mode === m.id
                   ? "bg-primary/10 border-primary"
                   : "bg-card border-border hover:border-primary/50"
@@ -151,7 +151,7 @@ export default function AIGeneratorPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Input Form */}
-          <div className="bg-card border border-border rounded-xl p-6">
+          <div className="bg-card border border-border rounded-lg p-6">
             <h2 className="text-lg font-semibold mb-4">
               {mode === "fire-plan" && "Fire Plan Parameters"}
               {mode === "air-request" && "Air Support Request Details"}
@@ -354,7 +354,7 @@ export default function AIGeneratorPage() {
           </div>
 
           {/* Output Display */}
-          <div className="bg-card border border-border rounded-xl p-6">
+          <div className="bg-card border border-border rounded-lg p-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold">Generated Output</h2>
               {(firePlan || airRequest || safetyReview) && (
@@ -445,7 +445,7 @@ export default function AIGeneratorPage() {
                     <span className={`px-2 py-0.5 rounded text-xs ${
                       airRequest.priority === "urgent" ? "bg-red-500/20 text-red-500" :
                       airRequest.priority === "priority" ? "bg-amber-500/20 text-amber-500" :
-                      "bg-emerald-500/20 text-emerald-500"
+                      "bg-primary/20 text-primary"
                     }`}>
                       {airRequest.priority.toUpperCase()}
                     </span>
@@ -477,14 +477,14 @@ export default function AIGeneratorPage() {
             {mode === "safety-review" && safetyReview && (
               <div className="space-y-4 text-sm">
                 <div className={`p-3 rounded-lg ${
-                  safetyReview.overallSafe ? "bg-green-500/10" : "bg-red-500/10"
+                  safetyReview.overallSafe ? "bg-primary/10" : "bg-red-500/10"
                 }`}>
                   <div className="flex items-center justify-between">
-                    <h3 className={`font-semibold ${safetyReview.overallSafe ? "text-green-500" : "text-red-500"}`}>
+                    <h3 className={`font-semibold ${safetyReview.overallSafe ? "text-primary" : "text-red-500"}`}>
                       {safetyReview.overallSafe ? "Plan is Safe" : "Safety Concerns Detected"}
                     </h3>
                     <span className={`px-2 py-0.5 rounded text-xs ${
-                      safetyReview.riskLevel === "low" ? "bg-green-500/20 text-green-500" :
+                      safetyReview.riskLevel === "low" ? "bg-primary/20 text-primary" :
                       safetyReview.riskLevel === "medium" ? "bg-amber-500/20 text-amber-500" :
                       "bg-red-500/20 text-red-500"
                     }`}>
@@ -502,7 +502,7 @@ export default function AIGeneratorPage() {
                     {safetyReview.checks.map((check, i) => (
                       <div key={i} className="flex items-start gap-2 text-xs">
                         {check.status === "pass" ? (
-                          <Check className="w-4 h-4 text-green-500" />
+                          <Check className="w-4 h-4 text-primary" />
                         ) : check.status === "warning" ? (
                           <Shield className="w-4 h-4 text-amber-500" />
                         ) : (

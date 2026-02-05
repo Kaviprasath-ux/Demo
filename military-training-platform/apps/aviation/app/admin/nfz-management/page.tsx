@@ -24,16 +24,16 @@ import { useROENFZStore, type NoFlyZone } from "@/lib/stores/roe-nfz-store";
 
 const typeConfig = {
   permanent: { label: "Permanent", color: "text-red-500", bg: "bg-red-500/20" },
-  temporary: { label: "Temporary", color: "text-yellow-500", bg: "bg-yellow-500/20" },
-  conditional: { label: "Conditional", color: "text-emerald-500", bg: "bg-emerald-500/20" },
+  temporary: { label: "Temporary", color: "text-primary", bg: "bg-primary/20" },
+  conditional: { label: "Conditional", color: "text-primary", bg: "bg-primary/20" },
 };
 
 const reasonConfig = {
   military: { icon: Shield, label: "Military", color: "text-red-500" },
-  civilian: { icon: Building, label: "Civilian", color: "text-emerald-500" },
-  diplomatic: { icon: Building, label: "Diplomatic", color: "text-emerald-500" },
-  environmental: { icon: Trees, label: "Environmental", color: "text-green-500" },
-  training: { icon: GraduationCap, label: "Training", color: "text-yellow-500" },
+  civilian: { icon: Building, label: "Civilian", color: "text-primary" },
+  diplomatic: { icon: Building, label: "Diplomatic", color: "text-primary" },
+  environmental: { icon: Trees, label: "Environmental", color: "text-primary" },
+  training: { icon: GraduationCap, label: "Training", color: "text-primary" },
 };
 
 export default function NFZManagementPage() {
@@ -92,7 +92,7 @@ export default function NFZManagementPage() {
             label="Active"
             value={noFlyZones.filter((z) => z.isActive).length}
             icon={CheckCircle}
-            color="text-green-500"
+            color="text-primary"
           />
           <StatCard
             label="Permanent"
@@ -104,12 +104,12 @@ export default function NFZManagementPage() {
             label="Temporary"
             value={noFlyZones.filter((z) => z.type === "temporary").length}
             icon={Clock}
-            color="text-yellow-500"
+            color="text-primary"
           />
         </div>
 
         {/* Map Preview */}
-        <div className="bg-card border border-border rounded-xl p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <h3 className="font-semibold mb-3">NFZ Coverage Map</h3>
           <div className="h-64 bg-muted rounded-lg flex items-center justify-center relative overflow-hidden">
             {/* Simple grid background */}
@@ -137,7 +137,7 @@ export default function NFZManagementPage() {
                 className={`absolute w-16 h-16 rounded-full flex items-center justify-center ${
                   zone.type === "permanent" ? "bg-red-500/30 border-2 border-red-500" :
                   zone.type === "temporary" ? "bg-yellow-500/30 border-2 border-yellow-500" :
-                  "bg-emerald-500/30 border-2 border-emerald-500"
+                  "bg-primary/30 border-2 border-primary"
                 }`}
                 style={{
                   left: `${20 + (i * 25)}%`,
@@ -146,8 +146,8 @@ export default function NFZManagementPage() {
               >
                 <Ban className={`w-6 h-6 ${
                   zone.type === "permanent" ? "text-red-500" :
-                  zone.type === "temporary" ? "text-yellow-500" :
-                  "text-emerald-500"
+                  zone.type === "temporary" ? "text-primary" :
+                  "text-primary"
                 }`} />
               </div>
             ))}
@@ -265,7 +265,7 @@ function NFZCard({
   const ReasonIcon = reasonConf.icon;
 
   return (
-    <div className="bg-card border border-border rounded-xl overflow-hidden">
+    <div className="bg-card border border-border rounded-lg overflow-hidden">
       <button
         onClick={onToggle}
         className="w-full p-4 flex items-center justify-between hover:bg-muted/50 transition-colors"
@@ -278,7 +278,7 @@ function NFZCard({
             <div className="flex items-center gap-2">
               <h3 className="font-semibold">{zone.name}</h3>
               {zone.isActive ? (
-                <CheckCircle className="w-4 h-4 text-green-500" />
+                <CheckCircle className="w-4 h-4 text-primary" />
               ) : (
                 <XCircle className="w-4 h-4 text-muted-foreground" />
               )}
@@ -369,7 +369,7 @@ function NFZCard({
               <ul className="space-y-1">
                 {zone.exceptions.map((exception, i) => (
                   <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 shrink-0" />
+                    <CheckCircle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
                     {exception}
                   </li>
                 ))}
@@ -464,7 +464,7 @@ function AddNFZModal({
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div className="bg-card border border-border rounded-xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6">
+      <div className="bg-card border border-border rounded-lg max-w-lg w-full max-h-[90vh] overflow-y-auto p-6">
         <h2 className="text-xl font-bold mb-4">Add No-Fly Zone</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

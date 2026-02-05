@@ -70,22 +70,22 @@ export default function TrainingPage() {
 
   const getCategoryColor = (category: string) => {
     const colors: Record<string, string> = {
-      artillery: "bg-emerald-500/20 text-emerald-400",
-      aviation: "bg-emerald-500/20 text-emerald-400",
-      "joint-ops": "bg-emerald-500/20 text-emerald-400",
+      artillery: "bg-primary/20 text-primary",
+      aviation: "bg-primary/20 text-primary",
+      "joint-ops": "bg-primary/20 text-primary",
       safety: "bg-red-500/20 text-red-400",
-      communication: "bg-green-500/20 text-green-400",
+      communication: "bg-primary/20 text-primary",
     };
-    return colors[category] || "bg-gray-500/20 text-gray-400";
+    return colors[category] || "bg-gray-500/20 text-muted-foreground";
   };
 
   const getStatusColor = (status: string) => {
     const colors: Record<string, string> = {
-      "not-started": "bg-gray-500/20 text-gray-400",
-      "in-progress": "bg-yellow-500/20 text-yellow-400",
-      completed: "bg-green-500/20 text-green-400",
+      "not-started": "bg-gray-500/20 text-muted-foreground",
+      "in-progress": "bg-primary/20 text-primary",
+      completed: "bg-primary/20 text-primary",
     };
-    return colors[status] || "bg-gray-500/20 text-gray-400";
+    return colors[status] || "bg-gray-500/20 text-muted-foreground";
   };
 
   const getTypeLabel = (type: string) => {
@@ -102,32 +102,32 @@ export default function TrainingPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-white flex items-center gap-3">
-          <BookOpen className="w-8 h-8 text-green-500" />
+        <h1 className="text-2xl font-bold text-foreground flex items-center gap-3">
+          <BookOpen className="w-8 h-8 text-primary" />
           Training Modules
         </h1>
-        <p className="text-gray-400 mt-1">
+        <p className="text-muted-foreground mt-1">
           Complete training modules to progress through your JFSP certification
         </p>
       </div>
 
       {/* Progress Summary */}
       <div className="grid grid-cols-3 gap-4">
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
-          <p className="text-gray-400 text-sm">Not Started</p>
-          <p className="text-2xl font-bold text-white">
+        <div className="bg-card border border-border rounded-lg p-4">
+          <p className="text-muted-foreground text-sm">Not Started</p>
+          <p className="text-2xl font-bold text-foreground">
             {modules.filter((m) => m.status === "not-started").length}
           </p>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
-          <p className="text-gray-400 text-sm">In Progress</p>
-          <p className="text-2xl font-bold text-yellow-400">
+        <div className="bg-card border border-border rounded-lg p-4">
+          <p className="text-muted-foreground text-sm">In Progress</p>
+          <p className="text-2xl font-bold text-primary">
             {modules.filter((m) => m.status === "in-progress").length}
           </p>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
-          <p className="text-gray-400 text-sm">Completed</p>
-          <p className="text-2xl font-bold text-green-400">
+        <div className="bg-card border border-border rounded-lg p-4">
+          <p className="text-muted-foreground text-sm">Completed</p>
+          <p className="text-2xl font-bold text-primary">
             {modules.filter((m) => m.status === "completed").length}
           </p>
         </div>
@@ -136,19 +136,19 @@ export default function TrainingPage() {
       {/* Filters */}
       <div className="flex flex-wrap gap-4">
         <div className="relative flex-1 min-w-[200px]">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
             placeholder="Search modules..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
+            className="w-full pl-10 pr-4 py-2 bg-card border border-border rounded-lg text-foreground placeholder-gray-500 focus:border-primary focus:outline-none"
           />
         </div>
         <select
           value={categoryFilter}
           onChange={(e) => setCategoryFilter(e.target.value)}
-          className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg text-white focus:border-green-500 focus:outline-none"
+          className="px-4 py-2 bg-card border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
         >
           <option value="all">All Categories</option>
           <option value="artillery">Artillery</option>
@@ -160,7 +160,7 @@ export default function TrainingPage() {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg text-white focus:border-green-500 focus:outline-none"
+          className="px-4 py-2 bg-card border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
         >
           <option value="all">All Status</option>
           <option value="not-started">Not Started</option>
@@ -180,13 +180,13 @@ export default function TrainingPage() {
           return (
             <div
               key={module.id}
-              className={`bg-[#12121a] border rounded-xl overflow-hidden ${
-                !canStart ? "border-gray-800 opacity-60" : "border-gray-800"
+              className={`bg-card border rounded-lg overflow-hidden ${
+                !canStart ? "border-border opacity-60" : "border-border"
               }`}
             >
               {/* Module Header */}
               <div
-                className="p-4 cursor-pointer hover:bg-[#0a0a0f]/50"
+                className="p-4 cursor-pointer hover:bg-muted/50/50"
                 onClick={() => canStart && toggleExpand(module.id)}
               >
                 <div className="flex items-start justify-between">
@@ -200,10 +200,10 @@ export default function TrainingPage() {
                     </div>
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <h3 className="font-semibold text-white">{module.name}</h3>
-                        {!canStart && <Lock className="w-4 h-4 text-gray-500" />}
+                        <h3 className="font-semibold text-foreground">{module.name}</h3>
+                        {!canStart && <Lock className="w-4 h-4 text-muted-foreground" />}
                       </div>
-                      <p className="text-sm text-gray-400 line-clamp-1">{module.description}</p>
+                      <p className="text-sm text-muted-foreground line-clamp-1">{module.description}</p>
                       <div className="flex items-center gap-4 mt-2">
                         <span
                           className={`text-xs px-2 py-0.5 rounded ${getCategoryColor(
@@ -212,11 +212,11 @@ export default function TrainingPage() {
                         >
                           {module.category.replace("-", " ")}
                         </span>
-                        <span className="text-xs text-gray-500 flex items-center gap-1">
+                        <span className="text-xs text-muted-foreground flex items-center gap-1">
                           <Clock className="w-3 h-3" />
                           {module.duration} min
                         </span>
-                        <span className="text-xs text-gray-500">{getTypeLabel(module.type)}</span>
+                        <span className="text-xs text-muted-foreground">{getTypeLabel(module.type)}</span>
                       </div>
                     </div>
                   </div>
@@ -229,12 +229,12 @@ export default function TrainingPage() {
                       </span>
                       {module.status !== "not-started" && (
                         <div className="mt-2">
-                          <div className="text-xs text-gray-500 mb-1">
+                          <div className="text-xs text-muted-foreground mb-1">
                             {completedTopics}/{module.topics.length} topics
                           </div>
-                          <div className="w-24 h-1.5 bg-gray-800 rounded-full">
+                          <div className="w-24 h-1.5 bg-muted rounded-full">
                             <div
-                              className="h-1.5 bg-green-500 rounded-full"
+                              className="h-1.5 bg-primary rounded-full"
                               style={{ width: `${module.progress}%` }}
                             />
                           </div>
@@ -244,9 +244,9 @@ export default function TrainingPage() {
 
                     {canStart && (
                       isExpanded ? (
-                        <ChevronUp className="w-5 h-5 text-gray-400" />
+                        <ChevronUp className="w-5 h-5 text-muted-foreground" />
                       ) : (
-                        <ChevronDown className="w-5 h-5 text-gray-400" />
+                        <ChevronDown className="w-5 h-5 text-muted-foreground" />
                       )
                     )}
                   </div>
@@ -255,20 +255,20 @@ export default function TrainingPage() {
 
               {/* Expanded Content */}
               {isExpanded && canStart && (
-                <div className="border-t border-gray-800 p-4">
+                <div className="border-t border-border p-4">
                   {/* Prerequisites */}
                   {module.prerequisiteIds.length > 0 && (
                     <div className="mb-4">
-                      <p className="text-xs text-gray-500 mb-2">Prerequisites:</p>
+                      <p className="text-xs text-muted-foreground mb-2">Prerequisites:</p>
                       <div className="flex flex-wrap gap-2">
                         {module.prerequisiteIds.map((prereqId) => {
                           const prereq = modules.find((m) => m.id === prereqId);
                           return (
                             <span
                               key={prereqId}
-                              className="text-xs px-2 py-1 bg-gray-800 text-gray-400 rounded flex items-center gap-1"
+                              className="text-xs px-2 py-1 bg-muted text-muted-foreground rounded flex items-center gap-1"
                             >
-                              <CheckCircle2 className="w-3 h-3 text-green-400" />
+                              <CheckCircle2 className="w-3 h-3 text-primary" />
                               {prereq?.name}
                             </span>
                           );
@@ -284,8 +284,8 @@ export default function TrainingPage() {
                         key={topic.id}
                         className={`flex items-center justify-between p-3 rounded-lg cursor-pointer transition-colors ${
                           topic.completed
-                            ? "bg-green-500/10 border border-green-500/20"
-                            : "bg-[#0a0a0f] hover:bg-gray-900"
+                            ? "bg-primary/10 border border-primary/20"
+                            : "bg-muted/50 hover:bg-background"
                         }`}
                         onClick={() => {
                           if (!topic.completed) {
@@ -295,24 +295,24 @@ export default function TrainingPage() {
                       >
                         <div className="flex items-center gap-3">
                           {topic.completed ? (
-                            <CheckCircle2 className="w-5 h-5 text-green-500" />
+                            <CheckCircle2 className="w-5 h-5 text-primary" />
                           ) : (
-                            <Circle className="w-5 h-5 text-gray-600" />
+                            <Circle className="w-5 h-5 text-muted-foreground" />
                           )}
                           <span
                             className={
-                              topic.completed ? "text-gray-400 line-through" : "text-white"
+                              topic.completed ? "text-muted-foreground line-through" : "text-foreground"
                             }
                           >
                             {topic.name}
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <span className="text-xs text-gray-500">{topic.duration} min</span>
+                          <span className="text-xs text-muted-foreground">{topic.duration} min</span>
                           {!topic.completed && (
                             <Button
                               size="sm"
-                              className="bg-green-600 hover:bg-green-700"
+                              className="bg-primary hover:bg-primary/90"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 completeModuleTopic(module.id, topic.id);
@@ -330,7 +330,7 @@ export default function TrainingPage() {
                   {/* Assessment Info */}
                   {module.assessmentRequired && (
                     <div className="mt-4 p-3 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
-                      <p className="text-sm text-yellow-400">
+                      <p className="text-sm text-primary">
                         Assessment required after completing this module
                       </p>
                     </div>
@@ -341,7 +341,7 @@ export default function TrainingPage() {
                     <div className="mt-4 flex justify-end">
                       <Button
                         onClick={() => startModule(module.id)}
-                        className="bg-green-600 hover:bg-green-700"
+                        className="bg-primary hover:bg-primary/90"
                       >
                         <Play className="w-4 h-4 mr-2" />
                         Start Module
@@ -353,8 +353,8 @@ export default function TrainingPage() {
 
               {/* Locked Message */}
               {!canStart && (
-                <div className="border-t border-gray-800 p-4 bg-[#0a0a0f]">
-                  <p className="text-sm text-gray-500 flex items-center gap-2">
+                <div className="border-t border-border p-4 bg-muted/50">
+                  <p className="text-sm text-muted-foreground flex items-center gap-2">
                     <Lock className="w-4 h-4" />
                     Complete prerequisites to unlock this module
                   </p>
@@ -367,8 +367,8 @@ export default function TrainingPage() {
 
       {filteredModules.length === 0 && (
         <div className="text-center py-12">
-          <BookOpen className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-          <p className="text-gray-400">No modules found</p>
+          <BookOpen className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+          <p className="text-muted-foreground">No modules found</p>
         </div>
       )}
     </div>

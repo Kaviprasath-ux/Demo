@@ -82,7 +82,7 @@ export default function CadetKnowledgeSearchPage() {
       {/* Header */}
       <div className="text-center space-y-2">
         <div className="flex items-center justify-center gap-3">
-          <div className="p-3 rounded-xl bg-primary/20">
+          <div className="p-3 rounded-lg bg-primary/20">
             <Sparkles className="w-8 h-8 text-primary" />
           </div>
         </div>
@@ -93,7 +93,7 @@ export default function CadetKnowledgeSearchPage() {
       </div>
 
       {/* Search Box */}
-      <div className="bg-card border border-border rounded-xl p-4 space-y-4">
+      <div className="bg-card border border-border rounded-lg p-4 space-y-4">
         {/* Category Filters */}
         <div className="flex flex-wrap gap-2">
           {categoryFilters.map((cat) => (
@@ -162,7 +162,7 @@ export default function CadetKnowledgeSearchPage() {
         {searchHistory.map((item, idx) => (
           <div
             key={idx}
-            className="bg-card border border-border rounded-xl overflow-hidden"
+            className="bg-card border border-border rounded-lg overflow-hidden"
           >
             {/* Query */}
             <div className="p-4 border-b border-border bg-muted/50">
@@ -180,9 +180,9 @@ export default function CadetKnowledgeSearchPage() {
                   <span
                     className={`px-2 py-0.5 rounded text-xs font-medium ${
                       item.response.confidence === "high"
-                        ? "bg-green-500/20 text-green-500"
+                        ? "bg-primary/20 text-primary"
                         : item.response.confidence === "medium"
-                        ? "bg-yellow-500/20 text-yellow-500"
+                        ? "bg-primary/20 text-primary"
                         : "bg-red-500/20 text-red-500"
                     }`}
                   >

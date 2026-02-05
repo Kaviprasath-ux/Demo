@@ -60,22 +60,22 @@ export default function FOOTraineesPage() {
   const getStatusColor = (status: FOOTrainee["status"]) => {
     switch (status) {
       case "active":
-        return "bg-green-500/20 text-green-400";
+        return "bg-primary/20 text-primary";
       case "on-leave":
-        return "bg-yellow-500/20 text-yellow-400";
+        return "bg-primary/20 text-primary";
       case "graduated":
-        return "bg-emerald-500/20 text-emerald-400";
+        return "bg-primary/20 text-primary";
       case "failed":
         return "bg-red-500/20 text-red-400";
       case "medical":
-        return "bg-emerald-500/20 text-emerald-400";
+        return "bg-primary/20 text-primary";
       default:
-        return "bg-gray-500/20 text-gray-400";
+        return "bg-gray-500/20 text-muted-foreground";
     }
   };
 
   const getProgressColor = (progress: number) => {
-    if (progress >= 80) return "bg-green-500";
+    if (progress >= 80) return "bg-primary";
     if (progress >= 50) return "bg-yellow-500";
     return "bg-red-500";
   };
@@ -143,17 +143,17 @@ export default function FOOTraineesPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-3">
-            <Users className="w-8 h-8 text-emerald-500" />
+          <h1 className="text-2xl font-bold text-foreground flex items-center gap-3">
+            <Users className="w-8 h-8 text-primary" />
             FOO Trainee Management
           </h1>
-          <p className="text-gray-400 mt-1">
+          <p className="text-muted-foreground mt-1">
             Manage Forward Observation Officer trainees and their progress
           </p>
         </div>
         <Button
           onClick={() => setShowAddDialog(true)}
-          className="bg-emerald-600 hover:bg-emerald-700"
+          className="bg-primary hover:bg-primary/90"
         >
           <Plus className="w-4 h-4 mr-2" />
           Add Trainee
@@ -162,47 +162,47 @@ export default function FOOTraineesPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-4 gap-4">
-        <div className="bg-[#12121a] border border-gray-800 rounded-lg p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-500/20 rounded-lg">
-              <Users className="w-5 h-5 text-emerald-500" />
+            <div className="p-2 bg-primary/20 rounded-lg">
+              <Users className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-white">{stats.total}</p>
-              <p className="text-sm text-gray-400">Total Trainees</p>
+              <p className="text-2xl font-bold text-foreground">{stats.total}</p>
+              <p className="text-sm text-muted-foreground">Total Trainees</p>
             </div>
           </div>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-lg p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-green-500/20 rounded-lg">
-              <UserCheck className="w-5 h-5 text-green-500" />
+            <div className="p-2 bg-primary/20 rounded-lg">
+              <UserCheck className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-white">{stats.active}</p>
-              <p className="text-sm text-gray-400">Active</p>
+              <p className="text-2xl font-bold text-foreground">{stats.active}</p>
+              <p className="text-sm text-muted-foreground">Active</p>
             </div>
           </div>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-lg p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-yellow-500/20 rounded-lg">
-              <Clock className="w-5 h-5 text-yellow-500" />
+            <div className="p-2 bg-primary/20 rounded-lg">
+              <Clock className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-white">{stats.onLeave}</p>
-              <p className="text-sm text-gray-400">On Leave</p>
+              <p className="text-2xl font-bold text-foreground">{stats.onLeave}</p>
+              <p className="text-sm text-muted-foreground">On Leave</p>
             </div>
           </div>
         </div>
-        <div className="bg-[#12121a] border border-gray-800 rounded-lg p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-500/20 rounded-lg">
-              <GraduationCap className="w-5 h-5 text-emerald-500" />
+            <div className="p-2 bg-primary/20 rounded-lg">
+              <GraduationCap className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-white">{stats.graduated}</p>
-              <p className="text-sm text-gray-400">Graduated</p>
+              <p className="text-2xl font-bold text-foreground">{stats.graduated}</p>
+              <p className="text-sm text-muted-foreground">Graduated</p>
             </div>
           </div>
         </div>
@@ -211,21 +211,21 @@ export default function FOOTraineesPage() {
       {/* Filters */}
       <div className="flex items-center gap-4">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
             placeholder="Search by name, service number, or unit..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
+            className="w-full pl-10 pr-4 py-2 bg-card border border-border rounded-lg focus:outline-none focus:border-primary text-foreground"
           />
         </div>
         <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-gray-500" />
+          <Filter className="w-4 h-4 text-muted-foreground" />
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
+            className="px-4 py-2 bg-card border border-border rounded-lg focus:outline-none focus:border-primary text-foreground"
           >
             <option value="all">All Status</option>
             <option value="active">Active</option>
@@ -237,7 +237,7 @@ export default function FOOTraineesPage() {
           <select
             value={batchFilter}
             onChange={(e) => setBatchFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
+            className="px-4 py-2 bg-card border border-border rounded-lg focus:outline-none focus:border-primary text-foreground"
           >
             <option value="all">All Batches</option>
             {batches.map((batch) => (
@@ -254,19 +254,19 @@ export default function FOOTraineesPage() {
         {filteredTrainees.map((trainee) => (
           <div
             key={trainee.id}
-            className="bg-[#12121a] border border-gray-800 rounded-lg p-4 hover:border-gray-700 transition-colors cursor-pointer"
+            className="bg-card border border-border rounded-lg p-4 hover:border-border transition-colors cursor-pointer"
             onClick={() => setSelectedTrainee(trainee)}
           >
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center text-lg font-bold text-white">
+                <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center text-lg font-bold text-foreground">
                   {trainee.name.charAt(0)}
                 </div>
                 <div>
-                  <h3 className="font-semibold text-white">
+                  <h3 className="font-semibold text-foreground">
                     {trainee.rank} {trainee.name}
                   </h3>
-                  <p className="text-sm text-gray-400">{trainee.serviceNumber}</p>
+                  <p className="text-sm text-muted-foreground">{trainee.serviceNumber}</p>
                 </div>
               </div>
               <span className={`px-2 py-1 rounded text-xs ${getStatusColor(trainee.status)}`}>
@@ -276,25 +276,25 @@ export default function FOOTraineesPage() {
 
             <div className="space-y-2 mb-4">
               <div className="flex justify-between text-sm">
-                <span className="text-gray-400">Unit</span>
-                <span className="text-white">{trainee.unit}</span>
+                <span className="text-muted-foreground">Unit</span>
+                <span className="text-foreground">{trainee.unit}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-400">Batch</span>
-                <span className="text-white">{trainee.batch}</span>
+                <span className="text-muted-foreground">Batch</span>
+                <span className="text-foreground">{trainee.batch}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-400">Phase</span>
-                <span className="text-emerald-400 truncate max-w-[150px]">{trainee.currentPhase}</span>
+                <span className="text-muted-foreground">Phase</span>
+                <span className="text-primary truncate max-w-[150px]">{trainee.currentPhase}</span>
               </div>
             </div>
 
             <div className="space-y-2">
               <div className="flex justify-between text-sm mb-1">
-                <span className="text-gray-400">Progress</span>
-                <span className="text-white">{trainee.progress}%</span>
+                <span className="text-muted-foreground">Progress</span>
+                <span className="text-foreground">{trainee.progress}%</span>
               </div>
-              <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+              <div className="h-2 bg-muted rounded-full overflow-hidden">
                 <div
                   className={`h-full ${getProgressColor(trainee.progress)} transition-all`}
                   style={{ width: `${trainee.progress}%` }}
@@ -302,25 +302,25 @@ export default function FOOTraineesPage() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-800">
+            <div className="flex items-center justify-between mt-4 pt-4 border-t border-border">
               <div className="flex items-center gap-4 text-sm">
-                <span className="flex items-center gap-1 text-gray-400">
+                <span className="flex items-center gap-1 text-muted-foreground">
                   <Target className="w-4 h-4" />
                   {trainee.accuracyRate}%
                 </span>
-                <span className="flex items-center gap-1 text-gray-400">
+                <span className="flex items-center gap-1 text-muted-foreground">
                   <BarChart3 className="w-4 h-4" />
                   {trainee.averageScore}%
                 </span>
               </div>
-              <ChevronRight className="w-5 h-5 text-gray-500" />
+              <ChevronRight className="w-5 h-5 text-muted-foreground" />
             </div>
           </div>
         ))}
       </div>
 
       {filteredTrainees.length === 0 && (
-        <div className="text-center py-12 text-gray-500">
+        <div className="text-center py-12 text-muted-foreground">
           <Users className="w-12 h-12 mx-auto mb-4 opacity-50" />
           <p>No trainees found matching your criteria</p>
         </div>
@@ -329,18 +329,18 @@ export default function FOOTraineesPage() {
       {/* View Trainee Detail Modal */}
       {selectedTrainee && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-800">
+          <div className="bg-card border border-border rounded-lg w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-border">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center text-2xl font-bold text-white">
+                  <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center text-2xl font-bold text-foreground">
                     {selectedTrainee.name.charAt(0)}
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold text-white">
+                    <h2 className="text-xl font-bold text-foreground">
                       {selectedTrainee.rank} {selectedTrainee.name}
                     </h2>
-                    <p className="text-gray-400">{selectedTrainee.serviceNumber}</p>
+                    <p className="text-muted-foreground">{selectedTrainee.serviceNumber}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
@@ -351,7 +351,7 @@ export default function FOOTraineesPage() {
                     variant="ghost"
                     size="sm"
                     onClick={() => setSelectedTrainee(null)}
-                    className="text-gray-400"
+                    className="text-muted-foreground"
                   >
                     <X className="w-5 h-5" />
                   </Button>
@@ -363,67 +363,67 @@ export default function FOOTraineesPage() {
               {/* Basic Info */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
-                  <label className="text-sm text-gray-400">Unit</label>
-                  <p className="font-medium text-white">{selectedTrainee.unit}</p>
+                  <label className="text-sm text-muted-foreground">Unit</label>
+                  <p className="font-medium text-foreground">{selectedTrainee.unit}</p>
                 </div>
                 <div>
-                  <label className="text-sm text-gray-400">Regiment</label>
-                  <p className="font-medium text-white">{selectedTrainee.regiment}</p>
+                  <label className="text-sm text-muted-foreground">Regiment</label>
+                  <p className="font-medium text-foreground">{selectedTrainee.regiment}</p>
                 </div>
                 <div>
-                  <label className="text-sm text-gray-400">Batch</label>
-                  <p className="font-medium text-white">{selectedTrainee.batch}</p>
+                  <label className="text-sm text-muted-foreground">Batch</label>
+                  <p className="font-medium text-foreground">{selectedTrainee.batch}</p>
                 </div>
                 <div>
-                  <label className="text-sm text-gray-400">Enrollment Date</label>
-                  <p className="font-medium text-white">{selectedTrainee.enrollmentDate}</p>
+                  <label className="text-sm text-muted-foreground">Enrollment Date</label>
+                  <p className="font-medium text-foreground">{selectedTrainee.enrollmentDate}</p>
                 </div>
               </div>
 
               {/* Current Phase */}
               <div>
-                <label className="text-sm text-gray-400">Current Phase</label>
-                <p className="font-medium text-emerald-400">{selectedTrainee.currentPhase}</p>
+                <label className="text-sm text-muted-foreground">Current Phase</label>
+                <p className="font-medium text-primary">{selectedTrainee.currentPhase}</p>
               </div>
 
               {/* Performance Metrics */}
               <div>
-                <h3 className="font-semibold text-white mb-3">Performance Metrics</h3>
+                <h3 className="font-semibold text-foreground mb-3">Performance Metrics</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="bg-[#0a0a0f] rounded-lg p-4 text-center">
-                    <p className="text-3xl font-bold text-emerald-400">{selectedTrainee.progress}%</p>
-                    <p className="text-sm text-gray-400">Progress</p>
+                  <div className="bg-muted/50 rounded-lg p-4 text-center">
+                    <p className="text-3xl font-bold text-primary">{selectedTrainee.progress}%</p>
+                    <p className="text-sm text-muted-foreground">Progress</p>
                   </div>
-                  <div className="bg-[#0a0a0f] rounded-lg p-4 text-center">
-                    <p className="text-3xl font-bold text-green-400">{selectedTrainee.averageScore}%</p>
-                    <p className="text-sm text-gray-400">Avg Score</p>
+                  <div className="bg-muted/50 rounded-lg p-4 text-center">
+                    <p className="text-3xl font-bold text-primary">{selectedTrainee.averageScore}%</p>
+                    <p className="text-sm text-muted-foreground">Avg Score</p>
                   </div>
-                  <div className="bg-[#0a0a0f] rounded-lg p-4 text-center">
-                    <p className="text-3xl font-bold text-emerald-400">{selectedTrainee.accuracyRate}%</p>
-                    <p className="text-sm text-gray-400">Fire Accuracy</p>
+                  <div className="bg-muted/50 rounded-lg p-4 text-center">
+                    <p className="text-3xl font-bold text-primary">{selectedTrainee.accuracyRate}%</p>
+                    <p className="text-sm text-muted-foreground">Fire Accuracy</p>
                   </div>
-                  <div className="bg-[#0a0a0f] rounded-lg p-4 text-center">
-                    <p className="text-3xl font-bold text-emerald-400">{selectedTrainee.fireCallsCompleted}</p>
-                    <p className="text-sm text-gray-400">Fire Calls</p>
+                  <div className="bg-muted/50 rounded-lg p-4 text-center">
+                    <p className="text-3xl font-bold text-primary">{selectedTrainee.fireCallsCompleted}</p>
+                    <p className="text-sm text-muted-foreground">Fire Calls</p>
                   </div>
                 </div>
               </div>
 
               {/* Training Hours */}
               <div>
-                <h3 className="font-semibold text-white mb-3">Training Hours</h3>
+                <h3 className="font-semibold text-foreground mb-3">Training Hours</h3>
                 <div className="grid grid-cols-3 gap-4">
-                  <div className="bg-[#0a0a0f] rounded-lg p-4">
-                    <p className="text-2xl font-bold text-white">{selectedTrainee.totalHours}h</p>
-                    <p className="text-sm text-gray-400">Total Hours</p>
+                  <div className="bg-muted/50 rounded-lg p-4">
+                    <p className="text-2xl font-bold text-foreground">{selectedTrainee.totalHours}h</p>
+                    <p className="text-sm text-muted-foreground">Total Hours</p>
                   </div>
-                  <div className="bg-[#0a0a0f] rounded-lg p-4">
-                    <p className="text-2xl font-bold text-white">{selectedTrainee.simulatorHours}h</p>
-                    <p className="text-sm text-gray-400">Simulator</p>
+                  <div className="bg-muted/50 rounded-lg p-4">
+                    <p className="text-2xl font-bold text-foreground">{selectedTrainee.simulatorHours}h</p>
+                    <p className="text-sm text-muted-foreground">Simulator</p>
                   </div>
-                  <div className="bg-[#0a0a0f] rounded-lg p-4">
-                    <p className="text-2xl font-bold text-white">{selectedTrainee.fieldHours}h</p>
-                    <p className="text-sm text-gray-400">Field</p>
+                  <div className="bg-muted/50 rounded-lg p-4">
+                    <p className="text-2xl font-bold text-foreground">{selectedTrainee.fieldHours}h</p>
+                    <p className="text-sm text-muted-foreground">Field</p>
                   </div>
                 </div>
               </div>
@@ -431,12 +431,12 @@ export default function FOOTraineesPage() {
               {/* Completed Modules */}
               {selectedTrainee.completedModules.length > 0 && (
                 <div>
-                  <h3 className="font-semibold text-white mb-3">Completed Modules</h3>
+                  <h3 className="font-semibold text-foreground mb-3">Completed Modules</h3>
                   <div className="flex flex-wrap gap-2">
                     {selectedTrainee.completedModules.map((module) => (
                       <span
                         key={module}
-                        className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm"
+                        className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm"
                       >
                         {module}
                       </span>
@@ -448,12 +448,12 @@ export default function FOOTraineesPage() {
               {/* Specializations */}
               {selectedTrainee.specializations.length > 0 && (
                 <div>
-                  <h3 className="font-semibold text-white mb-3">Specializations</h3>
+                  <h3 className="font-semibold text-foreground mb-3">Specializations</h3>
                   <div className="flex flex-wrap gap-2">
                     {selectedTrainee.specializations.map((spec) => (
                       <span
                         key={spec}
-                        className="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm"
+                        className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm"
                       >
                         {spec}
                       </span>
@@ -464,7 +464,7 @@ export default function FOOTraineesPage() {
 
               {/* Status Actions */}
               <div>
-                <h3 className="font-semibold text-white mb-3">Update Status</h3>
+                <h3 className="font-semibold text-foreground mb-3">Update Status</h3>
                 <div className="flex gap-2 flex-wrap">
                   {(["active", "on-leave", "graduated", "failed", "medical"] as const).map(
                     (status) => (
@@ -478,8 +478,8 @@ export default function FOOTraineesPage() {
                         }}
                         className={
                           selectedTrainee.status === status
-                            ? "bg-emerald-600"
-                            : "border-gray-700"
+                            ? "bg-primary"
+                            : "border-border"
                         }
                       >
                         {status.charAt(0).toUpperCase() + status.slice(1)}
@@ -490,7 +490,7 @@ export default function FOOTraineesPage() {
               </div>
             </div>
 
-            <div className="p-6 border-t border-gray-800 flex justify-between">
+            <div className="p-6 border-t border-border flex justify-between">
               <Button
                 variant="outline"
                 className="border-red-500/50 text-red-400 hover:bg-red-500/10"
@@ -500,11 +500,11 @@ export default function FOOTraineesPage() {
                 Delete
               </Button>
               <div className="flex gap-3">
-                <Button variant="outline" onClick={() => setSelectedTrainee(null)} className="border-gray-700">
+                <Button variant="outline" onClick={() => setSelectedTrainee(null)} className="border-border">
                   Close
                 </Button>
                 <Button
-                  className="bg-emerald-600 hover:bg-emerald-700"
+                  className="bg-primary hover:bg-primary/90"
                   onClick={() => openEditDialog(selectedTrainee)}
                 >
                   <Edit className="w-4 h-4 mr-2" />
@@ -519,21 +519,21 @@ export default function FOOTraineesPage() {
       {/* Add Trainee Dialog */}
       {showAddDialog && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-lg">
-            <div className="p-6 border-b border-gray-800 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-white">Add New FOO Trainee</h2>
-              <Button variant="ghost" size="sm" onClick={() => setShowAddDialog(false)} className="text-gray-400">
+          <div className="bg-card border border-border rounded-lg w-full max-w-lg">
+            <div className="p-6 border-b border-border flex items-center justify-between">
+              <h2 className="text-xl font-bold text-foreground">Add New FOO Trainee</h2>
+              <Button variant="ghost" size="sm" onClick={() => setShowAddDialog(false)} className="text-muted-foreground">
                 <X className="w-5 h-5" />
               </Button>
             </div>
             <form onSubmit={handleAddTrainee} className="p-6 space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Rank</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Rank</label>
                   <select
                     name="rank"
                     required
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   >
                     <option value="Lt">Lieutenant (Lt)</option>
                     <option value="Capt">Captain (Capt)</option>
@@ -541,47 +541,47 @@ export default function FOOTraineesPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Name</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Name</label>
                   <input
                     name="name"
                     required
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Service Number</label>
+                <label className="block text-sm text-muted-foreground mb-1">Service Number</label>
                 <input
                   name="serviceNumber"
                   required
                   placeholder="IC-XXXXX"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                 />
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Unit</label>
+                <label className="block text-sm text-muted-foreground mb-1">Unit</label>
                 <input
                   name="unit"
                   required
                   placeholder="e.g., 14 Field Regiment"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                 />
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Regiment</label>
+                <label className="block text-sm text-muted-foreground mb-1">Regiment</label>
                 <input
                   name="regiment"
                   required
                   defaultValue="Regiment of Artillery"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                 />
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Batch</label>
+                <label className="block text-sm text-muted-foreground mb-1">Batch</label>
                 <select
                   name="batch"
                   required
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                 >
                   {batches.map((batch) => (
                     <option key={batch} value={batch}>
@@ -592,10 +592,10 @@ export default function FOOTraineesPage() {
                 </select>
               </div>
               <div className="flex justify-end gap-3 pt-4">
-                <Button type="button" variant="outline" onClick={() => setShowAddDialog(false)} className="border-gray-700">
+                <Button type="button" variant="outline" onClick={() => setShowAddDialog(false)} className="border-border">
                   Cancel
                 </Button>
-                <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700">
+                <Button type="submit" className="bg-primary hover:bg-primary/90">
                   Add Trainee
                 </Button>
               </div>
@@ -607,22 +607,22 @@ export default function FOOTraineesPage() {
       {/* Edit Trainee Dialog */}
       {showEditDialog && editingTrainee && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-lg">
-            <div className="p-6 border-b border-gray-800 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-white">Edit FOO Trainee</h2>
-              <Button variant="ghost" size="sm" onClick={() => setShowEditDialog(false)} className="text-gray-400">
+          <div className="bg-card border border-border rounded-lg w-full max-w-lg">
+            <div className="p-6 border-b border-border flex items-center justify-between">
+              <h2 className="text-xl font-bold text-foreground">Edit FOO Trainee</h2>
+              <Button variant="ghost" size="sm" onClick={() => setShowEditDialog(false)} className="text-muted-foreground">
                 <X className="w-5 h-5" />
               </Button>
             </div>
             <form onSubmit={handleEditTrainee} className="p-6 space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Rank</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Rank</label>
                   <select
                     name="rank"
                     required
                     defaultValue={editingTrainee.rank}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   >
                     <option value="Lt">Lieutenant (Lt)</option>
                     <option value="Capt">Captain (Capt)</option>
@@ -630,49 +630,49 @@ export default function FOOTraineesPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Name</label>
+                  <label className="block text-sm text-muted-foreground mb-1">Name</label>
                   <input
                     name="name"
                     required
                     defaultValue={editingTrainee.name}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Service Number</label>
+                <label className="block text-sm text-muted-foreground mb-1">Service Number</label>
                 <input
                   name="serviceNumber"
                   required
                   defaultValue={editingTrainee.serviceNumber}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                 />
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Unit</label>
+                <label className="block text-sm text-muted-foreground mb-1">Unit</label>
                 <input
                   name="unit"
                   required
                   defaultValue={editingTrainee.unit}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                 />
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Regiment</label>
+                <label className="block text-sm text-muted-foreground mb-1">Regiment</label>
                 <input
                   name="regiment"
                   required
                   defaultValue={editingTrainee.regiment}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                 />
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Batch</label>
+                <label className="block text-sm text-muted-foreground mb-1">Batch</label>
                 <select
                   name="batch"
                   required
                   defaultValue={editingTrainee.batch}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                 >
                   {batches.map((batch) => (
                     <option key={batch} value={batch}>
@@ -682,12 +682,12 @@ export default function FOOTraineesPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Current Phase</label>
+                <label className="block text-sm text-muted-foreground mb-1">Current Phase</label>
                 <select
                   name="currentPhase"
                   required
                   defaultValue={editingTrainee.currentPhase}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                 >
                   <option value="Phase I - Basic FOO Procedures">Phase I - Basic FOO Procedures</option>
                   <option value="Phase II - Advanced Fire Control">Phase II - Advanced Fire Control</option>
@@ -696,12 +696,12 @@ export default function FOOTraineesPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Status</label>
+                <label className="block text-sm text-muted-foreground mb-1">Status</label>
                 <select
                   name="status"
                   required
                   defaultValue={editingTrainee.status}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-primary focus:outline-none"
                 >
                   <option value="active">Active</option>
                   <option value="on-leave">On Leave</option>
@@ -711,10 +711,10 @@ export default function FOOTraineesPage() {
                 </select>
               </div>
               <div className="flex justify-end gap-3 pt-4">
-                <Button type="button" variant="outline" onClick={() => setShowEditDialog(false)} className="border-gray-700">
+                <Button type="button" variant="outline" onClick={() => setShowEditDialog(false)} className="border-border">
                   Cancel
                 </Button>
-                <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700">
+                <Button type="submit" className="bg-primary hover:bg-primary/90">
                   Save Changes
                 </Button>
               </div>
@@ -726,16 +726,16 @@ export default function FOOTraineesPage() {
       {/* Delete Confirmation Dialog */}
       {showDeleteConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-[#12121a] border border-gray-800 rounded-xl w-full max-w-md p-6">
-            <h2 className="text-xl font-bold text-white mb-4">Confirm Delete</h2>
-            <p className="text-gray-400 mb-6">
+          <div className="bg-card border border-border rounded-lg w-full max-w-md p-6">
+            <h2 className="text-xl font-bold text-foreground mb-4">Confirm Delete</h2>
+            <p className="text-muted-foreground mb-6">
               Are you sure you want to delete this trainee? This action cannot be undone.
             </p>
             <div className="flex justify-end gap-3">
               <Button
                 variant="outline"
                 onClick={() => setShowDeleteConfirm(null)}
-                className="border-gray-700"
+                className="border-border"
               >
                 Cancel
               </Button>

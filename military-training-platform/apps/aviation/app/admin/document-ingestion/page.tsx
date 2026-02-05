@@ -219,13 +219,13 @@ export default function DocumentIngestionPage() {
             label="Processed"
             value={stats.completed}
             icon={CheckCircle}
-            color="text-green-500"
+            color="text-primary"
           />
           <StatCard
             label="Processing"
             value={stats.processing}
             icon={Clock}
-            color="text-yellow-500"
+            color="text-primary"
           />
           <StatCard
             label="Failed"
@@ -368,8 +368,8 @@ function DocumentCard({
 }) {
   const statusConfig = {
     pending: { icon: Clock, color: "text-muted-foreground", bg: "bg-muted" },
-    processing: { icon: RefreshCw, color: "text-yellow-500", bg: "bg-yellow-500/20" },
-    completed: { icon: CheckCircle, color: "text-green-500", bg: "bg-green-500/20" },
+    processing: { icon: RefreshCw, color: "text-primary", bg: "bg-primary/20" },
+    completed: { icon: CheckCircle, color: "text-primary", bg: "bg-primary/20" },
     failed: { icon: XCircle, color: "text-red-500", bg: "bg-red-500/20" },
   };
 
@@ -377,7 +377,7 @@ function DocumentCard({
   const StatusIcon = status.icon;
 
   return (
-    <div className="bg-card border border-border rounded-xl overflow-hidden">
+    <div className="bg-card border border-border rounded-lg overflow-hidden">
       <button
         onClick={onToggle}
         className="w-full p-4 flex items-center justify-between hover:bg-muted/50 transition-colors"
@@ -532,7 +532,7 @@ function UploadModal({
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div className="bg-card border border-border rounded-xl max-w-lg w-full p-6">
+      <div className="bg-card border border-border rounded-lg max-w-lg w-full p-6">
         <h2 className="text-xl font-bold mb-4">Upload Documents</h2>
 
         {/* Drag & Drop Zone */}
@@ -541,7 +541,7 @@ function UploadModal({
           onDragLeave={handleDrag}
           onDragOver={handleDrag}
           onDrop={handleDrop}
-          className={`border-2 border-dashed rounded-xl p-8 text-center transition-colors ${
+          className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
             dragActive ? "border-primary bg-primary/5" : "border-border"
           }`}
         >

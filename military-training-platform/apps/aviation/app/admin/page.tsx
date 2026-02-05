@@ -29,9 +29,9 @@ export default function AdminDashboard() {
   const recentUsers = users.slice(0, 4);
 
   const roleDistribution = [
-    { role: "Artillery Instructors", count: users.filter((u) => u.role === "artillery-instructor").length, color: "bg-emerald-600" },
-    { role: "Aviation Instructors", count: users.filter((u) => u.role === "aviation-instructor").length, color: "bg-emerald-500" },
-    { role: "Cadets/Trainees", count: users.filter((u) => u.role === "cadet").length, color: "bg-green-500" },
+    { role: "Artillery Instructors", count: users.filter((u) => u.role === "artillery-instructor").length, color: "bg-primary" },
+    { role: "Aviation Instructors", count: users.filter((u) => u.role === "aviation-instructor").length, color: "bg-primary" },
+    { role: "Cadets/Trainees", count: users.filter((u) => u.role === "cadet").length, color: "bg-primary" },
     { role: "Administrators", count: users.filter((u) => u.role === "admin").length, color: "bg-emerald-400" },
     { role: "Auditors", count: users.filter((u) => u.role === "auditor").length, color: "bg-emerald-700" },
   ];
@@ -40,85 +40,85 @@ export default function AdminDashboard() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-white">Admin Dashboard</h1>
-        <p className="text-gray-400">
+        <h1 className="text-2xl font-bold text-foreground">Admin Dashboard</h1>
+        <p className="text-muted-foreground">
           System overview and management console
         </p>
       </div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center justify-between mb-2">
-            <Users className="w-5 h-5 text-emerald-500" />
-            <span className="text-xs text-green-400">{stats.activeUsers} active</span>
+            <Users className="w-5 h-5 text-primary" />
+            <span className="text-xs text-primary">{stats.activeUsers} active</span>
           </div>
-          <p className="text-2xl font-bold text-white">{stats.totalUsers}</p>
-          <p className="text-xs text-gray-500">Total Users</p>
+          <p className="text-2xl font-bold text-foreground">{stats.totalUsers}</p>
+          <p className="text-xs text-muted-foreground">Total Users</p>
         </div>
 
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center justify-between mb-2">
-            <GraduationCap className="w-5 h-5 text-green-500" />
+            <GraduationCap className="w-5 h-5 text-primary" />
           </div>
-          <p className="text-2xl font-bold text-white">{stats.totalTrainees}</p>
-          <p className="text-xs text-gray-500">Trainees</p>
+          <p className="text-2xl font-bold text-foreground">{stats.totalTrainees}</p>
+          <p className="text-xs text-muted-foreground">Trainees</p>
         </div>
 
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center justify-between mb-2">
-            <UserCheck className="w-5 h-5 text-emerald-500" />
+            <UserCheck className="w-5 h-5 text-primary" />
           </div>
-          <p className="text-2xl font-bold text-white">{stats.totalInstructors}</p>
-          <p className="text-xs text-gray-500">Instructors</p>
+          <p className="text-2xl font-bold text-foreground">{stats.totalInstructors}</p>
+          <p className="text-xs text-muted-foreground">Instructors</p>
         </div>
 
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center justify-between mb-2">
-            <Server className="w-5 h-5 text-emerald-500" />
+            <Server className="w-5 h-5 text-primary" />
           </div>
-          <p className="text-2xl font-bold text-white">{stats.systemUptime}</p>
-          <p className="text-xs text-gray-500">System Uptime</p>
+          <p className="text-2xl font-bold text-foreground">{stats.systemUptime}</p>
+          <p className="text-xs text-muted-foreground">System Uptime</p>
         </div>
       </div>
 
       {/* Secondary Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
-          <Calendar className="w-5 h-5 text-emerald-500 mb-2" />
-          <p className="text-2xl font-bold text-white">{stats.totalSessions}</p>
-          <p className="text-xs text-gray-500">Total Sessions</p>
+        <div className="bg-card border border-border rounded-lg p-4">
+          <Calendar className="w-5 h-5 text-primary mb-2" />
+          <p className="text-2xl font-bold text-foreground">{stats.totalSessions}</p>
+          <p className="text-xs text-muted-foreground">Total Sessions</p>
         </div>
 
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
-          <ClipboardCheck className="w-5 h-5 text-emerald-500 mb-2" />
-          <p className="text-2xl font-bold text-white">{stats.totalAssessments}</p>
-          <p className="text-xs text-gray-500">Assessments</p>
+        <div className="bg-card border border-border rounded-lg p-4">
+          <ClipboardCheck className="w-5 h-5 text-primary mb-2" />
+          <p className="text-2xl font-bold text-foreground">{stats.totalAssessments}</p>
+          <p className="text-xs text-muted-foreground">Assessments</p>
         </div>
 
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
-          <TrendingUp className="w-5 h-5 text-emerald-500 mb-2" />
-          <p className="text-2xl font-bold text-white">{stats.avgCompletionRate}%</p>
-          <p className="text-xs text-gray-500">Avg Completion</p>
+        <div className="bg-card border border-border rounded-lg p-4">
+          <TrendingUp className="w-5 h-5 text-primary mb-2" />
+          <p className="text-2xl font-bold text-foreground">{stats.avgCompletionRate}%</p>
+          <p className="text-xs text-muted-foreground">Avg Completion</p>
         </div>
 
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <Activity className="w-5 h-5 text-red-500 mb-2" />
-          <p className="text-2xl font-bold text-white">{content.length}</p>
-          <p className="text-xs text-gray-500">Content Items</p>
+          <p className="text-2xl font-bold text-foreground">{content.length}</p>
+          <p className="text-xs text-muted-foreground">Content Items</p>
         </div>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Recent Activity */}
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl">
-          <div className="p-4 border-b border-gray-800 flex items-center justify-between">
-            <h2 className="font-semibold text-white flex items-center gap-2">
-              <Activity className="w-5 h-5 text-emerald-500" />
+        <div className="bg-card border border-border rounded-lg">
+          <div className="p-4 border-b border-border flex items-center justify-between">
+            <h2 className="font-semibold text-foreground flex items-center gap-2">
+              <Activity className="w-5 h-5 text-primary" />
               Recent Activity
             </h2>
             <Link href="/admin/audit-logs">
-              <Button variant="ghost" size="sm" className="text-emerald-400 hover:text-emerald-300">
+              <Button variant="ghost" size="sm" className="text-primary hover:text-emerald-300">
                 View All <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             </Link>
@@ -127,15 +127,15 @@ export default function AdminDashboard() {
             {recentLogs.map((log) => (
               <div
                 key={log.id}
-                className="flex items-start gap-3 p-3 bg-[#0a0a0f] rounded-lg"
+                className="flex items-start gap-3 p-3 bg-muted/50 rounded-lg"
               >
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center ${
                     log.status === "success"
-                      ? "bg-green-500/20 text-green-400"
+                      ? "bg-primary/20 text-primary"
                       : log.status === "failed"
                       ? "bg-red-500/20 text-red-400"
-                      : "bg-yellow-500/20 text-yellow-400"
+                      : "bg-primary/20 text-primary"
                   }`}
                 >
                   {log.status === "success" ? (
@@ -148,11 +148,11 @@ export default function AdminDashboard() {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
-                    <p className="text-white text-sm font-medium">{log.action}</p>
-                    <span className="text-xs text-gray-500">{log.timestamp}</span>
+                    <p className="text-foreground text-sm font-medium">{log.action}</p>
+                    <span className="text-xs text-muted-foreground">{log.timestamp}</span>
                   </div>
-                  <p className="text-xs text-gray-400">{log.userName}</p>
-                  <p className="text-xs text-gray-500 mt-1">{log.details}</p>
+                  <p className="text-xs text-muted-foreground">{log.userName}</p>
+                  <p className="text-xs text-muted-foreground mt-1">{log.details}</p>
                 </div>
               </div>
             ))}
@@ -160,14 +160,14 @@ export default function AdminDashboard() {
         </div>
 
         {/* User Distribution */}
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl">
-          <div className="p-4 border-b border-gray-800 flex items-center justify-between">
-            <h2 className="font-semibold text-white flex items-center gap-2">
-              <Users className="w-5 h-5 text-emerald-500" />
+        <div className="bg-card border border-border rounded-lg">
+          <div className="p-4 border-b border-border flex items-center justify-between">
+            <h2 className="font-semibold text-foreground flex items-center gap-2">
+              <Users className="w-5 h-5 text-primary" />
               User Distribution
             </h2>
             <Link href="/admin/users">
-              <Button variant="ghost" size="sm" className="text-emerald-400 hover:text-emerald-300">
+              <Button variant="ghost" size="sm" className="text-primary hover:text-emerald-300">
                 Manage <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             </Link>
@@ -176,10 +176,10 @@ export default function AdminDashboard() {
             {roleDistribution.map((item) => (
               <div key={item.role}>
                 <div className="flex justify-between text-sm mb-1">
-                  <span className="text-gray-400">{item.role}</span>
-                  <span className="text-white">{item.count}</span>
+                  <span className="text-muted-foreground">{item.role}</span>
+                  <span className="text-foreground">{item.count}</span>
                 </div>
-                <div className="h-2 bg-gray-800 rounded-full">
+                <div className="h-2 bg-muted rounded-full">
                   <div
                     className={`h-2 rounded-full ${item.color}`}
                     style={{
@@ -193,14 +193,14 @@ export default function AdminDashboard() {
         </div>
 
         {/* Recent Users */}
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl">
-          <div className="p-4 border-b border-gray-800 flex items-center justify-between">
-            <h2 className="font-semibold text-white flex items-center gap-2">
-              <UserCheck className="w-5 h-5 text-green-500" />
+        <div className="bg-card border border-border rounded-lg">
+          <div className="p-4 border-b border-border flex items-center justify-between">
+            <h2 className="font-semibold text-foreground flex items-center gap-2">
+              <UserCheck className="w-5 h-5 text-primary" />
               Recent Users
             </h2>
             <Link href="/admin/users">
-              <Button variant="ghost" size="sm" className="text-emerald-400 hover:text-emerald-300">
+              <Button variant="ghost" size="sm" className="text-primary hover:text-emerald-300">
                 View All <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             </Link>
@@ -209,22 +209,22 @@ export default function AdminDashboard() {
             {recentUsers.map((user) => (
               <div
                 key={user.id}
-                className="flex items-center justify-between p-3 bg-[#0a0a0f] rounded-lg"
+                className="flex items-center justify-between p-3 bg-muted/50 rounded-lg"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center text-white font-bold">
+                  <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center text-foreground font-bold">
                     {user.name.charAt(0)}
                   </div>
                   <div>
-                    <p className="text-white font-medium">{user.name}</p>
-                    <p className="text-xs text-gray-500">{user.rank} | {user.role}</p>
+                    <p className="text-foreground font-medium">{user.name}</p>
+                    <p className="text-xs text-muted-foreground">{user.rank} | {user.role}</p>
                   </div>
                 </div>
                 <span
                   className={`text-xs px-2 py-1 rounded ${
                     user.status === "active"
-                      ? "bg-green-500/20 text-green-400"
-                      : "bg-gray-500/20 text-gray-400"
+                      ? "bg-primary/20 text-primary"
+                      : "bg-gray-500/20 text-muted-foreground"
                   }`}
                 >
                   {user.status}
@@ -235,70 +235,70 @@ export default function AdminDashboard() {
         </div>
 
         {/* System Health */}
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl">
-          <div className="p-4 border-b border-gray-800">
-            <h2 className="font-semibold text-white flex items-center gap-2">
+        <div className="bg-card border border-border rounded-lg">
+          <div className="p-4 border-b border-border">
+            <h2 className="font-semibold text-foreground flex items-center gap-2">
               <Shield className="w-5 h-5 text-red-500" />
               System Health
             </h2>
           </div>
           <div className="p-4 space-y-4">
-            <div className="flex items-center justify-between p-3 bg-[#0a0a0f] rounded-lg">
+            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
               <div className="flex items-center gap-3">
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                <span className="text-white">Database</span>
+                <div className="w-3 h-3 bg-primary rounded-full"></div>
+                <span className="text-foreground">Database</span>
               </div>
-              <span className="text-green-400 text-sm">Operational</span>
+              <span className="text-primary text-sm">Operational</span>
             </div>
-            <div className="flex items-center justify-between p-3 bg-[#0a0a0f] rounded-lg">
+            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
               <div className="flex items-center gap-3">
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                <span className="text-white">Authentication Service</span>
+                <div className="w-3 h-3 bg-primary rounded-full"></div>
+                <span className="text-foreground">Authentication Service</span>
               </div>
-              <span className="text-green-400 text-sm">Operational</span>
+              <span className="text-primary text-sm">Operational</span>
             </div>
-            <div className="flex items-center justify-between p-3 bg-[#0a0a0f] rounded-lg">
+            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
               <div className="flex items-center gap-3">
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                <span className="text-white">File Storage</span>
+                <div className="w-3 h-3 bg-primary rounded-full"></div>
+                <span className="text-foreground">File Storage</span>
               </div>
-              <span className="text-green-400 text-sm">Operational</span>
+              <span className="text-primary text-sm">Operational</span>
             </div>
-            <div className="flex items-center justify-between p-3 bg-[#0a0a0f] rounded-lg">
+            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
               <div className="flex items-center gap-3">
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                <span className="text-white">Notification Service</span>
+                <div className="w-3 h-3 bg-primary rounded-full"></div>
+                <span className="text-foreground">Notification Service</span>
               </div>
-              <span className="text-green-400 text-sm">Operational</span>
+              <span className="text-primary text-sm">Operational</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
-        <h2 className="font-semibold text-white mb-4">Quick Actions</h2>
+      <div className="bg-card border border-border rounded-lg p-4">
+        <h2 className="font-semibold text-foreground mb-4">Quick Actions</h2>
         <div className="flex flex-wrap gap-3">
           <Link href="/admin/users">
-            <Button className="bg-emerald-600 hover:bg-emerald-700">
+            <Button className="bg-primary hover:bg-primary/90">
               <Users className="w-4 h-4 mr-2" />
               Add User
             </Button>
           </Link>
           <Link href="/admin/content">
-            <Button className="bg-emerald-600 hover:bg-emerald-700">
+            <Button className="bg-primary hover:bg-primary/90">
               <Activity className="w-4 h-4 mr-2" />
               Manage Content
             </Button>
           </Link>
           <Link href="/admin/audit-logs">
-            <Button className="bg-emerald-600 hover:bg-emerald-700">
+            <Button className="bg-primary hover:bg-primary/90">
               <Activity className="w-4 h-4 mr-2" />
               View Audit Logs
             </Button>
           </Link>
           <Link href="/admin/configuration">
-            <Button variant="outline" className="border-gray-700">
+            <Button variant="outline" className="border-border">
               <Shield className="w-4 h-4 mr-2" />
               System Settings
             </Button>

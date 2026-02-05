@@ -47,108 +47,108 @@ export default function AviationInstructorDashboard() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-white">Aviation Instructor Dashboard</h1>
-        <p className="text-gray-400">
+        <h1 className="text-2xl font-bold text-foreground">Aviation Instructor Dashboard</h1>
+        <p className="text-muted-foreground">
           Joint Fire Support Platform - Pilot Training Overview
         </p>
       </div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center justify-between mb-2">
-            <Users className="w-5 h-5 text-emerald-500" />
-            <span className="text-xs text-green-400">Active: {stats.activePilots}</span>
+            <Users className="w-5 h-5 text-primary" />
+            <span className="text-xs text-primary">Active: {stats.activePilots}</span>
           </div>
-          <p className="text-2xl font-bold text-white">{stats.totalPilots}</p>
-          <p className="text-xs text-gray-500">Total Pilots</p>
+          <p className="text-2xl font-bold text-foreground">{stats.totalPilots}</p>
+          <p className="text-xs text-muted-foreground">Total Pilots</p>
         </div>
 
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center justify-between mb-2">
-            <Crosshair className="w-5 h-5 text-emerald-500" />
+            <Crosshair className="w-5 h-5 text-primary" />
           </div>
-          <p className="text-2xl font-bold text-white">{stats.totalScenarios}</p>
-          <p className="text-xs text-gray-500">Flight Scenarios</p>
+          <p className="text-2xl font-bold text-foreground">{stats.totalScenarios}</p>
+          <p className="text-xs text-muted-foreground">Flight Scenarios</p>
         </div>
 
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center justify-between mb-2">
-            <Calendar className="w-5 h-5 text-emerald-500" />
+            <Calendar className="w-5 h-5 text-primary" />
           </div>
-          <p className="text-2xl font-bold text-white">{stats.totalSessions}</p>
-          <p className="text-xs text-gray-500">Flight Sessions</p>
+          <p className="text-2xl font-bold text-foreground">{stats.totalSessions}</p>
+          <p className="text-xs text-muted-foreground">Flight Sessions</p>
         </div>
 
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center justify-between mb-2">
-            <ClipboardCheck className="w-5 h-5 text-yellow-500" />
+            <ClipboardCheck className="w-5 h-5 text-primary" />
             {stats.pendingAssessments > 0 && (
-              <span className="text-xs text-yellow-400">
+              <span className="text-xs text-primary">
                 {stats.pendingAssessments} pending
               </span>
             )}
           </div>
-          <p className="text-2xl font-bold text-white">
+          <p className="text-2xl font-bold text-foreground">
             {assessments.filter((a) => a.status === "completed").length}
           </p>
-          <p className="text-xs text-gray-500">Assessments Done</p>
+          <p className="text-xs text-muted-foreground">Assessments Done</p>
         </div>
 
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center justify-between mb-2">
             <Target className="w-5 h-5 text-red-500" />
           </div>
-          <p className="text-2xl font-bold text-white">{stats.jointOperations}</p>
-          <p className="text-xs text-gray-500">Joint Operations</p>
+          <p className="text-2xl font-bold text-foreground">{stats.jointOperations}</p>
+          <p className="text-xs text-muted-foreground">Joint Operations</p>
         </div>
 
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
+        <div className="bg-card border border-border rounded-lg p-4">
           <div className="flex items-center justify-between mb-2">
-            <TrendingUp className="w-5 h-5 text-green-500" />
+            <TrendingUp className="w-5 h-5 text-primary" />
           </div>
-          <p className="text-2xl font-bold text-white">{stats.avgCASCompetency}%</p>
-          <p className="text-xs text-gray-500">Avg CAS Competency</p>
+          <p className="text-2xl font-bold text-foreground">{stats.avgCASCompetency}%</p>
+          <p className="text-xs text-muted-foreground">Avg CAS Competency</p>
         </div>
       </div>
 
       {/* Main Content Grid */}
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Upcoming Flight Sessions */}
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl">
-          <div className="p-4 border-b border-gray-800 flex items-center justify-between">
-            <h2 className="font-semibold text-white flex items-center gap-2">
-              <Clock className="w-5 h-5 text-emerald-500" />
+        <div className="bg-card border border-border rounded-lg">
+          <div className="p-4 border-b border-border flex items-center justify-between">
+            <h2 className="font-semibold text-foreground flex items-center gap-2">
+              <Clock className="w-5 h-5 text-primary" />
               Upcoming Flight Sessions
             </h2>
             <Link href="/aviation-instructor/sessions">
-              <Button variant="ghost" size="sm" className="text-emerald-400 hover:text-emerald-300">
+              <Button variant="ghost" size="sm" className="text-primary hover:text-emerald-300">
                 View All <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             </Link>
           </div>
           <div className="p-4 space-y-3">
             {upcomingSessions.length === 0 ? (
-              <p className="text-gray-500 text-center py-4">No upcoming sessions</p>
+              <p className="text-muted-foreground text-center py-4">No upcoming sessions</p>
             ) : (
               upcomingSessions.map((session) => (
                 <div
                   key={session.id}
-                  className="flex items-center justify-between p-3 bg-[#0a0a0f] rounded-lg"
+                  className="flex items-center justify-between p-3 bg-muted/50 rounded-lg"
                 >
                   <div className="flex items-center gap-3">
                     <div
                       className={`w-10 h-10 rounded-lg flex items-center justify-center ${
                         session.jointWithArtillery
-                          ? "bg-emerald-500/20 text-emerald-400"
-                          : "bg-emerald-500/20 text-emerald-400"
+                          ? "bg-primary/20 text-primary"
+                          : "bg-primary/20 text-primary"
                       }`}
                     >
                       <Plane className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-white font-medium">{session.title}</p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-foreground font-medium">{session.title}</p>
+                      <p className="text-xs text-muted-foreground">
                         {session.date} | {session.startTime} - {session.endTime}
                       </p>
                     </div>
@@ -157,14 +157,14 @@ export default function AviationInstructorDashboard() {
                     <span
                       className={`text-xs px-2 py-1 rounded ${
                         session.jointWithArtillery
-                          ? "bg-emerald-500/20 text-emerald-400"
-                          : "bg-emerald-500/20 text-emerald-400"
+                          ? "bg-primary/20 text-primary"
+                          : "bg-primary/20 text-primary"
                       }`}
                     >
                       {session.type.replace("-", " ")}
                     </span>
                     {session.jointWithArtillery && (
-                      <p className="text-xs text-emerald-400 mt-1">Joint Exercise</p>
+                      <p className="text-xs text-primary mt-1">Joint Exercise</p>
                     )}
                   </div>
                 </div>
@@ -174,14 +174,14 @@ export default function AviationInstructorDashboard() {
         </div>
 
         {/* Pending Assessments */}
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl">
-          <div className="p-4 border-b border-gray-800 flex items-center justify-between">
-            <h2 className="font-semibold text-white flex items-center gap-2">
-              <AlertTriangle className="w-5 h-5 text-yellow-500" />
+        <div className="bg-card border border-border rounded-lg">
+          <div className="p-4 border-b border-border flex items-center justify-between">
+            <h2 className="font-semibold text-foreground flex items-center gap-2">
+              <AlertTriangle className="w-5 h-5 text-primary" />
               Pending Assessments
             </h2>
             <Link href="/aviation-instructor/assessments">
-              <Button variant="ghost" size="sm" className="text-emerald-400 hover:text-emerald-300">
+              <Button variant="ghost" size="sm" className="text-primary hover:text-emerald-300">
                 View All <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             </Link>
@@ -189,27 +189,27 @@ export default function AviationInstructorDashboard() {
           <div className="p-4 space-y-3">
             {pendingAssessments.length === 0 ? (
               <div className="text-center py-4">
-                <CheckCircle2 className="w-8 h-8 text-green-500 mx-auto mb-2" />
-                <p className="text-gray-500">All assessments completed</p>
+                <CheckCircle2 className="w-8 h-8 text-primary mx-auto mb-2" />
+                <p className="text-muted-foreground">All assessments completed</p>
               </div>
             ) : (
               pendingAssessments.map((assessment) => (
                 <div
                   key={assessment.id}
-                  className="flex items-center justify-between p-3 bg-[#0a0a0f] rounded-lg"
+                  className="flex items-center justify-between p-3 bg-muted/50 rounded-lg"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-yellow-500/20 rounded-lg flex items-center justify-center text-yellow-400">
+                    <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center text-primary">
                       <ClipboardCheck className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-white font-medium">{assessment.pilotName}</p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-foreground font-medium">{assessment.pilotName}</p>
+                      <p className="text-xs text-muted-foreground">
                         {assessment.type.replace("-", " ")} | {assessment.date}
                       </p>
                     </div>
                   </div>
-                  <span className="text-xs px-2 py-1 rounded bg-yellow-500/20 text-yellow-400">
+                  <span className="text-xs px-2 py-1 rounded bg-primary/20 text-primary">
                     Scheduled
                   </span>
                 </div>
@@ -219,14 +219,14 @@ export default function AviationInstructorDashboard() {
         </div>
 
         {/* Pilot Performance */}
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl">
-          <div className="p-4 border-b border-gray-800 flex items-center justify-between">
-            <h2 className="font-semibold text-white flex items-center gap-2">
-              <TrendingUp className="w-5 h-5 text-green-500" />
+        <div className="bg-card border border-border rounded-lg">
+          <div className="p-4 border-b border-border flex items-center justify-between">
+            <h2 className="font-semibold text-foreground flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-primary" />
               Top Performing Pilots
             </h2>
             <Link href="/aviation-instructor/pilots">
-              <Button variant="ghost" size="sm" className="text-emerald-400 hover:text-emerald-300">
+              <Button variant="ghost" size="sm" className="text-primary hover:text-emerald-300">
                 View All <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             </Link>
@@ -235,32 +235,32 @@ export default function AviationInstructorDashboard() {
             {topPilots.map((pilot, index) => (
               <div
                 key={pilot.id}
-                className="flex items-center justify-between p-3 bg-[#0a0a0f] rounded-lg"
+                className="flex items-center justify-between p-3 bg-muted/50 rounded-lg"
               >
                 <div className="flex items-center gap-3">
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold ${
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-foreground font-bold ${
                       index === 0
                         ? "bg-yellow-500"
                         : index === 1
                         ? "bg-gray-400"
                         : index === 2
-                        ? "bg-emerald-600"
+                        ? "bg-primary"
                         : "bg-gray-600"
                     }`}
                   >
                     {index + 1}
                   </div>
                   <div>
-                    <p className="text-white font-medium">{pilot.name}</p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-foreground font-medium">{pilot.name}</p>
+                    <p className="text-xs text-muted-foreground">
                       {pilot.rank} | {pilot.flightHours}h flight time
                     </p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-lg font-bold text-white">{pilot.overallScore}%</p>
-                  <p className="text-xs text-gray-500">CAS: {pilot.casCompetency}%</p>
+                  <p className="text-lg font-bold text-foreground">{pilot.overallScore}%</p>
+                  <p className="text-xs text-muted-foreground">CAS: {pilot.casCompetency}%</p>
                 </div>
               </div>
             ))}
@@ -268,41 +268,41 @@ export default function AviationInstructorDashboard() {
         </div>
 
         {/* Upcoming Joint Operations */}
-        <div className="bg-[#12121a] border border-gray-800 rounded-xl">
-          <div className="p-4 border-b border-gray-800 flex items-center justify-between">
-            <h2 className="font-semibold text-white flex items-center gap-2">
+        <div className="bg-card border border-border rounded-lg">
+          <div className="p-4 border-b border-border flex items-center justify-between">
+            <h2 className="font-semibold text-foreground flex items-center gap-2">
               <Target className="w-5 h-5 text-red-500" />
               Upcoming Joint Operations
             </h2>
             <Link href="/aviation-instructor/joint-operations">
-              <Button variant="ghost" size="sm" className="text-emerald-400 hover:text-emerald-300">
+              <Button variant="ghost" size="sm" className="text-primary hover:text-emerald-300">
                 View All <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             </Link>
           </div>
           <div className="p-4 space-y-3">
             {upcomingJointOps.length === 0 ? (
-              <p className="text-gray-500 text-center py-4">No upcoming joint operations</p>
+              <p className="text-muted-foreground text-center py-4">No upcoming joint operations</p>
             ) : (
               upcomingJointOps.map((op) => (
                 <div
                   key={op.id}
-                  className="p-4 bg-[#0a0a0f] rounded-lg border border-gray-800"
+                  className="p-4 bg-muted/50 rounded-lg border border-border"
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-white font-medium">{op.name}</h3>
+                    <h3 className="text-foreground font-medium">{op.name}</h3>
                     <span
                       className={`text-xs px-2 py-1 rounded ${
                         op.status === "approved"
-                          ? "bg-green-500/20 text-green-400"
-                          : "bg-yellow-500/20 text-yellow-400"
+                          ? "bg-primary/20 text-primary"
+                          : "bg-primary/20 text-primary"
                       }`}
                     >
                       {op.status}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-400 mb-2">{op.description}</p>
-                  <div className="flex items-center justify-between text-xs text-gray-500">
+                  <p className="text-sm text-muted-foreground mb-2">{op.description}</p>
+                  <div className="flex items-center justify-between text-xs text-muted-foreground">
                     <span>{op.date} | {op.startTime}</span>
                     <span>{op.pilotIds.length} pilots assigned</span>
                   </div>
@@ -314,11 +314,11 @@ export default function AviationInstructorDashboard() {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
-        <h2 className="font-semibold text-white mb-4">Quick Actions</h2>
+      <div className="bg-card border border-border rounded-lg p-4">
+        <h2 className="font-semibold text-foreground mb-4">Quick Actions</h2>
         <div className="flex flex-wrap gap-3">
           <Link href="/aviation-instructor/sessions">
-            <Button className="bg-emerald-600 hover:bg-emerald-700">
+            <Button className="bg-primary hover:bg-primary/90">
               <Calendar className="w-4 h-4 mr-2" />
               Schedule Flight Session
             </Button>
@@ -330,7 +330,7 @@ export default function AviationInstructorDashboard() {
             </Button>
           </Link>
           <Link href="/aviation-instructor/scenarios">
-            <Button className="bg-emerald-600 hover:bg-emerald-700">
+            <Button className="bg-primary hover:bg-primary/90">
               <Crosshair className="w-4 h-4 mr-2" />
               Create Flight Scenario
             </Button>

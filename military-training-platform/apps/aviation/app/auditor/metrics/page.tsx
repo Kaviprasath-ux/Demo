@@ -37,22 +37,22 @@ export default function MetricsPage() {
   const getTrendIcon = (trend: string) => {
     switch (trend) {
       case "up":
-        return <ArrowUp className="w-5 h-5 text-green-400" />;
+        return <ArrowUp className="w-5 h-5 text-primary" />;
       case "down":
         return <ArrowDown className="w-5 h-5 text-red-400" />;
       default:
-        return <Minus className="w-5 h-5 text-gray-400" />;
+        return <Minus className="w-5 h-5 text-muted-foreground" />;
     }
   };
 
   const getTrendColor = (trend: string) => {
     switch (trend) {
       case "up":
-        return "text-green-400";
+        return "text-primary";
       case "down":
         return "text-red-400";
       default:
-        return "text-gray-400";
+        return "text-muted-foreground";
     }
   };
 
@@ -74,21 +74,21 @@ export default function MetricsPage() {
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "artillery":
-        return "bg-emerald-500/20 text-emerald-400 border-emerald-500/30";
+        return "bg-primary/20 text-primary border-primary/30";
       case "aviation":
-        return "bg-emerald-500/20 text-emerald-400 border-emerald-500/30";
+        return "bg-primary/20 text-primary border-primary/30";
       case "joint":
-        return "bg-emerald-500/20 text-emerald-400 border-emerald-500/30";
+        return "bg-primary/20 text-primary border-primary/30";
       case "safety":
-        return "bg-green-500/20 text-green-400 border-green-500/30";
+        return "bg-primary/20 text-primary border-primary/30";
       default:
-        return "bg-gray-500/20 text-gray-400 border-gray-500/30";
+        return "bg-gray-500/20 text-muted-foreground border-gray-500/30";
     }
   };
 
   const getProgressColor = (current: number, target: number) => {
     const percentage = (current / target) * 100;
-    if (percentage >= 100) return "bg-green-500";
+    if (percentage >= 100) return "bg-primary";
     if (percentage >= 80) return "bg-yellow-500";
     return "bg-red-500";
   };
@@ -96,14 +96,14 @@ export default function MetricsPage() {
   const getStatusIndicator = (current: number, target: number) => {
     if (current >= target) {
       return (
-        <span className="flex items-center gap-1 text-green-400 text-sm">
+        <span className="flex items-center gap-1 text-primary text-sm">
           <CheckCircle2 className="w-4 h-4" />
           On Target
         </span>
       );
     } else if (current >= target * 0.8) {
       return (
-        <span className="flex items-center gap-1 text-yellow-400 text-sm">
+        <span className="flex items-center gap-1 text-primary text-sm">
           <AlertTriangle className="w-4 h-4" />
           Near Target
         </span>
@@ -131,60 +131,60 @@ export default function MetricsPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-white flex items-center gap-3">
+        <h1 className="text-2xl font-bold text-foreground flex items-center gap-3">
           <TrendingUp className="w-8 h-8 text-red-500" />
           Training Metrics
         </h1>
-        <p className="text-gray-400 mt-1">
+        <p className="text-muted-foreground mt-1">
           Monitor key performance indicators and training effectiveness
         </p>
       </div>
 
       {/* Summary Stats */}
       <div className="grid grid-cols-4 gap-4">
-        <div className="bg-[#12121a] border border-green-500/30 rounded-xl p-4 text-center">
-          <CheckCircle2 className="w-6 h-6 text-green-400 mx-auto mb-2" />
-          <p className="text-2xl font-bold text-green-400">{onTargetCount}</p>
-          <p className="text-xs text-gray-500">On Target</p>
+        <div className="bg-card border border-primary/30 rounded-lg p-4 text-center">
+          <CheckCircle2 className="w-6 h-6 text-primary mx-auto mb-2" />
+          <p className="text-2xl font-bold text-primary">{onTargetCount}</p>
+          <p className="text-xs text-muted-foreground">On Target</p>
         </div>
-        <div className="bg-[#12121a] border border-yellow-500/30 rounded-xl p-4 text-center">
-          <Target className="w-6 h-6 text-yellow-400 mx-auto mb-2" />
-          <p className="text-2xl font-bold text-yellow-400">{nearTargetCount}</p>
-          <p className="text-xs text-gray-500">Near Target</p>
+        <div className="bg-card border border-yellow-500/30 rounded-lg p-4 text-center">
+          <Target className="w-6 h-6 text-primary mx-auto mb-2" />
+          <p className="text-2xl font-bold text-primary">{nearTargetCount}</p>
+          <p className="text-xs text-muted-foreground">Near Target</p>
         </div>
-        <div className="bg-[#12121a] border border-red-500/30 rounded-xl p-4 text-center">
+        <div className="bg-card border border-red-500/30 rounded-lg p-4 text-center">
           <AlertTriangle className="w-6 h-6 text-red-400 mx-auto mb-2" />
           <p className="text-2xl font-bold text-red-400">{belowTargetCount}</p>
-          <p className="text-xs text-gray-500">Below Target</p>
+          <p className="text-xs text-muted-foreground">Below Target</p>
         </div>
-        <div className="bg-[#12121a] border border-emerald-500/30 rounded-xl p-4 text-center">
-          <ArrowUp className="w-6 h-6 text-emerald-400 mx-auto mb-2" />
-          <p className="text-2xl font-bold text-emerald-400">{improvingCount}</p>
-          <p className="text-xs text-gray-500">Improving</p>
+        <div className="bg-card border border-primary/30 rounded-lg p-4 text-center">
+          <ArrowUp className="w-6 h-6 text-primary mx-auto mb-2" />
+          <p className="text-2xl font-bold text-primary">{improvingCount}</p>
+          <p className="text-xs text-muted-foreground">Improving</p>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="bg-[#12121a] border border-gray-800 rounded-xl p-4">
+      <div className="bg-card border border-border rounded-lg p-4">
         <div className="flex flex-wrap gap-4">
           <div className="flex-1 min-w-[200px]">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 type="text"
                 placeholder="Search metrics..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-red-500 focus:outline-none"
+                className="w-full pl-10 pr-4 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-red-500 focus:outline-none"
               />
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Filter className="w-4 h-4 text-gray-500" />
+            <Filter className="w-4 h-4 text-muted-foreground" />
             <select
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
-              className="px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-red-500 focus:outline-none"
+              className="px-3 py-2 bg-muted/50 border border-border rounded-lg text-foreground focus:border-red-500 focus:outline-none"
             >
               <option value="all">All Categories</option>
               <option value="artillery">Artillery</option>
@@ -201,7 +201,7 @@ export default function MetricsPage() {
         {filteredMetrics.map((metric) => (
           <div
             key={metric.id}
-            className="bg-[#12121a] border border-gray-800 rounded-xl p-5"
+            className="bg-card border border-border rounded-lg p-5"
           >
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center gap-3">
@@ -213,7 +213,7 @@ export default function MetricsPage() {
                   {getCategoryIcon(metric.category)}
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold">{metric.name}</h3>
+                  <h3 className="text-foreground font-semibold">{metric.name}</h3>
                   <span
                     className={`text-xs px-2 py-0.5 rounded border ${getCategoryColor(
                       metric.category
@@ -238,23 +238,23 @@ export default function MetricsPage() {
             <div className="space-y-3">
               <div className="flex items-end justify-between">
                 <div>
-                  <p className="text-3xl font-bold text-white">
+                  <p className="text-3xl font-bold text-foreground">
                     {metric.currentValue}
-                    <span className="text-lg text-gray-400">{metric.unit}</span>
+                    <span className="text-lg text-muted-foreground">{metric.unit}</span>
                   </p>
-                  <p className="text-sm text-gray-500">Current Value</p>
+                  <p className="text-sm text-muted-foreground">Current Value</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-lg text-gray-400">
+                  <p className="text-lg text-muted-foreground">
                     {metric.targetValue}
                     {metric.unit}
                   </p>
-                  <p className="text-sm text-gray-500">Target</p>
+                  <p className="text-sm text-muted-foreground">Target</p>
                 </div>
               </div>
 
               <div>
-                <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                <div className="h-2 bg-muted rounded-full overflow-hidden">
                   <div
                     className={`h-2 rounded-full ${getProgressColor(
                       metric.currentValue,
@@ -269,7 +269,7 @@ export default function MetricsPage() {
                   />
                 </div>
                 <div className="flex items-center justify-between mt-2">
-                  <span className="text-xs text-gray-500">{metric.period}</span>
+                  <span className="text-xs text-muted-foreground">{metric.period}</span>
                   {getStatusIndicator(metric.currentValue, metric.targetValue)}
                 </div>
               </div>
@@ -279,9 +279,9 @@ export default function MetricsPage() {
       </div>
 
       {/* Category Summary */}
-      <div className="bg-[#12121a] border border-gray-800 rounded-xl">
-        <div className="p-4 border-b border-gray-800">
-          <h2 className="font-semibold text-white">Category Performance</h2>
+      <div className="bg-card border border-border rounded-lg">
+        <div className="p-4 border-b border-border">
+          <h2 className="font-semibold text-foreground">Category Performance</h2>
         </div>
         <div className="p-4">
           <div className="grid md:grid-cols-4 gap-4">
@@ -306,12 +306,12 @@ export default function MetricsPage() {
                 >
                   <div className="flex items-center gap-2 mb-3">
                     {getCategoryIcon(category)}
-                    <span className="text-white font-medium capitalize">
+                    <span className="text-foreground font-medium capitalize">
                       {category}
                     </span>
                   </div>
-                  <p className="text-2xl font-bold text-white">{avgPerformance}%</p>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-2xl font-bold text-foreground">{avgPerformance}%</p>
+                  <p className="text-xs text-muted-foreground">
                     Average Performance ({categoryMetrics.length} metrics)
                   </p>
                 </div>

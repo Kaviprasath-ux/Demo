@@ -109,13 +109,13 @@ function HelicopterCard({
 }) {
   const categoryColors = {
     attack: "bg-red-500/20 text-red-500",
-    utility: "bg-emerald-500/20 text-emerald-500",
-    light: "bg-green-500/20 text-green-500",
-    trainer: "bg-emerald-500/20 text-emerald-500",
+    utility: "bg-primary/20 text-primary",
+    light: "bg-primary/20 text-primary",
+    trainer: "bg-primary/20 text-primary",
   };
 
   return (
-    <div className="bg-card border border-border rounded-xl overflow-hidden">
+    <div className="bg-card border border-border rounded-lg overflow-hidden">
       {/* Header */}
       <button
         onClick={onToggle}

@@ -304,10 +304,10 @@ export default function TrainingPage() {
                       <div className="pt-2">
                         <span className={`text-xs px-2 py-1 rounded ${
                           activeSession.status === "in_progress"
-                            ? "bg-emerald-500/20 text-emerald-400"
+                            ? "bg-primary/20 text-primary"
                             : activeSession.status === "paused"
-                            ? "bg-yellow-500/20 text-yellow-400"
-                            : "bg-gray-500/20 text-gray-400"
+                            ? "bg-primary/20 text-primary"
+                            : "bg-gray-500/20 text-muted-foreground"
                         }`}>
                           {activeSession.status === "in_progress" ? "In Progress" :
                            activeSession.status === "paused" ? "Paused" : "Completed"}

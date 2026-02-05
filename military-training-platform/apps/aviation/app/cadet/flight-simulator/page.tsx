@@ -98,7 +98,7 @@ export default function CadetFlightSimulatorPage() {
 
         <div className="flex items-center gap-2">
           {activeSession && (
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-green-500/20 text-green-500 rounded-lg">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/20 text-primary rounded-lg">
               <Clock className="w-4 h-4" />
               <span className="text-sm font-medium">Session Active</span>
             </div>
@@ -295,11 +295,11 @@ export default function CadetFlightSimulatorPage() {
                   <div className="flex flex-wrap gap-1">
                     <span className={`px-2 py-0.5 text-xs rounded ${
                       selectedScenario.difficulty === "basic"
-                        ? "bg-green-500/20 text-green-500"
+                        ? "bg-primary/20 text-primary"
                         : selectedScenario.difficulty === "intermediate"
-                        ? "bg-yellow-500/20 text-yellow-500"
+                        ? "bg-primary/20 text-primary"
                         : selectedScenario.difficulty === "advanced"
-                        ? "bg-emerald-500/20 text-emerald-500"
+                        ? "bg-primary/20 text-primary"
                         : "bg-red-500/20 text-red-500"
                     }`}>
                       {selectedScenario.difficulty}
