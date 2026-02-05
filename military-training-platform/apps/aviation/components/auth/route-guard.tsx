@@ -21,15 +21,16 @@ const routeConfigs: RouteConfig[] = [
   // Public routes (no auth required)
   { path: "/login", allowedRoles: [] },
 
-  // All authenticated users - Dashboard (role-specific views)
+  // All authenticated users - Dashboard & Profile
   { path: "/dashboard", allowedRoles: ["admin", "aviation-instructor", "artillery-instructor", "cadet", "auditor"] },
+  { path: "/profile", allowedRoles: ["admin", "aviation-instructor", "artillery-instructor", "cadet", "auditor"] },
 
   // Training & Simulator - Instructors and Cadets
   { path: "/training", allowedRoles: ["aviation-instructor", "artillery-instructor", "cadet"], redirectTo: "/dashboard" },
   { path: "/search", allowedRoles: ["aviation-instructor", "artillery-instructor", "cadet"], redirectTo: "/dashboard" },
 
-  // Documents - All except auditor
-  { path: "/documents", allowedRoles: ["admin", "aviation-instructor", "artillery-instructor", "cadet"], redirectTo: "/dashboard" },
+  // Documents - All authenticated users
+  { path: "/documents", allowedRoles: ["admin", "aviation-instructor", "artillery-instructor", "cadet", "auditor"], redirectTo: "/dashboard" },
 
   // Admin-only routes
   { path: "/admin/users", allowedRoles: ["admin"], redirectTo: "/dashboard" },
@@ -44,6 +45,8 @@ const routeConfigs: RouteConfig[] = [
 
   // Instructor routes
   { path: "/instructor", allowedRoles: ["aviation-instructor", "artillery-instructor"], redirectTo: "/dashboard" },
+  { path: "/aviation-instructor", allowedRoles: ["aviation-instructor", "admin"], redirectTo: "/dashboard" },
+  { path: "/artillery-instructor", allowedRoles: ["artillery-instructor", "admin"], redirectTo: "/dashboard" },
 
   // Cadet routes
   { path: "/cadet", allowedRoles: ["cadet"], redirectTo: "/dashboard" },

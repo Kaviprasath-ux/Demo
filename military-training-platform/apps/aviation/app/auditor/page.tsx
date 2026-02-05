@@ -356,7 +356,7 @@ export default function AuditorDashboard() {
             </Button>
           </Link>
           <Link href="/auditor/findings">
-            <Button className="bg-orange-600 hover:bg-orange-700">
+            <Button className="bg-emerald-600 hover:bg-emerald-700">
               <AlertTriangle className="w-4 h-4 mr-2" />
               Log Finding
             </Button>

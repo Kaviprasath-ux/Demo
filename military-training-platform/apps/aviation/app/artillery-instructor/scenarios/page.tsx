@@ -206,7 +206,7 @@ export default function ScenariosPage() {
         </div>
         <Button
           onClick={() => setShowAddDialog(true)}
-          className="bg-orange-600 hover:bg-orange-700"
+          className="bg-emerald-600 hover:bg-emerald-700"
         >
           <Plus className="w-4 h-4 mr-2" />
           Create Scenario
@@ -270,7 +270,7 @@ export default function ScenariosPage() {
             placeholder="Search scenarios..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-orange-500 text-white"
+            className="w-full pl-10 pr-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
           />
         </div>
         <div className="flex items-center gap-2">
@@ -278,7 +278,7 @@ export default function ScenariosPage() {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-orange-500 text-white"
+            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
           >
             <option value="all">All Types</option>
             <option value="cas">CAS</option>
@@ -291,7 +291,7 @@ export default function ScenariosPage() {
           <select
             value={difficultyFilter}
             onChange={(e) => setDifficultyFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-orange-500 text-white"
+            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
           >
             <option value="all">All Difficulty</option>
             <option value="basic">Basic</option>
@@ -302,7 +302,7 @@ export default function ScenariosPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-orange-500 text-white"
+            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
           >
             <option value="all">All Status</option>
             <option value="active">Active</option>
@@ -623,7 +623,7 @@ export default function ScenariosPage() {
                   Duplicate
                 </Button>
                 <Button
-                  className="bg-orange-600 hover:bg-orange-700"
+                  className="bg-emerald-600 hover:bg-emerald-700"
                   onClick={() => {
                     setEditingScenario(selectedScenario);
                     setShowEditDialog(true);
@@ -671,7 +671,7 @@ export default function ScenariosPage() {
                   required
                   defaultValue={editingScenario?.title}
                   placeholder="e.g., Hilltop Enemy Position Engagement"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 />
               </div>
 
@@ -682,7 +682,7 @@ export default function ScenariosPage() {
                     name="type"
                     required
                     defaultValue={editingScenario?.type || "cas"}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   >
                     <option value="cas">CAS</option>
                     <option value="direct-fire">Direct Fire</option>
@@ -698,7 +698,7 @@ export default function ScenariosPage() {
                     name="difficulty"
                     required
                     defaultValue={editingScenario?.difficulty || "intermediate"}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   >
                     <option value="basic">Basic</option>
                     <option value="intermediate">Intermediate</option>
@@ -713,7 +713,7 @@ export default function ScenariosPage() {
                       name="status"
                       required
                       defaultValue={editingScenario?.status}
-                      className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                      className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                     >
                       <option value="draft">Draft</option>
                       <option value="active">Active</option>
@@ -731,7 +731,7 @@ export default function ScenariosPage() {
                     required
                     defaultValue={editingScenario?.terrain}
                     placeholder="e.g., Mountainous"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -741,7 +741,7 @@ export default function ScenariosPage() {
                     required
                     defaultValue={editingScenario?.weather}
                     placeholder="e.g., Clear"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -751,7 +751,7 @@ export default function ScenariosPage() {
                     required
                     defaultValue={editingScenario?.visibility}
                     placeholder="e.g., Good (10km+)"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -764,7 +764,7 @@ export default function ScenariosPage() {
                     required
                     defaultValue={editingScenario?.targetType}
                     placeholder="e.g., Enemy Bunker Complex"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -774,7 +774,7 @@ export default function ScenariosPage() {
                     required
                     defaultValue={editingScenario?.gridReference}
                     placeholder="e.g., 43R MQ 1234 5678"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none font-mono"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none font-mono"
                   />
                 </div>
               </div>
@@ -787,7 +787,7 @@ export default function ScenariosPage() {
                   defaultValue={editingScenario?.targetDescription}
                   placeholder="Detailed description of the target..."
                   rows={2}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none resize-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none resize-none"
                 />
               </div>
 
@@ -799,7 +799,7 @@ export default function ScenariosPage() {
                     required
                     defaultValue={editingScenario?.friendlyPositions}
                     placeholder="e.g., 1km South, in defilade"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -809,7 +809,7 @@ export default function ScenariosPage() {
                     required
                     defaultValue={editingScenario?.enemyPositions}
                     placeholder="e.g., Hilltop, 360° fields of fire"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -822,7 +822,7 @@ export default function ScenariosPage() {
                     required
                     defaultValue={editingScenario?.altitude}
                     placeholder="e.g., 2400m MSL"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -832,7 +832,7 @@ export default function ScenariosPage() {
                     required
                     defaultValue={editingScenario?.aircraftType}
                     placeholder="e.g., ALH Rudra / Mi-17"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -844,7 +844,7 @@ export default function ScenariosPage() {
                     defaultValue={editingScenario?.timeLimit || 15}
                     min={5}
                     max={60}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -856,7 +856,7 @@ export default function ScenariosPage() {
                   required
                   defaultValue={editingScenario?.munitionsAllowed.join(", ")}
                   placeholder="e.g., 70mm Rockets, Cannon, ATGMs"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 />
               </div>
 
@@ -868,7 +868,7 @@ export default function ScenariosPage() {
                   defaultValue={editingScenario?.objectives.join("\n")}
                   placeholder="Establish communication with aircraft&#10;Provide accurate target description&#10;Execute safe fire mission"
                   rows={4}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none resize-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none resize-none"
                 />
               </div>
 
@@ -879,7 +879,7 @@ export default function ScenariosPage() {
                   defaultValue={editingScenario?.briefingNotes}
                   placeholder="Additional briefing information..."
                   rows={2}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none resize-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none resize-none"
                 />
               </div>
 
@@ -896,7 +896,7 @@ export default function ScenariosPage() {
                 >
                   Cancel
                 </Button>
-                <Button type="submit" className="bg-orange-600 hover:bg-orange-700">
+                <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700">
                   {showEditDialog ? "Save Changes" : "Create Scenario"}
                 </Button>
               </div>

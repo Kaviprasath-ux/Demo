@@ -105,12 +105,12 @@ export const roleConfig: Record<AviationRole, { label: string; description: stri
   "artillery-instructor": {
     label: "Artillery Instructor",
     description: "Train FOO personnel in fire support procedures",
-    color: "bg-orange-500"
+    color: "bg-emerald-500"
   },
   "aviation-instructor": {
     label: "Aviation Instructor",
     description: "Train pilots in CAS and joint operations",
-    color: "bg-blue-500"
+    color: "bg-emerald-500"
   },
   "cadet": {
     label: "Cadet/Trainee",
@@ -120,7 +120,7 @@ export const roleConfig: Record<AviationRole, { label: string; description: stri
   "admin": {
     label: "Administrator",
     description: "System administration and user management",
-    color: "bg-blue-500"
+    color: "bg-emerald-500"
   },
   "auditor": {
     label: "Auditor",

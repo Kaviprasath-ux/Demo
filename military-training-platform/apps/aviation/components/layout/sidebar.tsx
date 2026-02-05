@@ -68,8 +68,7 @@ const getNavigationForRole = (role: AviationRole | undefined): NavItem[] => {
         { name: "Assessments", href: "/aviation-instructor/assessments", icon: ClipboardList },
         { name: "Curriculum", href: "/aviation-instructor/curriculum", icon: BookOpen },
         { name: "Joint Operations", href: "/aviation-instructor/joint-operations", icon: Target },
-        { name: "3D Simulator", href: "/training", icon: Navigation },
-        { name: "Knowledge Search", href: "/search", icon: Search },
+        { name: "3D Flight Training", href: "/training", icon: Navigation },
       ];
 
     case "artillery-instructor":
@@ -80,9 +79,9 @@ const getNavigationForRole = (role: AviationRole | undefined): NavItem[] => {
         { name: "Training Scenarios", href: "/artillery-instructor/scenarios", icon: Crosshair },
         { name: "Sessions", href: "/artillery-instructor/sessions", icon: Calendar },
         { name: "Assessments", href: "/artillery-instructor/assessments", icon: ClipboardList },
+        { name: "Curriculum", href: "/artillery-instructor/curriculum", icon: BookOpen },
         { name: "Joint Exercises", href: "/artillery-instructor/joint-exercises", icon: Target },
-        { name: "3D Simulator", href: "/training", icon: Navigation },
-        { name: "Knowledge Search", href: "/search", icon: Search },
+        { name: "3D Flight Training", href: "/training", icon: Navigation },
       ];
 
     case "cadet":

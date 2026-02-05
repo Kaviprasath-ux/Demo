@@ -195,7 +195,7 @@ export default function AssessmentsPage() {
         </div>
         <Button
           onClick={() => setShowAddDialog(true)}
-          className="bg-orange-600 hover:bg-orange-700"
+          className="bg-emerald-600 hover:bg-emerald-700"
         >
           <Plus className="w-4 h-4 mr-2" />
           New Assessment
@@ -259,7 +259,7 @@ export default function AssessmentsPage() {
             placeholder="Search by trainee name or phase..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-orange-500 text-white"
+            className="w-full pl-10 pr-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
           />
         </div>
         <div className="flex items-center gap-2">
@@ -267,7 +267,7 @@ export default function AssessmentsPage() {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-orange-500 text-white"
+            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
           >
             <option value="all">All Types</option>
             <option value="written">Written</option>
@@ -279,7 +279,7 @@ export default function AssessmentsPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-orange-500 text-white"
+            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
           >
             <option value="all">All Status</option>
             <option value="pending">Pending</option>
@@ -301,7 +301,7 @@ export default function AssessmentsPage() {
             <div className="p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center text-lg font-bold text-white">
+                  <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center text-lg font-bold text-white">
                     {assessment.traineeName.split(" ").pop()?.charAt(0) || "?"}
                   </div>
                   <div>
@@ -415,7 +415,7 @@ export default function AssessmentsPage() {
                     <Target className="w-4 h-4 text-emerald-500" />
                     Scenario
                   </h3>
-                  <div className="bg-emerald-500/10 border border-orange-500/30 rounded-lg p-3">
+                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-3">
                     <p className="text-emerald-400 font-medium">{selectedAssessment.scenarioName}</p>
                   </div>
                 </div>
@@ -583,7 +583,7 @@ export default function AssessmentsPage() {
                 </Button>
                 {selectedAssessment.status === "pending" && (
                   <Button
-                    className="bg-orange-600 hover:bg-orange-700"
+                    className="bg-emerald-600 hover:bg-emerald-700"
                     onClick={() => {
                       setGradingAssessment(selectedAssessment);
                       setShowGradeDialog(true);
@@ -621,7 +621,7 @@ export default function AssessmentsPage() {
                 <select
                   name="trainee"
                   required
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 >
                   <option value="">Select trainee</option>
                   {activeTrainees.map((trainee) => (
@@ -638,7 +638,7 @@ export default function AssessmentsPage() {
                   <select
                     name="type"
                     required
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   >
                     <option value="written">Written</option>
                     <option value="practical">Practical</option>
@@ -652,7 +652,7 @@ export default function AssessmentsPage() {
                   <select
                     name="phase"
                     required
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   >
                     <option value="Phase I">Phase I</option>
                     <option value="Phase II">Phase II</option>
@@ -665,7 +665,7 @@ export default function AssessmentsPage() {
                 <label className="block text-sm text-gray-400 mb-1">Scenario (Optional)</label>
                 <select
                   name="scenario"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 >
                   <option value="">No scenario</option>
                   {activeScenarios.map((scenario) => (
@@ -683,7 +683,7 @@ export default function AssessmentsPage() {
                     name="date"
                     type="date"
                     required
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -692,7 +692,7 @@ export default function AssessmentsPage() {
                     name="duration"
                     required
                     placeholder="e.g., 2h"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -706,7 +706,7 @@ export default function AssessmentsPage() {
                     required
                     defaultValue={100}
                     min={1}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -718,7 +718,7 @@ export default function AssessmentsPage() {
                     defaultValue={70}
                     min={1}
                     max={100}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -732,7 +732,7 @@ export default function AssessmentsPage() {
                 >
                   Cancel
                 </Button>
-                <Button type="submit" className="bg-orange-600 hover:bg-orange-700">
+                <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700">
                   Schedule Assessment
                 </Button>
               </div>
@@ -773,7 +773,7 @@ export default function AssessmentsPage() {
                   required
                   min={0}
                   max={100}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none text-2xl font-bold"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none text-2xl font-bold"
                 />
               </div>
 
@@ -785,7 +785,7 @@ export default function AssessmentsPage() {
                     type="number"
                     min={0}
                     max={100}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -795,7 +795,7 @@ export default function AssessmentsPage() {
                     type="number"
                     step="0.1"
                     min={0}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -808,7 +808,7 @@ export default function AssessmentsPage() {
                     type="number"
                     min={0}
                     max={100}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -818,7 +818,7 @@ export default function AssessmentsPage() {
                     type="number"
                     min={0}
                     max={100}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -830,7 +830,7 @@ export default function AssessmentsPage() {
                   required
                   rows={3}
                   placeholder="Assessment feedback and observations..."
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none resize-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none resize-none"
                 />
               </div>
 
@@ -840,7 +840,7 @@ export default function AssessmentsPage() {
                   name="recommendations"
                   rows={3}
                   placeholder="Practice abort procedures&#10;Continue to advanced scenarios"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none resize-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none resize-none"
                 />
               </div>
 
@@ -869,7 +869,7 @@ export default function AssessmentsPage() {
                 >
                   Cancel
                 </Button>
-                <Button type="submit" className="bg-orange-600 hover:bg-orange-700">
+                <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700">
                   Submit Grade
                 </Button>
               </div>

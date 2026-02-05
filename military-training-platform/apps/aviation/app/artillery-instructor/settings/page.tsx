@@ -47,7 +47,7 @@ export default function SettingsPage() {
         </div>
         <div className="p-6 space-y-4">
           <div className="flex items-center gap-6">
-            <div className="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center text-3xl font-bold text-white">
+            <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center text-3xl font-bold text-white">
               {user?.name.charAt(0) || "U"}
             </div>
             <div>
@@ -63,7 +63,7 @@ export default function SettingsPage() {
               <input
                 type="text"
                 defaultValue={user?.name}
-                className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
               />
             </div>
             <div>
@@ -113,7 +113,7 @@ export default function SettingsPage() {
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" defaultChecked className="sr-only peer" />
-              <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-500"></div>
+              <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
             </label>
           </div>
           <div className="flex items-center justify-between">
@@ -123,7 +123,7 @@ export default function SettingsPage() {
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" defaultChecked className="sr-only peer" />
-              <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-500"></div>
+              <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
             </label>
           </div>
           <div className="flex items-center justify-between">
@@ -133,7 +133,7 @@ export default function SettingsPage() {
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" defaultChecked className="sr-only peer" />
-              <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-500"></div>
+              <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
             </label>
           </div>
           <div className="flex items-center justify-between">
@@ -143,7 +143,7 @@ export default function SettingsPage() {
             </div>
             <label className="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" defaultChecked className="sr-only peer" />
-              <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-500"></div>
+              <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
             </label>
           </div>
         </div>
@@ -160,7 +160,7 @@ export default function SettingsPage() {
         <div className="p-6 space-y-4">
           <div>
             <label className="block text-sm text-gray-400 mb-1">Date Format</label>
-            <select className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none">
+            <select className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none">
               <option value="dd/mm/yyyy">DD/MM/YYYY</option>
               <option value="mm/dd/yyyy">MM/DD/YYYY</option>
               <option value="yyyy-mm-dd">YYYY-MM-DD</option>
@@ -168,14 +168,14 @@ export default function SettingsPage() {
           </div>
           <div>
             <label className="block text-sm text-gray-400 mb-1">Time Format</label>
-            <select className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none">
+            <select className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none">
               <option value="24h">24-hour</option>
               <option value="12h">12-hour</option>
             </select>
           </div>
           <div>
             <label className="block text-sm text-gray-400 mb-1">Default View</label>
-            <select className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none">
+            <select className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none">
               <option value="dashboard">Dashboard</option>
               <option value="sessions">Training Sessions</option>
               <option value="trainees">FOO Trainees</option>
@@ -207,7 +207,7 @@ export default function SettingsPage() {
               <p className="text-white font-medium">Session Timeout</p>
               <p className="text-sm text-gray-500">Auto-logout after inactivity</p>
             </div>
-            <select className="px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none">
+            <select className="px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none">
               <option value="15">15 minutes</option>
               <option value="30">30 minutes</option>
               <option value="60">1 hour</option>
@@ -225,7 +225,7 @@ export default function SettingsPage() {
             Settings saved
           </div>
         )}
-        <Button onClick={handleSave} className="bg-orange-600 hover:bg-orange-700">
+        <Button onClick={handleSave} className="bg-emerald-600 hover:bg-emerald-700">
           <Save className="w-4 h-4 mr-2" />
           Save Settings
         </Button>

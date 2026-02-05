@@ -221,7 +221,7 @@ export default function SessionsPage() {
         </div>
         <Button
           onClick={() => setShowAddDialog(true)}
-          className="bg-orange-600 hover:bg-orange-700"
+          className="bg-emerald-600 hover:bg-emerald-700"
         >
           <Plus className="w-4 h-4 mr-2" />
           Schedule Session
@@ -285,7 +285,7 @@ export default function SessionsPage() {
             placeholder="Search sessions..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-orange-500 text-white"
+            className="w-full pl-10 pr-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
           />
         </div>
         <div className="flex items-center gap-2">
@@ -293,7 +293,7 @@ export default function SessionsPage() {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-orange-500 text-white"
+            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
           >
             <option value="all">All Types</option>
             <option value="classroom">Classroom</option>
@@ -305,7 +305,7 @@ export default function SessionsPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-orange-500 text-white"
+            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
           >
             <option value="all">All Status</option>
             <option value="scheduled">Scheduled</option>
@@ -466,7 +466,7 @@ export default function SessionsPage() {
                     <Target className="w-4 h-4 text-emerald-500" />
                     Scenario
                   </h3>
-                  <div className="bg-emerald-500/10 border border-orange-500/30 rounded-lg p-3">
+                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-3">
                     <p className="text-emerald-400 font-medium">{selectedSession.scenarioName}</p>
                   </div>
                 </div>
@@ -577,7 +577,7 @@ export default function SessionsPage() {
                         }}
                         className={
                           selectedSession.status === status
-                            ? "bg-orange-600"
+                            ? "bg-emerald-600"
                             : "border-gray-700"
                         }
                       >
@@ -603,7 +603,7 @@ export default function SessionsPage() {
                   Close
                 </Button>
                 <Button
-                  className="bg-orange-600 hover:bg-orange-700"
+                  className="bg-emerald-600 hover:bg-emerald-700"
                   onClick={() => {
                     setEditingSession(selectedSession);
                     setShowEditDialog(true);
@@ -651,7 +651,7 @@ export default function SessionsPage() {
                   required
                   defaultValue={editingSession?.title}
                   placeholder="e.g., CAS Communication Protocols"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 />
               </div>
 
@@ -662,7 +662,7 @@ export default function SessionsPage() {
                     name="type"
                     required
                     defaultValue={editingSession?.type || "classroom"}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   >
                     <option value="classroom">Classroom</option>
                     <option value="simulator">Simulator</option>
@@ -678,7 +678,7 @@ export default function SessionsPage() {
                       name="status"
                       required
                       defaultValue={editingSession?.status}
-                      className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                      className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                     >
                       <option value="scheduled">Scheduled</option>
                       <option value="in-progress">In Progress</option>
@@ -695,7 +695,7 @@ export default function SessionsPage() {
                 <select
                   name="scenario"
                   defaultValue={editingSession?.scenarioId || ""}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 >
                   <option value="">No scenario</option>
                   {activeScenarios.map((scenario) => (
@@ -714,7 +714,7 @@ export default function SessionsPage() {
                     type="date"
                     required
                     defaultValue={editingSession?.date}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -724,7 +724,7 @@ export default function SessionsPage() {
                     type="time"
                     required
                     defaultValue={editingSession?.startTime}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -734,7 +734,7 @@ export default function SessionsPage() {
                     type="time"
                     required
                     defaultValue={editingSession?.endTime}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -746,7 +746,7 @@ export default function SessionsPage() {
                   required
                   defaultValue={editingSession?.location}
                   placeholder="e.g., Classroom A - Fire Control Wing"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 />
               </div>
 
@@ -790,7 +790,7 @@ export default function SessionsPage() {
                   defaultValue={editingSession?.objectives.join("\n")}
                   placeholder="Master CAS brevity codes&#10;Practice 9-line brief format"
                   rows={3}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none resize-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none resize-none"
                 />
               </div>
 
@@ -800,7 +800,7 @@ export default function SessionsPage() {
                   name="equipment"
                   defaultValue={editingSession?.equipment.join(", ")}
                   placeholder="e.g., Radio simulator, Projector, Training manuals"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 />
               </div>
 
@@ -813,7 +813,7 @@ export default function SessionsPage() {
                       defaultValue={editingSession?.remarks}
                       placeholder="Session notes and observations..."
                       rows={2}
-                      className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none resize-none"
+                      className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none resize-none"
                     />
                   </div>
 
@@ -845,7 +845,7 @@ export default function SessionsPage() {
                 >
                   Cancel
                 </Button>
-                <Button type="submit" className="bg-orange-600 hover:bg-orange-700">
+                <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700">
                   {showEditDialog ? "Save Changes" : "Schedule Session"}
                 </Button>
               </div>

@@ -292,7 +292,7 @@ export default function AdminDashboard() {
             </Button>
           </Link>
           <Link href="/admin/audit-logs">
-            <Button className="bg-orange-600 hover:bg-orange-700">
+            <Button className="bg-emerald-600 hover:bg-emerald-700">
               <Activity className="w-4 h-4 mr-2" />
               View Audit Logs
             </Button>

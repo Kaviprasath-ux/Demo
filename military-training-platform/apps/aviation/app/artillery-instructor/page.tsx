@@ -62,7 +62,7 @@ export default function ArtilleryInstructorDashboard() {
   return (
     <div className="space-y-6">
       {/* Welcome Banner */}
-      <div className="bg-gradient-to-r from-orange-600/20 to-orange-500/10 border border-orange-500/30 rounded-xl p-6">
+      <div className="bg-gradient-to-r from-emerald-600/20 to-emerald-500/10 border border-emerald-500/30 rounded-xl p-6">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-white mb-1">
@@ -74,13 +74,13 @@ export default function ArtilleryInstructorDashboard() {
           </div>
           <div className="flex items-center gap-3">
             <Link href="/artillery-instructor/sessions">
-              <Button className="bg-orange-600 hover:bg-orange-700">
+              <Button className="bg-emerald-600 hover:bg-emerald-700">
                 <Calendar className="w-4 h-4 mr-2" />
                 Schedule Session
               </Button>
             </Link>
             <Link href="/artillery-instructor/scenarios">
-              <Button variant="outline" className="border-orange-500/50 text-emerald-400 hover:bg-emerald-500/10">
+              <Button variant="outline" className="border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10">
                 <Target className="w-4 h-4 mr-2" />
                 New Scenario
               </Button>
@@ -273,7 +273,7 @@ export default function ArtilleryInstructorDashboard() {
                         w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold
                         ${index === 0 ? 'bg-yellow-500/20 text-yellow-500' :
                           index === 1 ? 'bg-gray-400/20 text-gray-400' :
-                          'bg-orange-600/20 text-emerald-500'}
+                          'bg-emerald-600/20 text-emerald-500'}
                       `}>
                         {index + 1}
                       </span>

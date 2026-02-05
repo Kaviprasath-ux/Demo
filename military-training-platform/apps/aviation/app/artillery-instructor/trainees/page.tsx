@@ -153,7 +153,7 @@ export default function FOOTraineesPage() {
         </div>
         <Button
           onClick={() => setShowAddDialog(true)}
-          className="bg-orange-600 hover:bg-orange-700"
+          className="bg-emerald-600 hover:bg-emerald-700"
         >
           <Plus className="w-4 h-4 mr-2" />
           Add Trainee
@@ -217,7 +217,7 @@ export default function FOOTraineesPage() {
             placeholder="Search by name, service number, or unit..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-orange-500 text-white"
+            className="w-full pl-10 pr-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
           />
         </div>
         <div className="flex items-center gap-2">
@@ -225,7 +225,7 @@ export default function FOOTraineesPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-orange-500 text-white"
+            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
           >
             <option value="all">All Status</option>
             <option value="active">Active</option>
@@ -237,7 +237,7 @@ export default function FOOTraineesPage() {
           <select
             value={batchFilter}
             onChange={(e) => setBatchFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-orange-500 text-white"
+            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
           >
             <option value="all">All Batches</option>
             {batches.map((batch) => (
@@ -259,7 +259,7 @@ export default function FOOTraineesPage() {
           >
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center text-lg font-bold text-white">
+                <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center text-lg font-bold text-white">
                   {trainee.name.charAt(0)}
                 </div>
                 <div>
@@ -333,7 +333,7 @@ export default function FOOTraineesPage() {
             <div className="p-6 border-b border-gray-800">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center text-2xl font-bold text-white">
+                  <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center text-2xl font-bold text-white">
                     {selectedTrainee.name.charAt(0)}
                   </div>
                   <div>
@@ -478,7 +478,7 @@ export default function FOOTraineesPage() {
                         }}
                         className={
                           selectedTrainee.status === status
-                            ? "bg-orange-600"
+                            ? "bg-emerald-600"
                             : "border-gray-700"
                         }
                       >
@@ -504,7 +504,7 @@ export default function FOOTraineesPage() {
                   Close
                 </Button>
                 <Button
-                  className="bg-orange-600 hover:bg-orange-700"
+                  className="bg-emerald-600 hover:bg-emerald-700"
                   onClick={() => openEditDialog(selectedTrainee)}
                 >
                   <Edit className="w-4 h-4 mr-2" />
@@ -533,7 +533,7 @@ export default function FOOTraineesPage() {
                   <select
                     name="rank"
                     required
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   >
                     <option value="Lt">Lieutenant (Lt)</option>
                     <option value="Capt">Captain (Capt)</option>
@@ -545,7 +545,7 @@ export default function FOOTraineesPage() {
                   <input
                     name="name"
                     required
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -555,7 +555,7 @@ export default function FOOTraineesPage() {
                   name="serviceNumber"
                   required
                   placeholder="IC-XXXXX"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 />
               </div>
               <div>
@@ -564,7 +564,7 @@ export default function FOOTraineesPage() {
                   name="unit"
                   required
                   placeholder="e.g., 14 Field Regiment"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 />
               </div>
               <div>
@@ -573,7 +573,7 @@ export default function FOOTraineesPage() {
                   name="regiment"
                   required
                   defaultValue="Regiment of Artillery"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 />
               </div>
               <div>
@@ -581,7 +581,7 @@ export default function FOOTraineesPage() {
                 <select
                   name="batch"
                   required
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 >
                   {batches.map((batch) => (
                     <option key={batch} value={batch}>
@@ -595,7 +595,7 @@ export default function FOOTraineesPage() {
                 <Button type="button" variant="outline" onClick={() => setShowAddDialog(false)} className="border-gray-700">
                   Cancel
                 </Button>
-                <Button type="submit" className="bg-orange-600 hover:bg-orange-700">
+                <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700">
                   Add Trainee
                 </Button>
               </div>
@@ -622,7 +622,7 @@ export default function FOOTraineesPage() {
                     name="rank"
                     required
                     defaultValue={editingTrainee.rank}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   >
                     <option value="Lt">Lieutenant (Lt)</option>
                     <option value="Capt">Captain (Capt)</option>
@@ -635,7 +635,7 @@ export default function FOOTraineesPage() {
                     name="name"
                     required
                     defaultValue={editingTrainee.name}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -645,7 +645,7 @@ export default function FOOTraineesPage() {
                   name="serviceNumber"
                   required
                   defaultValue={editingTrainee.serviceNumber}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 />
               </div>
               <div>
@@ -654,7 +654,7 @@ export default function FOOTraineesPage() {
                   name="unit"
                   required
                   defaultValue={editingTrainee.unit}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 />
               </div>
               <div>
@@ -663,7 +663,7 @@ export default function FOOTraineesPage() {
                   name="regiment"
                   required
                   defaultValue={editingTrainee.regiment}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 />
               </div>
               <div>
@@ -672,7 +672,7 @@ export default function FOOTraineesPage() {
                   name="batch"
                   required
                   defaultValue={editingTrainee.batch}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 >
                   {batches.map((batch) => (
                     <option key={batch} value={batch}>
@@ -687,7 +687,7 @@ export default function FOOTraineesPage() {
                   name="currentPhase"
                   required
                   defaultValue={editingTrainee.currentPhase}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 >
                   <option value="Phase I - Basic FOO Procedures">Phase I - Basic FOO Procedures</option>
                   <option value="Phase II - Advanced Fire Control">Phase II - Advanced Fire Control</option>
@@ -701,7 +701,7 @@ export default function FOOTraineesPage() {
                   name="status"
                   required
                   defaultValue={editingTrainee.status}
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 >
                   <option value="active">Active</option>
                   <option value="on-leave">On Leave</option>
@@ -714,7 +714,7 @@ export default function FOOTraineesPage() {
                 <Button type="button" variant="outline" onClick={() => setShowEditDialog(false)} className="border-gray-700">
                   Cancel
                 </Button>
-                <Button type="submit" className="bg-orange-600 hover:bg-orange-700">
+                <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700">
                   Save Changes
                 </Button>
               </div>

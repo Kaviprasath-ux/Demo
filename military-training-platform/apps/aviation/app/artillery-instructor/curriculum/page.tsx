@@ -168,7 +168,7 @@ export default function CurriculumPage() {
         </div>
         <Button
           onClick={() => setShowAddDialog(true)}
-          className="bg-orange-600 hover:bg-orange-700"
+          className="bg-emerald-600 hover:bg-emerald-700"
         >
           <Plus className="w-4 h-4 mr-2" />
           Add Curriculum
@@ -232,7 +232,7 @@ export default function CurriculumPage() {
             placeholder="Search curriculum..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-orange-500 text-white"
+            className="w-full pl-10 pr-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
           />
         </div>
         <div className="flex items-center gap-2">
@@ -240,7 +240,7 @@ export default function CurriculumPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-orange-500 text-white"
+            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
           >
             <option value="all">All Status</option>
             <option value="active">Active</option>
@@ -428,7 +428,7 @@ export default function CurriculumPage() {
                   </Button>
                   <Button
                     size="sm"
-                    className="bg-orange-600 hover:bg-orange-700"
+                    className="bg-emerald-600 hover:bg-emerald-700"
                     onClick={() => {
                       setEditingCurriculum(cur);
                       setShowEditDialog(true);
@@ -519,7 +519,7 @@ export default function CurriculumPage() {
                     <p className="text-xl font-bold text-emerald-400">{selectedCurriculum.simulatorHours}h</p>
                     <p className="text-sm text-gray-400">Simulator</p>
                   </div>
-                  <div className="bg-emerald-500/10 border border-orange-500/30 rounded-lg p-3 text-center">
+                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-3 text-center">
                     <p className="text-xl font-bold text-emerald-400">{selectedCurriculum.fieldHours}h</p>
                     <p className="text-sm text-gray-400">Field</p>
                   </div>
@@ -532,7 +532,7 @@ export default function CurriculumPage() {
                 Close
               </Button>
               <Button
-                className="bg-orange-600 hover:bg-orange-700"
+                className="bg-emerald-600 hover:bg-emerald-700"
                 onClick={() => {
                   setEditingCurriculum(selectedCurriculum);
                   setShowEditDialog(true);
@@ -580,7 +580,7 @@ export default function CurriculumPage() {
                     required
                     defaultValue={editingCurriculum?.name}
                     placeholder="e.g., Phase I - Basic FOO Procedures"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -590,7 +590,7 @@ export default function CurriculumPage() {
                     required
                     defaultValue={editingCurriculum?.code}
                     placeholder="e.g., FOO-101"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -602,7 +602,7 @@ export default function CurriculumPage() {
                     name="phase"
                     required
                     defaultValue={editingCurriculum?.phase || "Phase I"}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   >
                     <option value="Phase I">Phase I</option>
                     <option value="Phase II">Phase II</option>
@@ -616,7 +616,7 @@ export default function CurriculumPage() {
                     required
                     defaultValue={editingCurriculum?.duration}
                     placeholder="e.g., 8 weeks"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -628,7 +628,7 @@ export default function CurriculumPage() {
                     name="status"
                     required
                     defaultValue={editingCurriculum?.status}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   >
                     <option value="draft">Draft</option>
                     <option value="active">Active</option>
@@ -645,7 +645,7 @@ export default function CurriculumPage() {
                   defaultValue={editingCurriculum?.description}
                   rows={2}
                   placeholder="Brief description of the curriculum..."
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none resize-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none resize-none"
                 />
               </div>
 
@@ -655,7 +655,7 @@ export default function CurriculumPage() {
                   name="prerequisites"
                   defaultValue={editingCurriculum?.prerequisites.join(", ")}
                   placeholder="e.g., FOO-101, Ground School Certificate"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 />
               </div>
 
@@ -667,7 +667,7 @@ export default function CurriculumPage() {
                   defaultValue={editingCurriculum?.objectives.join("\n")}
                   rows={4}
                   placeholder="Master military communication protocols&#10;Learn target identification procedures"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none resize-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none resize-none"
                 />
               </div>
 
@@ -680,7 +680,7 @@ export default function CurriculumPage() {
                     required
                     defaultValue={editingCurriculum?.totalHours || 0}
                     min={0}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -691,7 +691,7 @@ export default function CurriculumPage() {
                     required
                     defaultValue={editingCurriculum?.theoryHours || 0}
                     min={0}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -702,7 +702,7 @@ export default function CurriculumPage() {
                     required
                     defaultValue={editingCurriculum?.practicalHours || 0}
                     min={0}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -713,7 +713,7 @@ export default function CurriculumPage() {
                     required
                     defaultValue={editingCurriculum?.simulatorHours || 0}
                     min={0}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -724,7 +724,7 @@ export default function CurriculumPage() {
                     required
                     defaultValue={editingCurriculum?.fieldHours || 0}
                     min={0}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -742,7 +742,7 @@ export default function CurriculumPage() {
                 >
                   Cancel
                 </Button>
-                <Button type="submit" className="bg-orange-600 hover:bg-orange-700">
+                <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700">
                   {showEditDialog ? "Save Changes" : "Add Curriculum"}
                 </Button>
               </div>

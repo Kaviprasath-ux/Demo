@@ -477,7 +477,7 @@ export const mockIngestionJobs: IngestionJob[] = [
 export function getIngestionStatusColor(status: IngestionStatus): string {
   const colors: Record<IngestionStatus, string> = {
     pending: "bg-gray-500",
-    processing: "bg-blue-500",
+    processing: "bg-emerald-500",
     completed: "bg-green-500",
     failed: "bg-red-500",
     review_required: "bg-yellow-500",
@@ -488,12 +488,12 @@ export function getIngestionStatusColor(status: IngestionStatus): string {
 // Get classification color
 export function getClassificationColor(classification: ContentClassification): string {
   const colors: Record<ContentClassification, string> = {
-    flight_manual: "bg-blue-500",
-    sop: "bg-blue-500",
-    doctrine: "bg-indigo-500",
-    technical: "bg-orange-500",
+    flight_manual: "bg-emerald-500",
+    sop: "bg-emerald-500",
+    doctrine: "bg-emerald-500",
+    technical: "bg-emerald-500",
     training: "bg-green-500",
-    checklist: "bg-cyan-500",
+    checklist: "bg-emerald-500",
     weapons_employment: "bg-red-500",
     emergency_procedures: "bg-yellow-500",
   };

@@ -461,10 +461,10 @@ export function getStatusColor(status: ContentStatus): string {
   const colors: Record<ContentStatus, string> = {
     draft: "bg-gray-500",
     pending_review: "bg-yellow-500",
-    approved: "bg-blue-500",
+    approved: "bg-emerald-500",
     published: "bg-green-500",
-    archived: "bg-blue-500",
-    superseded: "bg-orange-500",
+    archived: "bg-emerald-500",
+    superseded: "bg-emerald-500",
   };
   return colors[status];
 }
@@ -474,7 +474,7 @@ export function getSecurityColor(level: ContentMetadata["securityLevel"]): strin
   const colors: Record<string, string> = {
     unclassified: "bg-gray-500",
     restricted: "bg-yellow-500",
-    confidential: "bg-orange-500",
+    confidential: "bg-emerald-500",
     secret: "bg-red-500",
   };
   return colors[level];

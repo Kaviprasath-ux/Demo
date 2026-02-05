@@ -210,7 +210,7 @@ export default function JointExercisesPage() {
         </div>
         <Button
           onClick={() => setShowAddDialog(true)}
-          className="bg-orange-600 hover:bg-orange-700"
+          className="bg-emerald-600 hover:bg-emerald-700"
         >
           <Plus className="w-4 h-4 mr-2" />
           Plan Exercise
@@ -274,7 +274,7 @@ export default function JointExercisesPage() {
             placeholder="Search exercises..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-orange-500 text-white"
+            className="w-full pl-10 pr-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
           />
         </div>
         <div className="flex items-center gap-2">
@@ -282,7 +282,7 @@ export default function JointExercisesPage() {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-orange-500 text-white"
+            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
           >
             <option value="all">All Types</option>
             <option value="coordination">Coordination</option>
@@ -294,7 +294,7 @@ export default function JointExercisesPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-orange-500 text-white"
+            className="px-4 py-2 bg-[#12121a] border border-gray-800 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
           >
             <option value="all">All Status</option>
             <option value="planning">Planning</option>
@@ -341,7 +341,7 @@ export default function JointExercisesPage() {
 
               {/* Participants Summary */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                <div className="bg-emerald-500/10 border border-orange-500/30 rounded-lg p-3">
+                <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-3">
                   <div className="flex items-center gap-2 mb-1">
                     <Crosshair className="w-4 h-4 text-emerald-400" />
                     <span className="text-sm text-emerald-400">Artillery</span>
@@ -472,7 +472,7 @@ export default function JointExercisesPage() {
               <div>
                 <h3 className="font-semibold text-white mb-3">Instructors</h3>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-emerald-500/10 border border-orange-500/30 rounded-lg p-4">
+                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
                     <p className="text-xs text-emerald-400">Artillery Instructor</p>
                     <p className="text-white font-medium">{selectedExercise.artilleryInstructorName}</p>
                   </div>
@@ -628,7 +628,7 @@ export default function JointExercisesPage() {
                         }}
                         className={
                           selectedExercise.status === status
-                            ? "bg-orange-600"
+                            ? "bg-emerald-600"
                             : "border-gray-700"
                         }
                       >
@@ -654,7 +654,7 @@ export default function JointExercisesPage() {
                   Close
                 </Button>
                 <Button
-                  className="bg-orange-600 hover:bg-orange-700"
+                  className="bg-emerald-600 hover:bg-emerald-700"
                   onClick={() => {
                     setEditingExercise(selectedExercise);
                     setShowEditDialog(true);
@@ -702,7 +702,7 @@ export default function JointExercisesPage() {
                   required
                   defaultValue={editingExercise?.name}
                   placeholder="e.g., Operation Thunder Strike"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 />
               </div>
 
@@ -713,7 +713,7 @@ export default function JointExercisesPage() {
                     name="type"
                     required
                     defaultValue={editingExercise?.type || "coordination"}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   >
                     <option value="coordination">Coordination</option>
                     <option value="live-fire">Live Fire</option>
@@ -729,7 +729,7 @@ export default function JointExercisesPage() {
                       name="status"
                       required
                       defaultValue={editingExercise?.status}
-                      className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                      className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                     >
                       <option value="planning">Planning</option>
                       <option value="scheduled">Scheduled</option>
@@ -749,7 +749,7 @@ export default function JointExercisesPage() {
                     type="date"
                     required
                     defaultValue={editingExercise?.startDate}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -759,7 +759,7 @@ export default function JointExercisesPage() {
                     type="date"
                     required
                     defaultValue={editingExercise?.endDate}
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -771,7 +771,7 @@ export default function JointExercisesPage() {
                   required
                   defaultValue={editingExercise?.location}
                   placeholder="e.g., Combined Arms Training Range"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 />
               </div>
 
@@ -783,7 +783,7 @@ export default function JointExercisesPage() {
                   defaultValue={editingExercise?.objectives.join("\n")}
                   rows={3}
                   placeholder="Execute coordinated air-ground fire mission&#10;Validate FOO-Pilot communication procedures"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none resize-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none resize-none"
                 />
               </div>
 
@@ -831,7 +831,7 @@ export default function JointExercisesPage() {
                     required
                     defaultValue={editingExercise?.safetyOfficer}
                     placeholder="e.g., Lt Col M. Iyer"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -841,7 +841,7 @@ export default function JointExercisesPage() {
                     required
                     defaultValue={editingExercise?.medicalSupport}
                     placeholder="e.g., Medical Team Alpha"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -853,7 +853,7 @@ export default function JointExercisesPage() {
                   required
                   defaultValue={editingExercise?.communicationPlan}
                   placeholder="e.g., Primary: HF 245.0, Secondary: VHF 121.5"
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                 />
               </div>
 
@@ -864,7 +864,7 @@ export default function JointExercisesPage() {
                   defaultValue={editingExercise?.contingencyPlan}
                   rows={2}
                   placeholder="Abort procedures, rally points..."
-                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none resize-none"
+                  className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none resize-none"
                 />
               </div>
 
@@ -876,7 +876,7 @@ export default function JointExercisesPage() {
                     required
                     defaultValue={editingExercise?.briefingSchedule}
                     placeholder="e.g., 2024-12-28 0500hrs at Ops Room"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -886,7 +886,7 @@ export default function JointExercisesPage() {
                     required
                     defaultValue={editingExercise?.debriefSchedule}
                     placeholder="e.g., 2024-12-30 1800hrs at Ops Room"
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -899,7 +899,7 @@ export default function JointExercisesPage() {
                     defaultValue={editingExercise?.remarks}
                     rows={2}
                     placeholder="Additional notes..."
-                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-orange-500 focus:outline-none resize-none"
+                    className="w-full px-3 py-2 bg-[#0a0a0f] border border-gray-800 rounded-lg text-white focus:border-emerald-500 focus:outline-none resize-none"
                   />
                 </div>
               )}
@@ -917,7 +917,7 @@ export default function JointExercisesPage() {
                 >
                   Cancel
                 </Button>
-                <Button type="submit" className="bg-orange-600 hover:bg-orange-700">
+                <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700">
                   {showEditDialog ? "Save Changes" : "Create Exercise"}
                 </Button>
               </div>
